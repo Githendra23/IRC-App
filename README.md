@@ -31,7 +31,7 @@ To make the application work, you need to install:
 
 Download the project:
 ```cmd
-git clone https://github.com/Githendra23/NextBuilder-Connect.git
+git clone https://github.com/Githendra23/IRC-App.git
 ```
 
 ### Launching the API and the website
