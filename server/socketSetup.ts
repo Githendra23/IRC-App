@@ -53,10 +53,13 @@ const socketSetup = (server: HttpServer) => {
     
           switch (command) {
             case '/nick':
-
               const userId = await getUser(data.sender)._id;
               const newUsername = data.message.split(' ')[1];
               const activeUsersArray = Array.from(activeUsers.values());
+
+              if (activeUsersArray.includes(newUsername)) {
+                return socket.emit('serverResponse', 'This username is already taken');
+              }
 
               activeUsers.set(socket.id, newUsername);
               console.log('activeUsers : ',activeUsers);
@@ -68,7 +71,9 @@ const socketSetup = (server: HttpServer) => {
               var channels = Array.from(activeUsersOnChannels.keys());
               socket.emit('serverResponse', `Channels: ${channels.join(', ')}`);
               break;
+
             case '/delete':
+              break;
 
             case '/join':
               var channelName = data.message.split(' ')[1];
