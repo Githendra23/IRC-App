@@ -100,24 +100,8 @@ const Channel = ({
         </svg>
         <h2 className="text-3xl font-bold text-center">Channels</h2>
       </div>
+
       <div className="border-b border-gray-700 p-2 flex items-center"></div>
-      <div className="flex flex-col items-center">
-        <PopupWindow buttonText="+">
-          <input
-            className=" w-full mb-1 p-2 rounded bg-neutral-300 text-black dark:text-[#09ebe3] dark:bg-[#004449]"
-            placeholder="Enter Channel Name"
-            value={newChannel}
-            onChange={handleChannelNameChange}
-            onKeyDown={handleKeyPress}
-          />
-          <button
-            className="flex mt-1 bg-blue-500 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-lg"
-            onClick={handleJoinChannel}
-          >
-            Create/Join
-          </button>
-        </PopupWindow>
-      </div>
 
       {channels.length > 0 && (
         <div className="">
@@ -137,6 +121,23 @@ const Channel = ({
           ))}
         </div>
       )}
+      <div className="flex flex-col items-center">
+        <PopupWindow buttonText="+">
+          <input
+            className=" w-full mb-1 p-2 rounded bg-neutral-300 text-black dark:text-[#09ebe3] dark:bg-[#004449]"
+            placeholder="Enter Channel Name"
+            value={newChannel}
+            onChange={handleChannelNameChange}
+            onKeyDown={handleKeyPress}
+          />
+          <button
+            className="flex mt-1 bg-blue-500 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-lg"
+            onClick={handleJoinChannel}
+          >
+            Create/Join
+          </button>
+        </PopupWindow>
+      </div>
     </div>
   );
 };
