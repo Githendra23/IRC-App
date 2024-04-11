@@ -4,6 +4,7 @@ const cors = require('cors');
 const http = require('http');
 const dotenv = require('dotenv');
 const socketSetup = require('./socketSetup');
+const cookieParser = require('cookie-parser');
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
@@ -14,6 +15,19 @@ const server = http.Server(app);
 
 mongoose.connect(mongoURL).then(function () {
   console.log('Connected to MongoDB');
+});
+
+app.set('port', PORT);
+app.use(cookieParser());
+
+app.use((req, res, next) => {
+  const token = req.cookies.token;
+  
+  
+  // console.log('Token:', token);
+  
+  
+  next(); // Call next to proceed with the request pipeline
 });
 
 const { userRoutes } = require('./routes/user');

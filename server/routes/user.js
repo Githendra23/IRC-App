@@ -37,8 +37,10 @@ userRoutes.post('/register', async (req, res) => {
         await createdUser.updateOne({ username: username, password: hashedPassword });
         
         const token = await createdUser.generateToken();
+        const cookieOptions = { domain: `:${req.app.get('port')}`, httpOnly: true, secure: true };
 
-        return res.cookie('token', token, { httpOnly: true }).status(201).json({ message: 'User registered successfully', token: token });
+        res.cookie('token', token, cookieOptions);
+        return res.status(201).json({ message: 'Successfully logged in', userId: existingUser._id });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: 'Internal Server Error' });
@@ -76,8 +78,11 @@ userRoutes.post('/login', async (req, res) => {
 
         if (await existingUser.comparePassword(password)) {
             const token = await existingUser.generateToken();
-            
-            return res.cookie('token', token, { httpOnly: true }).status(201).json({ message: 'Successfully logged in', token: token, userId: existingUser._id });
+            const cookieOptions = { httpOnly: true, secure: true };
+            // const cookieOptions = { domain: `:${req.app.get('port')}`, httpOnly: true, secure: true };
+
+            res.cookie('token', token, cookieOptions);
+            return res.status(201).json({ message: 'Successfully logged in', userId: existingUser._id });
         }
         return res.status(401).json({ message: "Invalid Username or Password" });
     }
