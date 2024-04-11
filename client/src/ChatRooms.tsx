@@ -10,6 +10,14 @@ import ThemeButton from "./components/ThemeButton";
 import { useNavigate } from "react-router-dom";
 import { checkToken } from "./apiCalls";
 
+interface Data {
+  sender?: string;
+  receiver?: string | null;
+  message: string;
+  createdAt: string;
+  channel: string;
+}
+
 const ChatRooms = () => {
   const [connected, setConnected] = useState(isConnected());
   const username = localStorage.getItem("username");
