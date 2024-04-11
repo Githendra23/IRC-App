@@ -102,25 +102,20 @@ const Channel = ({
       </div>
       <div className="border-b border-gray-700 p-2 flex items-center"></div>
       <div className="flex flex-col items-center">
-        <input
-          className=" w-full mb-1 p-2 rounded bg-neutral-300 text-black dark:text-[#09ebe3] dark:bg-[#004449]"
-          placeholder="Enter Channel Name"
-          value={newChannel}
-          onChange={handleChannelNameChange}
-          onKeyDown={handleKeyPress}
-        />
-        <button
-          className="flex mt-1 bg-blue-500 hover:bg-blue-700 text-white text-center text-2xl font-bold py-2 px-4 rounded-3xl"
-          onClick={handleJoinChannel}
-        >
-          +
-        </button>
-
-        <PopupWindow
-          className="flex mt-1 bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded-3xl"
-          buttonText="test"
-        >
-          <p>hello</p>
+        <PopupWindow buttonText="+">
+          <input
+            className=" w-full mb-1 p-2 rounded bg-neutral-300 text-black dark:text-[#09ebe3] dark:bg-[#004449]"
+            placeholder="Enter Channel Name"
+            value={newChannel}
+            onChange={handleChannelNameChange}
+            onKeyDown={handleKeyPress}
+          />
+          <button
+            className="flex mt-1 bg-blue-500 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-lg"
+            onClick={handleJoinChannel}
+          >
+            Create/Join
+          </button>
         </PopupWindow>
       </div>
 
