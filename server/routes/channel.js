@@ -6,20 +6,32 @@ const channelRoutes = express.Router();
 channelRoutes.post('/', async (req, res) => {
     try {
         const { channelName, userId } = req.body;
-
+        console.log({ channelName, userId });
         if (!channelName) {
             return res.status(400).json({ message: 'Please provide a channelName for the channel' });
         }
 
         const existingChannel = await Channel.findOne({ name: channelName});
 
-        if (existingChannel) return res.status(400).json({ message: 'Channel already exists, joining' });
+        if (existingChannel) return res.status(201).json({ message: 'Channel already exists, joining' });
 
         const userID = await getUserById(userId).then(user => user._id);
 
         const newChannel = await Channel.create({ name: channelName, ownerId: userID});
 
         return res.status(201).json(newChannel);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+channelRoutes.get('/', async (req, res) => {
+    try {
+        const channels = await Channel.find();
+        const channelData = channels.map(channel => ({ name: channel.name, ownerId: channel.ownerId }));
+
+        res.status(200).json(channelData);
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: 'Internal Server Error' });

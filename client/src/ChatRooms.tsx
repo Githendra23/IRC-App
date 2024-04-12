@@ -27,9 +27,9 @@ const ChatRooms = () => {
   const socket = getSocket();
 
   useEffect(() => {
-    if (!isConnected()) {
-      logOut();
+    if (!isConnected() || !connected) {
       socket.emit("disconnect");
+      logOut();
     }
 
     socket.on("connect", () => {
@@ -119,9 +119,7 @@ const ChatRooms = () => {
             <ActiveUser />
           </div>
         </div>
-      ) : (
-        (logOut(), null)
-      )}
+      ) : null}
     </div>
   );
 };

@@ -49,10 +49,14 @@ const Channel = ({
   }
 
   const createChal = async (channelName: string) => {
-    if (!userId) return;
+    if (!userId) {
+      console.error("userId is null");
+      return;
+    }
+
     const { response, data } = await createChannel(channelName, userId);
 
-    if (response.status === 201 || response.status === 400) {
+    if (response.status === 201) {
       setChannels((prevchannels) => [...prevchannels, channelName]);
       setNewChannel("");
       toast.success(`Joined ${channelName}`);

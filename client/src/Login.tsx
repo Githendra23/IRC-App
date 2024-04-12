@@ -30,6 +30,7 @@ const Login = () => {
 
         const socket = getSocket();
         localStorage.setItem("username", username);
+        localStorage.setItem("userId", data.userId);
 
         socket.on("connect", () => {
           socket.emit("newUser", username);
@@ -39,8 +40,6 @@ const Login = () => {
             console.log(`${username} joined the chat`);
             toast.info(`${username} joined the chat`);
           });
-
-          localStorage.setItem("userId", data.userId);
         });
 
         navigate("/chatrooms");
