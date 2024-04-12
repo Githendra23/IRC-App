@@ -49,7 +49,7 @@ const ChatBody = ({
       toast.success(message);
     });
 
-    socket.on('showCommands' , (message) => {
+    socket.on("showCommands", (message) => {
       toast.info(message);
     });
 
@@ -66,13 +66,16 @@ const ChatBody = ({
   }, [selectedChannel]);
 
   async function fetchMessages() {
-    await fetch(`http://localhost:4000/message/${selectedChannel}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
+    await fetch(
+      `http://localhost:4000/message/${selectedChannel}/${username}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setMessages(data);

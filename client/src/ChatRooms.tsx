@@ -40,10 +40,15 @@ const ChatRooms = () => {
 
   useEffect(() => {
     const checkConnect = async () => {
-      const { response, data } = await checkToken();
+      if (username) {
+        const { response, data } = await checkToken(username);
 
-      if (response.ok && "username" in data && data.username === username) {
-        setConnected(true);
+        if (response.ok && "username" in data && data.username === username) {
+          setConnected(true);
+        } else {
+          setConnected(false);
+          logOut();
+        }
       } else {
         setConnected(false);
         logOut();
@@ -54,6 +59,9 @@ const ChatRooms = () => {
   });
 
   const logOut = () => {
+    const expires = "expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    document.cookie = `jwt_${username}=; ${expires};`;
+
     disconnect();
     toast.success("Logged out");
     localStorage.removeItem("username");

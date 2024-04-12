@@ -16,7 +16,8 @@ const Login = () => {
 
     date.setTime(date.getTime() + day * 24 * 60 * 60 * 1000);
     const expires = "expires=" + date.toUTCString();
-    document.cookie = "jwt=" + token + ";" + expires + ";path=/";
+
+    document.cookie = `jwt_${username}=${token}; ${expires};`;
   };
 
   const handleConnect = async () => {

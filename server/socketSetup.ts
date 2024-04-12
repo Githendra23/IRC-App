@@ -112,19 +112,29 @@ const socketSetup = (server: HttpServer) => {
               break;
 
             case '/msg':
-              const receiverUsername = data.message.split(' ')[1];
+              const messageParts = data.message.split(' ');
+              
+              if (messageParts.length < 3) {
+                  socket.emit('serverResponse', 'Invalid message format. Usage: /msg <receiver> <message>');
+                  break;
+              }
 
+              const receiverUsername = data.message.split(' ')[1];
               const senderUsername = data.sender;
               const receiverSocketId = Array.from(activeUsers.entries()).find(([id, username]) => username === receiverUsername)?.[0];
+
               if (receiverSocketId) {
-                if (senderUsername === receiverUsername) socket.emit('serverResponse', 'Cannot send private message to yourself');
+                if (senderUsername === receiverUsername) {
+                  socket.emit('serverResponse', 'Cannot send private message to yourself');
+                  break;
+                }
 
                 const receiverSocket = socketIO.sockets.sockets.get(receiverSocketId);
                 const privateMessage = data.message.split(' ').slice(2).join(' ');
             
                 if (receiverSocket) {
                   const message: Data = { sender: senderUsername, message: privateMessage, receiver: receiverUsername, createdAt: `${currentTime}`, channel: data.channel};
-                  //socket.emit('message', message);
+
                   receiverSocket.to(data.channel).emit('message', message);
 
                   const receiverId = await getUser(receiverUsername);

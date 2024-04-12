@@ -62,7 +62,7 @@ var socketSetup = function (server) {
             socket.broadcast.emit('activeUsers', activeUsersArray);
         });
         socket.on('message', function (data) { return __awaiter(void 0, void 0, void 0, function () {
-            var currentTime, hours, minutes, command, _a, userId, newUsername, activeUsersArray, channels, channelName, username, channels, channelName, username, channels, index, channel, users, receiverUsername_1, senderUsername, receiverSocketId, receiverSocket, privateMessage, message, receiverId, senderId, channelId, senderId, channelId, newData;
+            var currentTime, hours, minutes, command, _a, userId, newUsername, activeUsersArray, channels, channelName, username, channels, channelName, username, channels, index, channel, users, messageParts, receiverUsername_1, senderUsername, receiverSocketId, receiverSocket, privateMessage, message, receiverId, senderId, channelId, senderId, channelId, newData;
             var _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
@@ -135,6 +135,11 @@ var socketSetup = function (server) {
                         socket.emit('activeUsersOnChannels', users);
                         return [3 /*break*/, 19];
                     case 8:
+                        messageParts = data.message.split(' ');
+                        if (messageParts.length < 3) {
+                            socket.emit('serverResponse', 'Invalid message format. Usage: /msg <receiver> <message>');
+                            return [3 /*break*/, 19];
+                        }
                         receiverUsername_1 = data.message.split(' ')[1];
                         senderUsername = data.sender;
                         receiverSocketId = (_b = Array.from(activeUsers.entries()).find(function (_a) {
@@ -142,13 +147,14 @@ var socketSetup = function (server) {
                             return username === receiverUsername_1;
                         })) === null || _b === void 0 ? void 0 : _b[0];
                         if (!receiverSocketId) return [3 /*break*/, 15];
-                        if (senderUsername === receiverUsername_1)
+                        if (senderUsername === receiverUsername_1) {
                             socket.emit('serverResponse', 'Cannot send private message to yourself');
+                            return [3 /*break*/, 19];
+                        }
                         receiverSocket = socketIO.sockets.sockets.get(receiverSocketId);
                         privateMessage = data.message.split(' ').slice(2).join(' ');
                         if (!receiverSocket) return [3 /*break*/, 13];
                         message = { sender: senderUsername, message: privateMessage, receiver: receiverUsername_1, createdAt: "".concat(currentTime), channel: data.channel };
-                        //socket.emit('message', message);
                         receiverSocket.to(data.channel).emit('message', message);
                         return [4 /*yield*/, getUser(receiverUsername_1)];
                     case 9:

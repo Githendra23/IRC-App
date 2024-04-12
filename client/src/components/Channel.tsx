@@ -81,6 +81,14 @@ const Channel = ({
     };
   }, []);
 
+  const removeChannel = (channelName: string) => {
+    socket.emit("message", {
+      sender: username,
+      message: `/quit ${channelName}`,
+      channel: selectedChannel,
+    });
+  };
+
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key !== "Enter") return;
     handleJoinChannel();
@@ -106,17 +114,27 @@ const Channel = ({
       {channels.length > 0 && (
         <div className="">
           {channels.map((channel, index) => (
-            <div
-              key={index}
-              className={`mx-1 my-0.5 border-gray-100 p-3.5 dark:border-gray-600 cursor-pointer rounded-lg text-left text-lg
+            <div className="flex">
+              <div
+                key={index}
+                className={`flex-1 mx-1 my-0.5 border-gray-100 p-3.5 dark:border-gray-600 cursor-pointer rounded-lg text-left text-lg
                 ${
                   selectedChannel === channel
                     ? "bg-blue-100 dark:bg-[#004449]"
                     : "hover:bg-blue-100 dark:hover:bg-[#004449] "
                 }`}
-              onClick={() => selectChannel(channel)}
-            >
-              {channel}
+                onClick={() => selectChannel(channel)}
+              >
+                {channel}
+              </div>
+              <div className="flex justify-center items-center mr-1">
+                <button
+                  className="z-0 px-2 bg-red-500 hover:bg-red-700 text-white text-center rounded"
+                  onClick={() => removeChannel(channel)}
+                >
+                  Quit
+                </button>
+              </div>
             </div>
           ))}
         </div>

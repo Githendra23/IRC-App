@@ -6,9 +6,9 @@ const { getUserById } = require('./user');
 
 const verifyToken = require('./verifyToken');
 
-router.get('/:channel', async (req, res) => {
+router.get('/:channel/:username', async (req, res) => {
     try {
-        const { channel } = req.params;
+        const { channel, username } = req.params;
         const channelId = await getChannel(channel);
         const messages = await getMessages(channelId._id);
 
@@ -16,18 +16,21 @@ router.get('/:channel', async (req, res) => {
             const sender = await getUserById(message.senderId);
             const receiver = await getUserById(message.receiverId);
 
-            const formattedMessage = {
-                sender: sender.username,
-                receiver: receiver ? receiver.username : null,
-                createdAt: new Date(message.createdAt),
-                message: message.message,
-                channel: channelId.name
-            };
+            if (sender.username === username || !receiver || receiver.username === username) {
+                const formattedMessage = {
+                    sender: sender.username,
+                    receiver: receiver ? receiver.username : null,
+                    createdAt: new Date(message.createdAt),
+                    message: message.message,
+                    channel: channelId.name
+                };
 
-            return formattedMessage;
+                return formattedMessage;
+            }
         }));
-
-        return res.status(200).json(messagesWithUserNames);
+        const filteredMessages = messagesWithUserNames.filter(message => message !== null && message !== undefined);
+        // console.log(filteredMessages);
+        return res.status(200).json(filteredMessages);
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: 'Internal Server Error' });
