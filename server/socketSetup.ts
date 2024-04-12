@@ -79,12 +79,16 @@ const socketSetup = (server: HttpServer) => {
               var channelName = data.message.split(' ')[1];
               var username = activeUsers.get(socket.id) as string; // Add type assertion to ensure username is of type string
               var channels = activeUsersOnChannels.get(username) || []; // Initialize with an empty array if undefined
-              channels.push(channelName);
-              activeUsersOnChannels.set(username, channels);   
-              console.log('haaaaa : ',activeUsersOnChannels);           
-              socket.join(channelName);
-              console.log('user has joined');
-              socket.emit('joinChannel', channelName);
+            
+              if (!activeUsersOnChannels.get(username)?.includes(channelName)) {
+                channels.push(channelName);
+
+                activeUsersOnChannels.set(username, channels);   
+                console.log('haaaaa : ',activeUsersOnChannels);           
+                socket.join(channelName);
+                console.log('user has joined');
+                socket.emit('joinChannel', channelName);
+              }
               break;
 
             case '/quit':
@@ -113,7 +117,7 @@ const socketSetup = (server: HttpServer) => {
 
             case '/msg':
               const messageParts = data.message.split(' ');
-              
+
               if (messageParts.length < 3) {
                   socket.emit('serverResponse', 'Invalid message format. Usage: /msg <receiver> <message>');
                   break;

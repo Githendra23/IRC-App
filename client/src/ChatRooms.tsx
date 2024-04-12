@@ -24,10 +24,9 @@ const ChatRooms = () => {
   const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
   const [messages, setMessages] = useState<Data[]>([]);
   const navigate = useNavigate();
+  const socket = getSocket();
 
   useEffect(() => {
-    const socket = getSocket();
-
     if (!isConnected()) {
       logOut();
       socket.emit("disconnect");
@@ -121,7 +120,7 @@ const ChatRooms = () => {
           </div>
         </div>
       ) : (
-        <App />
+        (logOut(), null)
       )}
     </div>
   );
