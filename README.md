@@ -4,7 +4,7 @@ A seamless real-time communication chat app enabling users to create an account,
 - ```/msg <username>``` to send a private message to another user in the same room.
 - ```/join <room name>```  to join or create a new chat room.
 - ```/quit <room name>``` to leave a chat room (if no room name is provided, it will exit the current room).
-- ```/delete <room name>``` to delete a channel (if no room name is provided, it will exit the current room if you're the owner).
+- ```/delete <room name>``` to delete a channel (if no room name is provided, it will kick everyone, including yourself, from the current room and delete it if you're the owner).
 - ```/nick <new username>``` to change your username to a new one.
 
 ## Technologies used
