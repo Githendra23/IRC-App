@@ -210,7 +210,7 @@ var socketSetup = function (server) {
                         _d.label = 17;
                     case 17: return [3 /*break*/, 20];
                     case 18:
-                        socket.emit('showCommands', 'Available commands: /nick, /list, /delete, /join, /quit, /users, /msg, /help');
+                        socket.emit('showCommands', 'Available commands:\n - /nick <username>\n - /list\n - /delete <channel name>\n - /join <channel name>\n - /quit <channel name>\n - /users\n - /msg <username>');
                         return [3 /*break*/, 20];
                     case 19:
                         socket.emit('serverResponse', "Command doesn't exist");

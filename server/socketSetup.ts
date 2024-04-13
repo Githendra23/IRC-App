@@ -2,9 +2,7 @@ import { Socket } from 'socket.io';
 import { Server as HttpServer, get } from 'http';
 const { getUser } = require('./routes/user');
 const Message = require('./models/messageModel');
-const Channel = require('./models/channelModel');
-const User = require('./models/userModel');
-const { getChannel, isChannelOwner, getChannelById, deleteChannel } = require('./routes/channel');
+const { getChannel, isChannelOwner, deleteChannel } = require('./routes/channel');
 
 interface Data {
   sender?: string;
@@ -189,7 +187,7 @@ const socketSetup = (server: HttpServer) => {
               break;
     
             case '/help':
-              socket.emit('showCommands', 'Available commands: /nick, /list, /delete, /join, /quit, /users, /msg, /help');
+              socket.emit('showCommands', 'Available commands:\n - /nick <username>\n - /list\n - /delete <channel name>\n - /join <channel name>\n - /quit <channel name>\n - /users\n - /msg <username>');
               break;
               
             default:
@@ -229,13 +227,12 @@ const socketSetup = (server: HttpServer) => {
         activeUsers.delete(socket.id);
         console.log('Current users:', activeUsers);
         socket.emit('userLeft', username);
+
         const activeUsersArray = Array.from(activeUsers.values());
         activeUsersOnChannels.delete(username);
         console.log('Active users array:', activeUsersOnChannels);
         socket.emit('activeUsers', activeUsersArray);
         socket.broadcast.emit('activeUsers', activeUsersArray);
-        /* socket.emit('activeUsersOnChannels', activeUsersOnChannels);
-        socket.broadcast.emit('activeUsersOnChannels', activeUsersOnChannels); */
       });
     });
 

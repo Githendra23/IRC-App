@@ -56,6 +56,8 @@ const ChatBody = ({
     return () => {
       socket.off("message");
       socket.off("serverResponse");
+      socket.off("showCommands");
+      socket.off("leaveChannel");
     };
   }, [socket, setMessages]);
 
@@ -79,8 +81,6 @@ const ChatBody = ({
       .then((res) => res.json())
       .then((data) => {
         setMessages(data);
-
-        console.log(data);
       });
   }
 
