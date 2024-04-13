@@ -23,35 +23,11 @@ const ActiveUser = () => {
     return colors[randomIndex];
   };
 
-/*   useEffect(() => {
-    socket.on("activeUsers", (activeUsersArray) => {
-      // Map each user to an object containing their name and a random color
-      const usersWithColors = activeUsersArray.map((user: string) => {
-        // Check if the user already exists in the state
-        const existingUser = activeUsers.find((u) => u.name === user);
-
-        // If the user exists, keep their color, otherwise assign a new color
-        const color = existingUser ? existingUser.color : getRandomColor();
-
-        return {
-          name: user,
-          color: color,
-        };
-      });
-
-      setActiveUsers(usersWithColors);
-    });
-
-    return () => {
-      socket.off("activeUsers");
-    };
-  }, [socket, activeUsers]);
- */
   useEffect(() => {
-    socket.on("activeUsersOnChannels", (message) => {
+    socket.on("activeUsersOnChannels", (message: string[]) => {
       console.log(message);
-      
-      const usersWithColors = message.map((user) => {
+
+      const usersWithColors = message.map((user: string) => {
         const existingUser = activeUsers.find((u) => u.name === user);
 
         const color = existingUser ? existingUser.color : getRandomColor();
@@ -68,7 +44,7 @@ const ActiveUser = () => {
     return () => {
       socket.off("activeUsersOnChannels");
     };
-  }, [socket, activeUsers]);
+  }, [socket, setActiveUsers]);
 
   return (
     <div className="flex flex-col text-center gap-y-2">
@@ -83,7 +59,12 @@ const ActiveUser = () => {
               {user.name[0]}
             </div>
           </div>
-          <span key={index} className="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-xs text-lg">{user.name}</span>
+          <span
+            key={index}
+            className="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-xs text-lg"
+          >
+            {user.name}
+          </span>
         </div>
       ))}
     </div>

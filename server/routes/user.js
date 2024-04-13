@@ -88,13 +88,11 @@ userRoutes.post('/login', async (req, res) => {
 });
 
 function getUser(username) {
-    const user = User.findOne({ username });
-    return user;
+    return User.findOne({ username });
 }
 
 function getUserById(id) {
-    const user = User.findById(id);
-    return user;
+    return User.findById(id);
 }
 
 module.exports = { userRoutes, getUser, getUserById };

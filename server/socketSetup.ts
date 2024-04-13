@@ -4,7 +4,7 @@ const { getUser } = require('./routes/user');
 const Message = require('./models/messageModel');
 const Channel = require('./models/channelModel');
 const User = require('./models/userModel');
-const { getChannel } = require('./routes/channel');
+const { getChannel, isChannelOwner, getChannelById, deleteChannel } = require('./routes/channel');
 
 interface Data {
   sender?: string;
@@ -53,7 +53,6 @@ const socketSetup = (server: HttpServer) => {
     
           switch (command) {
             case '/nick':
-              const userId = await getUser(data.sender)._id;
               const newUsername = data.message.split(' ')[1];
               const activeUsersArray = Array.from(activeUsers.values());
 
@@ -73,6 +72,33 @@ const socketSetup = (server: HttpServer) => {
               break;
 
             case '/delete':
+              const user = await getUser(data.sender);
+              const userId = user._id;
+              var channelName = data.message.split(' ')[1] || data.channel;
+              var username = activeUsers.get(socket.id) as string;
+              const channelToDelete = await getChannel(channelName);
+              const channelId = channelToDelete._id;
+
+              const isOwner: boolean = isChannelOwner(channelId, userId);
+
+              if (isOwner) {
+                activeUsersOnChannels.forEach((channels, username) => {
+                  const index = channels.indexOf(channelName);
+
+                  if (index !== -1) {
+                    channels.splice(index, 1);
+                  }
+                });
+            
+                socket.emit('leaveChannel', channelName);
+                socket.broadcast.emit('leaveChannel', channelName);
+
+                deleteChannel(channelId);
+
+              } else {
+                socket.emit('serverResponse', "You do not have the necessary permissions to delete this channel");
+              }
+              
               break;
 
             case '/join':
@@ -88,6 +114,8 @@ const socketSetup = (server: HttpServer) => {
                 socket.join(channelName);
                 console.log('user has joined');
                 socket.emit('joinChannel', channelName);
+                socket.emit('activeUsersOnChannels', activeUsersOnChannels);
+                socket.broadcast.emit('activeUsersOnChannels', activeUsersOnChannels);
               }
               break;
 
@@ -206,8 +234,8 @@ const socketSetup = (server: HttpServer) => {
         console.log('Active users array:', activeUsersOnChannels);
         socket.emit('activeUsers', activeUsersArray);
         socket.broadcast.emit('activeUsers', activeUsersArray);
-        socket.emit('activeUsersOnChannels', activeUsersOnChannels);
-        socket.broadcast.emit('activeUsersOnChannels', activeUsersOnChannels);
+        /* socket.emit('activeUsersOnChannels', activeUsersOnChannels);
+        socket.broadcast.emit('activeUsersOnChannels', activeUsersOnChannels); */
       });
     });
 

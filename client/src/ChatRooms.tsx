@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { getSocket, disconnect, isConnected } from "./socket";
 import Input from "./components/Input";
-import App from "./App";
 import { toast } from "react-toastify";
 import ChatBody from "./components/ChatBody";
 import ActiveUser from "./components/ActiveUser";
@@ -28,7 +27,6 @@ const ChatRooms = () => {
 
   useEffect(() => {
     if (!isConnected() || !connected) {
-      socket.emit("disconnect");
       logOut();
     }
 
@@ -61,11 +59,11 @@ const ChatRooms = () => {
     const expires = "expires=Thu, 01 Jan 1970 00:00:00 UTC";
     document.cookie = `jwt_${username}=; ${expires};`;
 
-    disconnect();
     toast.success("Logged out");
     localStorage.removeItem("username");
     localStorage.removeItem("userId");
     setConnected(isConnected());
+    disconnect();
     navigate("/");
   };
 

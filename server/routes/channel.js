@@ -57,12 +57,22 @@ channelRoutes.delete('/:id', async (req, res) => {
     }
 });
 
-function getChannel(channelName) {
-    return Channel.findOne({ name: channelName });
+async function getChannel(channelName) {
+    return await Channel.findOne({ name: channelName });
 }
 
-function getChannelById(channelId) {
-    return Channel.findOne({ _id:channelId });
+async function getChannelById(channelId) {
+    return await Channel.findOne({ _id:channelId });
 }
 
-module.exports = { channelRoutes, getChannel, getChannelById };
+async function isChannelOwner(channelId, ownerId) {
+    const channel = await Channel.findById(channelId);
+
+    return channel.ownerId.toString() === ownerId.toString();
+}
+
+async function deleteChannel(channelId) {
+    return await Channel.findByIdAndDelete(channelId);
+}
+
+module.exports = { channelRoutes, getChannel, getChannelById, isChannelOwner, deleteChannel };
