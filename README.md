@@ -38,6 +38,11 @@ git clone https://github.com/Githendra23/IRC-App.git
 
 To launch the web application, you must first start the API, and then the site.
 
+First, install Express.js for the API to work:
+```cmd
+npm i express
+```
+
 To launch the API, open the terminal, then navigate to the folder "**backend**" with the command *cd*.
 ```cmd
 cd <path inside the folder "backend">
