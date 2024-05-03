@@ -7,6 +7,9 @@ A seamless real-time communication chat app enabling users to create an account,
 - ```/delete <room name>``` to delete a channel (if no room name is provided, it will kick everyone, including yourself, from the current room and delete it if you're the owner).
 - ```/nick <new username>``` to change your username to a new one.
 
+![image](https://github.com/Githendra23/IRC-App/assets/51377697/8b67434f-6dfd-44a0-8e0a-62cc275d17df)
+
+
 ## Technologies used
 
 **Backend:**
