@@ -6,7 +6,7 @@ let isConnect = false;
 export const connect = () => {
     if (isConnect) return;
 
-    socket = socketIO("http://localhost:4000");
+    socket = socketIO("http://localhost:8080/api");
     isConnect = true;
 };
 

@@ -1,0 +1,33 @@
+services:
+  api:
+    container_name: api_socket
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      MONGO_URL: mongodb+srv://user:user@chatrelay.bfroctp.mongodb.net/?retryWrites=true&w=majority&appName=chatrelay
+      JWT_KEY: eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwNjY0MTUzNSwiaWF0IjoxNzA2NjQxNTM1fQ.Mj7cixwuIdP6rCNQ_6riQWoXa6WkNPYhoXmXwo4ptVs
+      PORT: 4000
+    volumes:
+      - .:/var/www/html/api
+
+  site:
+    container_name: IRC_app
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    depends_on:
+      - api
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8080:8080"
+    depends_on:
+      - site
+      - api

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
 dotenv.config();
-const secretKey = process.env.SECRETKEY;
+const secretKey = process.env.JWT_KEY;
 
 module.exports = async (req, res) => {
     const { token } = req.body;

@@ -60,7 +60,7 @@ const Login = () => {
 
   return (
     <>
-      {!connected ? (
+      {!connected && (
         <div className="flex flex-col justify-center items-center h-[100vh] ">
           <div className="flex flex-col bg-[#05323a] rounded-lg py-20 px-20 shadow-md">
             <h1 className="text-5xl font-bold text-white text-center mb-10">
@@ -104,7 +104,7 @@ const Login = () => {
             </p>
           </div>
         </div>
-      ) : null}
+      )}
     </>
   );
 };

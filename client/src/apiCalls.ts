@@ -1,5 +1,5 @@
 export const register = async (username: string, password: string) => {
-    const response = await fetch("http://localhost:4000/user/register", {
+    const response = await fetch("http://localhost:8080/api/user/register", {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: {
@@ -14,7 +14,7 @@ export const register = async (username: string, password: string) => {
 }
   
 export const login = async (username: string, password: string) => {
-    const response = await fetch("http://localhost:4000/user/login", {
+    const response = await fetch("http://localhost:8080/api/user/login", {
         method: "POST",
         body: JSON.stringify({ username, password }),
         headers: {
@@ -44,7 +44,7 @@ export const checkToken = async (username: string) => {
     const jwtToken = getJwtToken();
 
     if (jwtToken) {
-        const response = await fetch("http://localhost:4000/verifyToken", {
+        const response = await fetch("http://localhost:8080/api/verifyToken", {
         method: "POST",
         body: JSON.stringify({ token: jwtToken }),
         headers: {
@@ -65,7 +65,7 @@ export const checkToken = async (username: string) => {
 };
 
 export const getChannels = async () => {
-    const response = await fetch("http://localhost:4000/channel", {
+    const response = await fetch("http://localhost:8080/api/channel", {
         method: "GET",
         headers: {
         Accept: "application/json",
@@ -79,7 +79,7 @@ export const getChannels = async () => {
 }
 
 export const createChannel = async (channelName: string, userId: string) => {
-    const response = await fetch("http://localhost:4000/channel", {
+    const response = await fetch("http://localhost:8080/api/channel", {
         method: "POST",
         body: JSON.stringify({ channelName, userId }),
         headers: {
