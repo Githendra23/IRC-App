@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { register } from "./apiCalls";
+import axios from "axios";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -11,11 +11,16 @@ const Register = () => {
 
   const handleSubmit = async () => {
     if (username && password && repeatPassword && password === repeatPassword) {
-      const { response, data } = await register(username, password);
-
-      if (response.ok) {
-        navigateToLogin();
-      } else toast.error(data.message);
+      axios.post("http://localhost:8080/api/user/register", {
+            username: username,
+            password: password
+          })
+          .then(() => {
+            navigate('/login');
+          })
+          .catch((err) => {
+            toast.error(err);
+          });
     } else {
       toast.error("Please enter a username and password");
     }
@@ -25,10 +30,6 @@ const Register = () => {
     if (event.key !== "Enter") return;
 
     handleSubmit();
-  };
-
-  const navigateToLogin = () => {
-    navigate("/login");
   };
 
   return (
@@ -79,9 +80,8 @@ const Register = () => {
             </button>
           </div>
 
-          <p
-            className="hover:cursor-pointer hover:underline hover:underline-offset-2 text-center"
-            onClick={navigateToLogin}
+          <p className="hover:cursor-pointer hover:underline hover:underline-offset-2 text-center"
+            onClick={() => navigate('/login')}
           >
             Already have an account?
           </p>
