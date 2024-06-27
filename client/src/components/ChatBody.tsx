@@ -20,7 +20,7 @@ const ChatBody = ({
   selectedChannel: string | null;
   setSelectedChannel: (channel: string | null) => void;
   messages: Data[];
-  setMessages: (messages: Data[]) => Data[];
+  setMessages: (messages: (prevMessages: Data[]) => Data[]) => Data[];
 }) => {
   const socket = getSocket();
   const username = localStorage.getItem("username");

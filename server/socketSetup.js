@@ -36,13 +36,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var socket_io_1 = require("socket.io");
 var getUser = require('./routes/user').getUser;
 var Message = require('./models/messageModel');
-var Channel = require('./models/channelModel');
-var User = require('./models/userModel');
-var _a = require('./routes/channel'), getChannel = _a.getChannel, isChannelOwner = _a.isChannelOwner, getChannelById = _a.getChannelById, deleteChannel = _a.deleteChannel;
+var _a = require('./routes/channel'), getChannel = _a.getChannel, isChannelOwner = _a.isChannelOwner, deleteChannel = _a.deleteChannel;
 var socketSetup = function (server) {
-    var socketIO = require('socket.io')(server, {
+    var socketIO = new socket_io_1.Server(server, {
         cors: {
             origin: '*',
         }
@@ -181,7 +180,13 @@ var socketSetup = function (server) {
                         receiverSocket = socketIO.sockets.sockets.get(receiverSocketId);
                         privateMessage = data.message.split(' ').slice(2).join(' ');
                         if (!receiverSocket) return [3 /*break*/, 14];
-                        message = { sender: senderUsername, message: privateMessage, receiver: receiverUsername_1, createdAt: "".concat(currentTime), channel: data.channel };
+                        message = {
+                            sender: senderUsername,
+                            message: privateMessage,
+                            receiver: receiverUsername_1,
+                            createdAt: "".concat(currentTime),
+                            channel: data.channel
+                        };
                         receiverSocket.to(data.channel).emit('message', message);
                         return [4 /*yield*/, getUser(receiverUsername_1)];
                     case 10:
@@ -247,17 +252,17 @@ var socketSetup = function (server) {
         });
         socket.on('disconnect', function () {
             var username = activeUsers.get(socket.id);
-            console.log("user ".concat(username, " disconnected"));
-            activeUsers.delete(socket.id);
-            console.log('Current users:', activeUsers);
-            socket.emit('userLeft', username);
-            var activeUsersArray = Array.from(activeUsers.values());
-            activeUsersOnChannels.delete(username);
-            console.log('Active users array:', activeUsersOnChannels);
-            socket.emit('activeUsers', activeUsersArray);
-            socket.broadcast.emit('activeUsers', activeUsersArray);
-            /* socket.emit('activeUsersOnChannels', activeUsersOnChannels);
-            socket.broadcast.emit('activeUsersOnChannels', activeUsersOnChannels); */
+            if (username) {
+                console.log("user ".concat(username, " disconnected"));
+                activeUsers.delete(socket.id);
+                console.log('Current users:', activeUsers);
+                socket.emit('userLeft', username);
+                var activeUsersArray = Array.from(activeUsers.values());
+                activeUsersOnChannels.delete(username);
+                console.log('Active users array:', activeUsersOnChannels);
+                socket.emit('activeUsers', activeUsersArray);
+                socket.broadcast.emit('activeUsers', activeUsersArray);
+            }
         });
     });
     function getUsersInChannel(channelName) {

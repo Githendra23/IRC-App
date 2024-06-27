@@ -11,11 +11,16 @@ const PORT = process.env.PORT || 4000;
 const mongoURL = process.env.MONGO_URL;
 
 const app = express();
-const server = http.Server(app);
+const server = http.createServer(app);
 
-mongoose.connect(mongoURL).then(function () {
-  console.log('Connected to MongoDB');
-});
+mongoose.connect(mongoURL)
+    .then(() => {
+      console.log('Connected to MongoDB');
+    })
+    .catch(err => {
+      console.error('Failed to connect to MongoDB:', err);
+      process.exit(1);
+    });
 
 const { userRoutes } = require('./routes/user');
 const verifyToken = require('./routes/verifyToken');

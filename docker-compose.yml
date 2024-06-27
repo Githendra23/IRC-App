@@ -8,6 +8,8 @@ services:
       MONGO_URL: mongodb+srv://user:user@chatrelay.bfroctp.mongodb.net/?retryWrites=true&w=majority&appName=chatrelay
       JWT_KEY: eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwNjY0MTUzNSwiaWF0IjoxNzA2NjQxNTM1fQ.Mj7cixwuIdP6rCNQ_6riQWoXa6WkNPYhoXmXwo4ptVs
       PORT: 4000
+    ports:
+      - "4000:4000"
     volumes:
       - .:/var/www/html/api
 

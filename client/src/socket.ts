@@ -1,4 +1,4 @@
-import socketIO, { Socket } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 
 let socket: Socket;
 let isConnect = false;
@@ -6,7 +6,8 @@ let isConnect = false;
 export const connect = () => {
     if (isConnect) return;
 
-    socket = socketIO("http://localhost:8080/api");
+    socket = io("http://localhost:4000");
+
     isConnect = true;
 };
 
