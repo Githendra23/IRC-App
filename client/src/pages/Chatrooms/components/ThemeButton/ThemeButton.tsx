@@ -1,4 +1,6 @@
 import {useEffect, useState} from "react";
+import darkImg from "./images/dark_mode.png";
+import lightImg from "./images/light_mode.png";
 
 const ThemeButton = () => {
     const [darkTheme, setDarkTheme] = useState(false);
@@ -34,7 +36,8 @@ const ThemeButton = () => {
             <img
                 width={25}
                 height={25}
-                src={`/assets/${darkTheme ? "dark" : "light"}_mode.png`}
+                src={darkTheme ? darkImg : lightImg}
+                alt="dark/light mode"
             />
         </button>
     );
