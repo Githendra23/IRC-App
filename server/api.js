@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const http = require('http');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 const socketSetup = require('./socketSetup');
 
 dotenv.config();
@@ -23,6 +24,8 @@ const { channelRoutes } = require('./routes/channel');
 
 app.use(express.json());
 app.use(cors({ origin: '*', credentials: true }));
+app.use(cookieParser());
+
 app.use('/user', userRoutes);
 app.use('/verifyToken', verifyToken);
 app.use('/message', messageRoutes);
