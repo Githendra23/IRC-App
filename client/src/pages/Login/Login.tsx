@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {getSocket, connect, isConnected} from "./socket";
+import {getSocket, connect, isConnected} from "../socket.ts";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";

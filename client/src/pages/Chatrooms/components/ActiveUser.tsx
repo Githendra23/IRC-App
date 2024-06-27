@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getSocket } from "../socket";
+import { getSocket } from "../../socket.ts";
 
 const ActiveUser = () => {
   const [activeUsers, setActiveUsers] = useState<

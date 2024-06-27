@@ -1,16 +1,15 @@
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import {toast} from "react-toastify";
-import {getSocket} from "../socket";
-import PopupWindow from "./PopupWindow";
+import {getSocket} from "../../../socket.ts";
+import PopupWindow from "../PopupWindow.tsx";
 import axios from "axios";
 
-const Channel = ({
-                     selectedChannel,
-                     setSelectedChannel,
-                 }: {
+interface Props {
     selectedChannel: string | null;
     setSelectedChannel: (channel: string | null) => void;
-}) => {
+}
+
+const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
     const [channels, setChannels] = useState<string[]>([]);
     const [newChannel, setNewChannel] = useState("");
     const userId = localStorage.getItem("userId");
@@ -48,7 +47,7 @@ const Channel = ({
         socket.emit("message", data);
     }
 
-    const createChal = async (channelName: string) => {
+    const createChannel = async (channelName: string) => {
         if (!userId) {
             console.error("userId is null");
             return;
@@ -70,7 +69,7 @@ const Channel = ({
 
     useEffect(() => {
         const joinChannel = (channelName: string) => {
-            createChal(channelName);
+            createChannel(channelName);
         };
 
         const leaveChannel = (channelName: string) => {

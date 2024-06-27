@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getSocket } from "../socket";
+import { getSocket } from "../../../socket.ts";
 
 const Input = ({ selectedChannel }: { selectedChannel: string | null }) => {
   const [message, setMessage] = useState("");

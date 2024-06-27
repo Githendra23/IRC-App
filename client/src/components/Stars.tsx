@@ -11,7 +11,7 @@ const Stars = React.memo((props) => {
     random.inSphere(new Float64Array(5000), { radius: 1.2 })
   );
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (!ref.current) return;
 
     ref.current.rotation.x -= delta / 10;

@@ -6,9 +6,9 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Login from "./Login";
-import Register from "./Register";
-import ChatRooms from "./ChatRooms";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ChatRooms from "./pages/Chatrooms";
 import StarCanvas from "./components/Stars";
 
 function App() {

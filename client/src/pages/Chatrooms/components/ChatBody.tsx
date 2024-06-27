@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { getSocket } from "../socket";
-import Typing from "./Typing";
+import { getSocket } from "../../socket.ts";
+import Typing from "./Typing.tsx";
 
 interface Data {
   sender?: string;
