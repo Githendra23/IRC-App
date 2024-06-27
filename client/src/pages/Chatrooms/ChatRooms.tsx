@@ -75,7 +75,7 @@ const ChatRooms = () => {
 
     return (
         <div className="scrollbar-thin dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3]">
-            {connected ? (
+            {connected && (
                 <div className="flex bg-black h-screen">
                     <div className="w-1/5 m-2 text-black dark:text-[#09ebe3] dark:bg-[#03252b] bg-white rounded">
                         <Channel
@@ -111,12 +111,7 @@ const ChatRooms = () => {
                                 setMessages={setMessages}
                             />
                             <div className="mt-2 p-2">
-                                <Input
-                                    selectedChannel={selectedChannel}
-                                    setSelectedChannel={setSelectedChannel}
-                                    messages={messages}
-                                    setMessages={setMessages}
-                                />
+                                <Input selectedChannel={selectedChannel}/>
                             </div>
                         </div>
                     </div>
@@ -124,7 +119,7 @@ const ChatRooms = () => {
                         <ActiveUser/>
                     </div>
                 </div>
-            ) : null}
+            )}
         </div>
     );
 };

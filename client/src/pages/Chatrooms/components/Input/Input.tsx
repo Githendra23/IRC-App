@@ -1,7 +1,11 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {getSocket} from "../../../socket.ts";
 
-const Input = ({selectedChannel}: { selectedChannel: string | null }) => {
+interface Props {
+    selectedChannel: string | null;
+}
+
+const Input: React.FC<Props> = ({selectedChannel}) => {
     const [message, setMessage] = useState("");
     const socket = getSocket();
     const username = localStorage.getItem("username");

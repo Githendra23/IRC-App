@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import React, {useEffect, Dispatch, SetStateAction} from "react";
 import {toast} from "react-toastify";
 import {getSocket} from "../../socket.ts";
 import Typing from "./Typing.tsx";
@@ -11,17 +11,14 @@ interface Data {
     channel: string;
 }
 
-const ChatBody = ({
-                      selectedChannel,
-                      setSelectedChannel,
-                      messages,
-                      setMessages,
-                  }: {
+interface Props {
     selectedChannel: string | null;
     setSelectedChannel: (channel: string | null) => void;
     messages: Data[];
-    setMessages: (messages: (prevMessages: Data[]) => Data[]) => Data[];
-}) => {
+    setMessages: Dispatch<SetStateAction<Data[]>>;
+}
+
+const ChatBody: React.FC<Props> = ({selectedChannel, setSelectedChannel, messages, setMessages}) => {
     const socket = getSocket();
     const username = localStorage.getItem("username");
 

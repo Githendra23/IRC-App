@@ -5,7 +5,7 @@ import {Points, PointMaterial, Preload} from "@react-three/drei";
 import * as random from "maath/random";
 
 const Stars = React.memo((props) => {
-    const ref = useRef<THREE.Group>();
+    const ref = useRef<THREE.Points<THREE.BufferGeometry, THREE.Material | THREE.Material[]>>(null);
 
     const sphere = Float32Array.from(
         random.inSphere(new Float64Array(5000), {radius: 1.2})
