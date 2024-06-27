@@ -40,7 +40,7 @@ const Login = () => {
                     navigate("/chatrooms");
                 })
                 .catch((err) => {
-                    toast.error(err.data.message);
+                    toast.error(err.response.data.message);
                 });
         } else {
             toast.error("Please enter a username");

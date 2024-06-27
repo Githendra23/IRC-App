@@ -2,6 +2,7 @@ import React, {useEffect, Dispatch, SetStateAction} from "react";
 import {toast} from "react-toastify";
 import {getSocket} from "../../socket.ts";
 import Typing from "./Typing.tsx";
+import axios from "axios";
 
 interface Data {
     sender?: string;
@@ -65,19 +66,12 @@ const ChatBody: React.FC<Props> = ({selectedChannel, setSelectedChannel, message
     }, [selectedChannel]);
 
     async function fetchMessages() {
-        await fetch(
-            `http://localhost:4000/message/${selectedChannel}/${username}`,
-            {
-                method: "GET",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-            }
-        )
-            .then((res) => res.json())
-            .then((data) => {
-                setMessages(data);
+        axios.get(`http://localhost:8080/api/message/${selectedChannel}/${username}`, {withCredentials: true})
+            .then((res) => {
+                setMessages(res.data);
+            })
+            .catch((err) => {
+                toast.error(err);
             });
     }
 

@@ -8,7 +8,10 @@ dotenv.config();
 const secretKey = process.env.JWT_KEY;
 
 module.exports = async (req, res) => {
-    const token = req.cookies.token;
+    const { username } = req.body;
+
+    const tokenKey = Object.keys(req.cookies).find(key => key.startsWith(`jwt_${username}`));
+    const token = req.cookies[tokenKey];
 
     if (!token) {
         return res.status(401).json({ message: 'Token not provided' });

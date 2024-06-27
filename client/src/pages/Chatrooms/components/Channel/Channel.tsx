@@ -64,7 +64,7 @@ const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
                 toast.success(`Joined ${channelName}`);
             })
             .catch((err) => {
-                toast.error(err.data.message);
+                toast.error(err.response.data.message);
             });
     };
 

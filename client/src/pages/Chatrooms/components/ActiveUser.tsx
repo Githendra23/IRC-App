@@ -25,6 +25,11 @@ const ActiveUser = () => {
 
     useEffect(() => {
         socket.on("activeUsersOnChannels", (message: string[]) => {
+            if (!Array.isArray(message)) {
+                console.error("Unexpected data format for active users:", message);
+                return;
+            }
+
             console.log(message);
 
             const usersWithColors = message.map((user: string) => {

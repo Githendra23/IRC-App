@@ -27,8 +27,30 @@ const verifyToken = require('./routes/verifyToken');
 const messageRoutes = require('./routes/message');
 const { channelRoutes } = require('./routes/channel');
 
+const allowedOrigins = [
+    'http://localhost:8000',
+    'http://localhost:8010',
+    'http://localhost:8020',
+    'http://localhost:8030',
+    'http://localhost:8040',
+    'http://localhost:8050',
+    'http://localhost:8060',
+    'http://localhost:8070',
+    'http://localhost:8080'
+];
+
 app.use(express.json());
-app.use(cors({ origin: '*', credentials: true }));
+app.use(cors({
+    origin: function(origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
+}));
 app.use(cookieParser());
 
 app.use('/user', userRoutes);

@@ -29,6 +29,14 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
+      - "8000:8080"
+      - "8010:8080"
+      - "8020:8080"
+      - "8030:8080"
+      - "8040:8080"
+      - "8050:8080"
+      - "8060:8080"
+      - "8070:8080"
       - "8080:8080"
     depends_on:
       - site

@@ -38,7 +38,7 @@ const ChatRooms = () => {
     useEffect(() => {
         const checkConnect = async () => {
             if (username) {
-                axios.post("http://localhost:8080/api/verifyToken", {}, {withCredentials: true})
+                axios.post("http://localhost:8080/api/verifyToken", {username}, {withCredentials: true})
                     .then((res) => {
                         if ("username" in res.data && res.data.username === username) {
                             setConnected(true);
@@ -48,7 +48,7 @@ const ChatRooms = () => {
                         }
                     })
                     .catch((err) => {
-                        toast.error(err.data.message);
+                        toast.error(err.response.data.message);
                         setConnected(false);
                         logOut();
                     });
