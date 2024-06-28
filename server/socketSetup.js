@@ -132,9 +132,8 @@ var socketSetup = function (server) {
                         if (!((_b = activeUsersOnChannels.get(username)) === null || _b === void 0 ? void 0 : _b.includes(channelName))) {
                             channels.push(channelName);
                             activeUsersOnChannels.set(username, channels);
-                            console.log('haaaaa : ', activeUsersOnChannels);
+                            console.log({ activeUsersOnChannels: activeUsersOnChannels });
                             socket.join(channelName);
-                            console.log('user has joined');
                             socket.emit('joinChannel', channelName);
                             socket.emit('activeUsersOnChannels', activeUsersOnChannels);
                             socket.broadcast.emit('activeUsersOnChannels', activeUsersOnChannels);
@@ -149,7 +148,7 @@ var socketSetup = function (server) {
                             channels.splice(index, 1);
                         }
                         activeUsersOnChannels.set(username, channels);
-                        console.log('hooooooo : ', activeUsersOnChannels);
+                        console.log({ activeUsersOnChannels: activeUsersOnChannels });
                         console.log("User ".concat(username, " has quit."));
                         socket.leave(channelName);
                         socket.emit('leaveChannel', channelName);
@@ -157,7 +156,6 @@ var socketSetup = function (server) {
                     case 8:
                         channel = data.message.split(' ')[1];
                         users = getUsersInChannel(channel);
-                        console.log("Users in channel ".concat(channel, " :"), users);
                         socket.emit('activeUsersOnChannels', users);
                         return [3 /*break*/, 20];
                     case 9:
@@ -175,7 +173,7 @@ var socketSetup = function (server) {
                         if (!receiverSocketId) return [3 /*break*/, 16];
                         if (senderUsername === receiverUsername_1) {
                             socket.emit('serverResponse', 'Cannot send private message to yourself');
-                            return [3 /*break*/, 20];
+                            return [2 /*return*/];
                         }
                         receiverSocket = socketIO.sockets.sockets.get(receiverSocketId);
                         privateMessage = data.message.split(' ').slice(2).join(' ');
@@ -187,7 +185,9 @@ var socketSetup = function (server) {
                             createdAt: "".concat(currentTime),
                             channel: data.channel
                         };
-                        receiverSocket.to(data.channel).emit('message', message);
+                        console.log({ receiverUsername: receiverUsername_1, receiverSocketId: receiverSocketId, senderUsername: senderUsername });
+                        receiverSocket.emit('message', message);
+                        socket.emit('message', message);
                         return [4 /*yield*/, getUser(receiverUsername_1)];
                     case 10:
                         receiverId = _d.sent();
@@ -205,6 +205,7 @@ var socketSetup = function (server) {
                             })];
                     case 13:
                         _d.sent();
+                        socket.emit('serverResponse', "Message sent to ".concat(receiverUsername_1));
                         return [3 /*break*/, 15];
                     case 14:
                         socket.emit('serverResponse', 'User not found or offline');

@@ -39,7 +39,7 @@ const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
 
     function selectChannel(channel: string) {
         setSelectedChannel(channel);
-        console.log("Selected channel:", channel);
+        console.log("Selected channel:", selectedChannel);
         const data = {
             sender: username,
             message: "/users " + channel,

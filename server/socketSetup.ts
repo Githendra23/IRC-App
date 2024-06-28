@@ -109,9 +109,8 @@ const socketSetup = (server: HttpServer) => {
                             channels.push(channelName);
 
                             activeUsersOnChannels.set(username, channels);
-                            console.log('haaaaa : ', activeUsersOnChannels);
+                            console.log({activeUsersOnChannels});
                             socket.join(channelName);
-                            console.log('user has joined');
                             socket.emit('joinChannel', channelName);
                             socket.emit('activeUsersOnChannels', activeUsersOnChannels);
                             socket.broadcast.emit('activeUsersOnChannels', activeUsersOnChannels);
@@ -129,7 +128,7 @@ const socketSetup = (server: HttpServer) => {
                         }
 
                         activeUsersOnChannels.set(username, channels);
-                        console.log('hooooooo : ', activeUsersOnChannels);
+                        console.log({activeUsersOnChannels});
                         console.log(`User ${username} has quit.`);
                         socket.leave(channelName);
                         socket.emit('leaveChannel', channelName);
@@ -138,7 +137,6 @@ const socketSetup = (server: HttpServer) => {
                     case '/users':
                         const channel = data.message.split(' ')[1];
                         const users = getUsersInChannel(channel);
-                        console.log(`Users in channel ${channel} :`, users);
                         socket.emit('activeUsersOnChannels', users);
                         break;
 
@@ -157,7 +155,7 @@ const socketSetup = (server: HttpServer) => {
                         if (receiverSocketId) {
                             if (senderUsername === receiverUsername) {
                                 socket.emit('serverResponse', 'Cannot send private message to yourself');
-                                break;
+                                return;
                             }
 
                             const receiverSocket = socketIO.sockets.sockets.get(receiverSocketId);
@@ -172,7 +170,10 @@ const socketSetup = (server: HttpServer) => {
                                     channel: data.channel
                                 };
 
-                                receiverSocket.to(data.channel).emit('message', message);
+                                console.log({receiverUsername, receiverSocketId, senderUsername});
+
+                                receiverSocket.emit('message', message);
+                                socket.emit('message', message);
 
                                 const receiverId = await getUser(receiverUsername);
                                 const senderId = await getUser(data.sender);
@@ -185,6 +186,7 @@ const socketSetup = (server: HttpServer) => {
                                     channelId: channelId._id
                                 })
 
+                                socket.emit('serverResponse', `Message sent to ${receiverUsername}`);
                             } else {
                                 socket.emit('serverResponse', 'User not found or offline');
                             }
@@ -200,7 +202,8 @@ const socketSetup = (server: HttpServer) => {
                     default:
                         socket.emit('serverResponse', "Command doesn't exist");
                 }
-            } else {
+            }
+            else {
                 const senderId = await getUser(data.sender);
                 const channelId = await getChannel(data.channel);
                 data.createdAt = `${currentTime}`;

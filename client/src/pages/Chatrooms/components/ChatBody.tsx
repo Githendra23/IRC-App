@@ -26,7 +26,6 @@ const ChatBody: React.FC<Props> = ({selectedChannel, setSelectedChannel, message
     useEffect(() => {
         socket.on("message", (data: Data) => {
             setMessages((prevMessages: Data[]) => [...prevMessages, data]);
-            console.log("data received from socket :", data);
         });
 
         socket.on("leaveChannel", (channelName: string) => {
@@ -98,40 +97,42 @@ const ChatBody: React.FC<Props> = ({selectedChannel, setSelectedChannel, message
                     {selectedChannel && (
                         <>
                             {messages.map((data, index) =>
-                                data.sender !== username ? (
-                                    <div key={index} className="w-[70%] flex flex-col mt-4 mb-2">
-                                        <label className="ml-5 text-sm mb-[3px]">
-                                            {data.sender}
-                                        </label>
-                                        <div className="flex flex-wrap">
-                                            <p
-                                                className={`text-lg overflow-hidden break-words border my-1 ml-3 px-5 py-3 mt-[-2px] ${
-                                                    data.receiver ? "italic" : "not-italic"
-                                                } border-[#0a2b03] rounded-[30px] bg-[#2f941a] text-white`}
-                                            >
-                                                {data.message}
-                                            </p>
-                                        </div>
-                                        <label className="ml-5 mt[-2px] text-sm">
-                                            {formatTime(data.createdAt)}
-                                        </label>
-                                    </div>
-                                ) : (
-                                    <div key={index} className="flex justify-end mt-4 mb-2">
-                                        <div className="w-[70%] justify-end">
-                                            <div className="flex flex-wrap justify-end">
-                                                <p className="text-lg overflow-hidden break-words border my-2 mr-3 px-5 py-3 border-[#03252b] rounded-[30px] bg-[#1356bb] text-white">
+                                selectedChannel === data.channel && (
+                                    data.sender !== username ? (
+                                        <div key={index} className="w-[70%] flex flex-col mt-4 mb-2">
+                                            <label className="ml-5 text-sm mb-[3px]">
+                                                {data.sender}
+                                            </label>
+                                            <div className="flex flex-wrap">
+                                                <p
+                                                    className={`text-lg overflow-hidden break-words border my-1 ml-3 px-5 py-3 mt-[-2px] ${
+                                                        data.receiver ? "italic" : "not-italic"
+                                                    } border-[#0a2b03] rounded-[30px] bg-[#2f941a] text-white`}
+                                                >
                                                     {data.message}
                                                 </p>
                                             </div>
+                                            <label className="ml-5 mt[-2px] text-sm">
+                                                {formatTime(data.createdAt)}
+                                            </label>
+                                        </div>
+                                    ) : (
+                                        <div key={index} className="flex justify-end mt-4 mb-2">
+                                            <div className="w-[70%] justify-end">
+                                                <div className="flex flex-wrap justify-end">
+                                                    <p className="text-lg overflow-hidden break-words border my-2 mr-3 px-5 py-3 border-[#03252b] rounded-[30px] bg-[#1356bb] text-white">
+                                                        {data.message}
+                                                    </p>
+                                                </div>
 
-                                            <div className="flex justify-end mr-5 mt[-2px] ml-6">
-                                                <label className="text-sm">
-                                                    {formatTime(data.createdAt)}
-                                                </label>
+                                                <div className="flex justify-end mr-5 mt[-2px] ml-6">
+                                                    <label className="text-sm">
+                                                        {formatTime(data.createdAt)}
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    )
                                 )
                             )}
                         </>
