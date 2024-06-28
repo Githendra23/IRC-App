@@ -74,26 +74,23 @@ const ChatRooms = () => {
     };
 
     return (
-        <div className="scrollbar-thin dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3]">
+        <div className="scrollbar-thin dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3] h-screen flex flex-col">
             {connected && (
-                <div className="flex bg-black h-screen">
-                    <div className="w-1/5 m-2 text-black dark:text-[#09ebe3] dark:bg-[#03252b] bg-white rounded">
+                <div className="flex h-full">
+                    <div className="flex-grow text-black dark:text-[#09ebe3] dark:bg-[#03252b] bg-white">
                         <Channel
                             selectedChannel={selectedChannel}
                             setSelectedChannel={setSelectedChannel}
                         />
                     </div>
 
-                    <div
-                        className="w-3/5 my-2 flex flex-col text-black dark:text-[#09ebe3] dark:bg-[#05323a] bg-white rounded justify-center items-start">
-                        <div className="flex justify-between w-full px-2 pt-2">
+                    <div className="w-3/5 h-full text-black dark:text-[#09ebe3] dark:bg-[#05323a] bg-gray-200 flex flex-col justify-between">
+                        <div className="flex justify-between items-center p-[0.85rem]">
                             <h1 className="text-3xl font-bold text-black dark:text-[#09ebe3]">
                                 {username}
                             </h1>
-
                             <div className="flex items-center">
-                                <ThemeButton/>
-
+                                <ThemeButton />
                                 <button
                                     className="p-2 bg-red-500 hover:bg-red-700 text-white rounded"
                                     onClick={logOut}
@@ -103,20 +100,20 @@ const ChatRooms = () => {
                             </div>
                         </div>
 
-                        <div className="mt-2 flex flex-col w-full">
-                            <ChatBody
-                                selectedChannel={selectedChannel}
-                                setSelectedChannel={setSelectedChannel}
-                                messages={messages}
-                                setMessages={setMessages}
-                            />
-                            <div className="mt-2 p-2">
-                                <Input selectedChannel={selectedChannel}/>
-                            </div>
+                        <ChatBody
+                            selectedChannel={selectedChannel}
+                            setSelectedChannel={setSelectedChannel}
+                            messages={messages}
+                            setMessages={setMessages}
+                        />
+
+                        <div className="w-full py-2 pr-2">
+                            <Input selectedChannel={selectedChannel} />
                         </div>
                     </div>
-                    <div className="w-1/5 m-2 text-black dark:text-[#09ebe3] dark:bg-[#03252b] bg-white rounded">
-                        <ActiveUser/>
+
+                    <div className="flex-grow text-black dark:text-[#09ebe3] dark:bg-[#03252b] bg-white">
+                        <ActiveUser />
                     </div>
                 </div>
             )}

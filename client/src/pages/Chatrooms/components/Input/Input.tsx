@@ -29,17 +29,17 @@ const Input: React.FC<Props> = ({selectedChannel}) => {
     };
 
     return (
-        <>
+        <div className="flex items-center">
             {selectedChannel && (
-                <div className="flex justify-center gap-x-1">
+                <>
                     <input
                         type="text"
                         onKeyDown={handleKeyPress}
-                        className="border border-black py-3 w-full rounded-md mr-2 pl-1 bg-neutral-300 text-black dark:text-[#09ebe3] dark:bg-[#004449]"
+                        className="border border-black py-3 flex-grow rounded-md mr-2 pl-1 bg-neutral-300 text-black dark:text-[#09ebe3] dark:bg-[#004449]"
                         placeholder="Type here"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                    ></input>
+                    />
 
                     <button
                         className="px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg py-3"
@@ -47,9 +47,9 @@ const Input: React.FC<Props> = ({selectedChannel}) => {
                     >
                         <AirplaneIcon className="w-6 h-6"/>
                     </button>
-                </div>
+                </>
             )}
-        </>
+        </div>
     );
 };
 

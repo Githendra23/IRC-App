@@ -102,13 +102,11 @@ const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
     };
 
     return (
-        <div className="flex flex-col text-center gap-y-2">
-            <div className="flex w-full px-2 gap-x-2 mt-4 items-center justify-center">
-                <MessageIcon className="w-8 h-8 items-center min-w-8 min-h-8"/>
-                <h2 className="text-3xl font-bold text-center">Channels</h2>
+        <div>
+            <div className="flex w-full gap-x-2 py-4 mb-2 items-center justify-center border-b border-gray-700">
+                <MessageIcon className="w-8 h-8 items-center"/>
+                <h2 className="text-xl lg:text-3xl font-bold">Channels</h2>
             </div>
-
-            <div className="border-b border-gray-700 p-2 flex items-center"></div>
 
             {channels.length > 0 && (
                 <div className="">
