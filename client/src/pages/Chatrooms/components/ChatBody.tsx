@@ -1,4 +1,4 @@
-import React, {useEffect, Dispatch, SetStateAction} from "react";
+import React, {useEffect, useRef, Dispatch, SetStateAction} from "react";
 import {toast} from "react-toastify";
 import {getSocket} from "../../socket.ts";
 import axios from "axios";
@@ -22,6 +22,7 @@ interface Props {
 const ChatBody: React.FC<Props> = ({className, selectedChannel, setSelectedChannel, messages, setMessages}) => {
     const socket = getSocket();
     const username = localStorage.getItem("username");
+    const chatEndRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         socket.on("message", (data: Data) => {
@@ -30,10 +31,7 @@ const ChatBody: React.FC<Props> = ({className, selectedChannel, setSelectedChann
 
         socket.on("leaveChannel", (channelName: string) => {
             setMessages((prevMessages: Data[]) => {
-                if (
-                    prevMessages.length > 0 &&
-                    prevMessages[0].channel === channelName
-                ) {
+                if (prevMessages.length > 0 && prevMessages[0].channel === channelName) {
                     setSelectedChannel(null);
                     return [];
                 } else {
@@ -56,13 +54,19 @@ const ChatBody: React.FC<Props> = ({className, selectedChannel, setSelectedChann
             socket.off("showCommands");
             socket.off("leaveChannel");
         };
-    }, [socket, setMessages]);
+    }, [socket, setMessages, setSelectedChannel]);
 
     useEffect(() => {
         if (selectedChannel) {
             fetchMessages();
         }
     }, [selectedChannel]);
+
+    useEffect(() => {
+        if (chatEndRef.current) {
+            chatEndRef.current.scrollIntoView({behavior: "smooth"});
+        }
+    }, [messages]);
 
     async function fetchMessages() {
         axios.get(`http://localhost:8080/api/message/${selectedChannel}/${username}`, {withCredentials: true})
@@ -125,6 +129,7 @@ const ChatBody: React.FC<Props> = ({className, selectedChannel, setSelectedChann
                             )
                         )
                     )}
+                    <div ref={chatEndRef}/>
                 </>
             )}
         </div>
