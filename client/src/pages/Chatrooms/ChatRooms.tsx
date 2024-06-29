@@ -8,6 +8,7 @@ import Channel from "./components/Channel";
 import ThemeButton from "./components/ThemeButton";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import SideBar from "./components/SideBar";
 
 interface Data {
     sender?: string;
@@ -74,9 +75,15 @@ const ChatRooms = () => {
     };
 
     return (
-        <div className="scrollbar-thin dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3] h-screen flex flex-col">
+        <div className="scrollbar-thin dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3] font-[sans-serif] h-screen flex flex-col">
             {connected && (
                 <div className="flex h-full">
+                    <SideBar className="flex flex-col justify-between items-center p-4 h-screen bg-gray-700">
+                        <div className="w-8"><img className="h-auto w-auto" src={'/assets/logo_.png'} alt="logo"/></div>
+                        <div>dfgdfg</div>
+                        <div>sdfsf</div>
+                    </SideBar>
+
                     <div className="flex-grow text-black dark:text-[#09ebe3] dark:bg-[#03252b] bg-white">
                         <Channel
                             selectedChannel={selectedChannel}
@@ -84,8 +91,8 @@ const ChatRooms = () => {
                         />
                     </div>
 
-                    <div className="w-3/5 h-full text-black dark:text-[#09ebe3] dark:bg-[#05323a] bg-gray-200 flex flex-col justify-between">
-                        <div className="flex justify-between items-center p-[0.85rem]">
+                    <div className="w-3/5 h-full px-2 text-black dark:text-[#09ebe3] dark:bg-[#05323a] bg-gray-200 flex flex-col justify-between">
+                        <div className="flex justify-between items-center py-[0.85rem]">
                             <h1 className="text-3xl font-bold text-black dark:text-[#09ebe3]">
                                 {username}
                             </h1>
@@ -107,7 +114,7 @@ const ChatRooms = () => {
                             setMessages={setMessages}
                         />
 
-                        <div className="w-full py-2 pr-2">
+                        <div className="w-full py-2">
                             <Input selectedChannel={selectedChannel} />
                         </div>
                     </div>

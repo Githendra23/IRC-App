@@ -57,23 +57,23 @@ const ActiveUser = () => {
                 <h2 className="text-xl lg:text-3xl font-bold">Active Users</h2>
             </div>
 
-            {activeUsers.map((user, index) => (
-                <div className="pl-4 flex items-center gap-3 my-1">
-                    <div
-                        className={"w-10 h-10 rounded-full flex items-center " + user.color}
-                    >
-                        <div className="text-center w-full text-black uppercase text-lg">
-                            {user.name[0]}
+            <div className="overscroll-y-auto">
+                {activeUsers.map((user, index) => (
+                    <div className="pl-4 flex items-center gap-3 my-2">
+                        <div className={"w-10 h-10 rounded-full flex items-center " + user.color}>
+                            <div className="text-center w-full text-black uppercase text-lg">
+                                {user.name[0]}
+                            </div>
                         </div>
+                        <span
+                            key={index}
+                            className="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-xs text-lg"
+                        >
+                            {user.name}
+                        </span>
                     </div>
-                    <span
-                        key={index}
-                        className="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-xs text-lg"
-                    >
-            {user.name}
-          </span>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 };
