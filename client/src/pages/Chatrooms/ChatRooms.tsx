@@ -9,10 +9,11 @@ import ThemeButton from "./components/ThemeButton";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import SideBar from "./components/SideBar";
-import SettingsButton from "./components/SideButtons/SettingsButton.tsx";
-import GroupChatButton from "./components/SideButtons/GroupChatButton.tsx";
-import RoomsButton from "./components/SideButtons/RoomsButton.tsx";
-import FriendsListButton from "./components/SideButtons/FriendsListButton.tsx";
+import SideButton from "./components/SideButton";
+import FriendIcon from "./icons/FriendIcon.tsx";
+import ChatIcon from "./icons/ChatIcon.tsx";
+import GroupChatIcon from "./icons/GroupChatIcon.tsx";
+import SettingsIcon from "./icons/SettingsIcon.tsx";
 
 interface Data {
     sender?: string;
@@ -29,6 +30,13 @@ const ChatRooms = () => {
     const [messages, setMessages] = useState<Data[]>([]);
     const navigate = useNavigate();
     const socket = getSocket();
+    const [activeButton, setActiveButton] = useState<string | null>(null);
+
+    const handleButtonClick = (buttonText: string) => {
+        if (activeButton !== buttonText) {
+            setActiveButton(buttonText);
+        }
+    };
 
     useEffect(() => {
         if (!isConnected() || !connected) {
@@ -85,12 +93,46 @@ const ChatRooms = () => {
                     <SideBar className="flex flex-col justify-between items-center py-4 px-2 h-screen bg-[#36404a]">
                         <div className="w-8"><img className="h-auto w-auto" src={'/assets/logo_.png'} alt="logo"/></div>
                         <div className="grid grid-cols-1 gap-y-1">
-                            <FriendsListButton className="p-4 hover:bg-lightGray rounded-md" text="Friends" color="#929cb8"/>
-                            <RoomsButton className="p-4 hover:bg-lightGray rounded-md" text="Rooms" color="#929cb8"/>
-                            <GroupChatButton className="p-4 hover:bg-lightGray rounded-md" text="Group Chats" color="#929cb8"/>
-                            <SettingsButton className="p-4 hover:bg-lightGray rounded-md" text="Settings" color="#929cb8"/>
+                            <SideButton
+                                text="Friends"
+                                icon={<FriendIcon className="h-auto w-6" color={activeButton === "Friends" ? "#5e5dc3" : "#929cb8"} />}
+                                isActive={activeButton === "Friends"}
+                                onClick={() => handleButtonClick("Friends")}
+                            >
+                                <div>sdf</div>
+                            </SideButton>
+
+                            <SideButton
+                                text="Rooms"
+                                icon={<ChatIcon className="h-auto w-6" color={activeButton === "Rooms" ? "#5e5dc3" : "#929cb8"} />}
+                                isActive={activeButton === "Rooms"}
+                                onClick={() => handleButtonClick("Rooms")}
+                            >
+                                <div>sdf</div>
+                            </SideButton>
+
+                            <SideButton
+                                text="Group Chats"
+                                icon={<GroupChatIcon className="h-auto w-6" color={activeButton === "Group Chats" ? "#5e5dc3" : "#929cb8"} />}
+                                isActive={activeButton === "Group Chats"}
+                                onClick={() => handleButtonClick("Group Chats")}
+                            >
+                                <div>sdf</div>
+                            </SideButton>
+
+                            <SideButton
+                                text="Settings"
+                                icon={<SettingsIcon className="h-auto w-6" color={activeButton === "Settings" ? "#5e5dc3" : "#929cb8"} />}
+                                isActive={activeButton === "Settings"}
+                                onClick={() => handleButtonClick("Settings")}
+                            >
+                                <div>sdf</div>
+                            </SideButton>
                         </div>
-                        <div className="flex items-center justify-center rounded-full h-8 w-8 bg-red-400">s</div>
+
+                        <div>
+                            <p className="flex items-center justify-center rounded-full h-8 w-8 bg-red-400">s</p>
+                        </div>
                     </SideBar>
 
                     <div className="flex-grow text-black dark:text-[#09ebe3] dark:bg-[#03252b] bg-white">
