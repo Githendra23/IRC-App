@@ -9,6 +9,7 @@ import ThemeButton from "./components/ThemeButton";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import SideBar from "./components/SideBar";
+import SettingsButton from "./components/SideButtons/SettingsButton.tsx";
 
 interface Data {
     sender?: string;
@@ -78,9 +79,11 @@ const ChatRooms = () => {
         <div className="scrollbar-thin dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3] font-[sans-serif] h-screen flex flex-col">
             {connected && (
                 <div className="flex h-full">
-                    <SideBar className="flex flex-col justify-between items-center p-4 h-screen bg-gray-700">
+                    <SideBar className="flex flex-col justify-between items-center py-4 px-2 h-screen bg-[#36404a]">
                         <div className="w-8"><img className="h-auto w-auto" src={'/assets/logo_.png'} alt="logo"/></div>
-                        <div>dfgdfg</div>
+                        <div>
+                            <SettingsButton className="p-4 hover:bg-lightGray rounded-md" color="#929cb8"/>
+                        </div>
                         <div>sdfsf</div>
                     </SideBar>
 
