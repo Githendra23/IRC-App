@@ -12,6 +12,7 @@ import SideBar from "./components/SideBar";
 import SettingsButton from "./components/SideButtons/SettingsButton.tsx";
 import GroupChatButton from "./components/SideButtons/GroupChatButton.tsx";
 import RoomsButton from "./components/SideButtons/RoomsButton.tsx";
+import FriendsListButton from "./components/SideButtons/FriendsListButton.tsx";
 
 interface Data {
     sender?: string;
@@ -84,6 +85,7 @@ const ChatRooms = () => {
                     <SideBar className="flex flex-col justify-between items-center py-4 px-2 h-screen bg-[#36404a]">
                         <div className="w-8"><img className="h-auto w-auto" src={'/assets/logo_.png'} alt="logo"/></div>
                         <div className="grid grid-cols-1 gap-y-1">
+                            <FriendsListButton className="p-4 hover:bg-lightGray rounded-md" color="#929cb8"/>
                             <RoomsButton className="p-4 hover:bg-lightGray rounded-md" color="#929cb8"/>
                             <GroupChatButton className="p-4 hover:bg-lightGray rounded-md" color="#929cb8"/>
                             <SettingsButton className="p-4 hover:bg-lightGray rounded-md" color="#929cb8"/>
