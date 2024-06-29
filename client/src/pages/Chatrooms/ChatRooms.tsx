@@ -85,10 +85,10 @@ const ChatRooms = () => {
                     <SideBar className="flex flex-col justify-between items-center py-4 px-2 h-screen bg-[#36404a]">
                         <div className="w-8"><img className="h-auto w-auto" src={'/assets/logo_.png'} alt="logo"/></div>
                         <div className="grid grid-cols-1 gap-y-1">
-                            <FriendsListButton className="p-4 hover:bg-lightGray rounded-md" color="#929cb8"/>
-                            <RoomsButton className="p-4 hover:bg-lightGray rounded-md" color="#929cb8"/>
-                            <GroupChatButton className="p-4 hover:bg-lightGray rounded-md" color="#929cb8"/>
-                            <SettingsButton className="p-4 hover:bg-lightGray rounded-md" color="#929cb8"/>
+                            <FriendsListButton className="p-4 hover:bg-lightGray rounded-md" text="Friends" color="#929cb8"/>
+                            <RoomsButton className="p-4 hover:bg-lightGray rounded-md" text="Rooms" color="#929cb8"/>
+                            <GroupChatButton className="p-4 hover:bg-lightGray rounded-md" text="Group Chats" color="#929cb8"/>
+                            <SettingsButton className="p-4 hover:bg-lightGray rounded-md" text="Settings" color="#929cb8"/>
                         </div>
                         <div className="flex items-center justify-center rounded-full h-8 w-8 bg-red-400">s</div>
                     </SideBar>
