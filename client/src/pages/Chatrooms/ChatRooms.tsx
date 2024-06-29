@@ -10,6 +10,7 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import SideBar from "./components/SideBar";
 import SettingsButton from "./components/SideButtons/SettingsButton.tsx";
+import GroupChatButton from "./components/SideButtons/GroupChatButton.tsx";
 
 interface Data {
     sender?: string;
@@ -81,7 +82,8 @@ const ChatRooms = () => {
                 <div className="flex h-full">
                     <SideBar className="flex flex-col justify-between items-center py-4 px-2 h-screen bg-[#36404a]">
                         <div className="w-8"><img className="h-auto w-auto" src={'/assets/logo_.png'} alt="logo"/></div>
-                        <div>
+                        <div className="grid grid-cols-1 gap-y-1">
+                            <GroupChatButton className="p-4 hover:bg-lightGray rounded-md" color="#929cb8"/>
                             <SettingsButton className="p-4 hover:bg-lightGray rounded-md" color="#929cb8"/>
                         </div>
                         <div>sdfsf</div>
