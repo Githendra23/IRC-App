@@ -30,10 +30,23 @@ const ThemeButton = () => {
 
     return (
         <button
-            className="p-4 hover:bg-lightGray rounded-md group relative"
+            className="p-4 hover:bg-[#f7f7ff] hover:dark:bg-lightGray rounded-md group relative"
             onClick={changeTheme}
         >
-            {darkTheme ? <MoonIcon className="h-auto w-6" color="#929cb8"/> : <SunIcon className="h-auto w-6" color="#929cb8"/>}
+            <div
+                className={`transition-opacity duration-300 ${
+                    darkTheme ? "opacity-0 invisible" : "opacity-100 visible"
+                }`}
+            >
+                <SunIcon className="h-auto w-6" color="#929cb8"/>
+            </div>
+            <div
+                className={`absolute top-1/2 -translate-y-1/2 transition-opacity duration-300 ${
+                    darkTheme ? "opacity-100 visible" : "opacity-0 invisible"
+                }`}
+            >
+                <MoonIcon className="h-auto w-6" color="#929cb8"/>
+            </div>
         </button>
     );
 };

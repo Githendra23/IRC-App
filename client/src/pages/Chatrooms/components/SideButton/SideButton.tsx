@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react";
+import React, { ReactNode } from "react";
 
 interface Props {
     text: string;
@@ -11,8 +11,9 @@ interface Props {
 const SideButton: React.FC<Props> = ({ icon, text, isActive, onClick, children }) => {
     return (
         <>
-            <button className={`p-4 hover:bg-lightGray rounded-md group relative`}
-                    onClick={onClick}>
+            <button className={`p-4 hover:bg-[#f7f7ff] hover:dark:bg-lightGray rounded-md group relative`}
+                onClick={onClick}
+            >
                 {icon}
 
                 <div className="absolute left-[4.5rem] top-1/2 -translate-y-1/2 bg-black py-2 px-3 rounded-md text-white

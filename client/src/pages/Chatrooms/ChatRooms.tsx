@@ -102,25 +102,32 @@ const ChatRooms = () => {
 
                             <SideButton
                                 text="Rooms"
-                                icon={<ChatIcon className="h-auto w-6" color={activeButton === "Rooms" ? "#5e5dc3" : "#929cb8"} />}
+                                icon={<ChatIcon className="h-auto w-6"
+                                                color={activeButton === "Rooms" ? "#5e5dc3" : "#929cb8"}/>}
                                 isActive={activeButton === "Rooms"}
                                 onClick={() => handleButtonClick("Rooms")}
                             />
 
                             <SideButton
                                 text="Group Chats"
-                                icon={<GroupChatIcon className="h-auto w-6" color={activeButton === "Group Chats" ? "#5e5dc3" : "#929cb8"} />}
+                                icon={<GroupChatIcon className="h-auto w-6"
+                                                     color={activeButton === "Group Chats" ? "#5e5dc3" : "#929cb8"}/>}
                                 isActive={activeButton === "Group Chats"}
                                 onClick={() => handleButtonClick("Group Chats")}
                             />
 
                             <SideButton
                                 text="Settings"
-                                icon={<SettingsIcon className="h-auto w-6" color={activeButton === "Settings" ? "#5e5dc3" : "#929cb8"} />}
+                                icon={<SettingsIcon className="h-auto w-6"
+                                                    color={activeButton === "Settings" ? "#5e5dc3" : "#929cb8"}/>}
                                 isActive={activeButton === "Settings"}
                                 onClick={() => handleButtonClick("Settings")}
                             >
-                                <div className="fixed h-screen top-0 left-0 w-screen bg-white" onClick={() => handleButtonClick("")}>sdf</div>
+                                <div
+                                    className={`fixed z-10 h-screen top-0 left-0 w-screen bg-white transition-transform duration-300 ease-in-out ${
+                                        activeButton === "Settings" ? "translate-x-0 visible" : "-translate-x-full invisible"
+                                    }`} onClick={() => handleButtonClick("")}>sdf
+                                </div>
                             </SideButton>
                         </div>
 
@@ -130,7 +137,7 @@ const ChatRooms = () => {
                         </div>
                     </SideBar>
 
-                    <div className="flex-grow text-black dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#03252b] bg-white">
+                    <div className="flex-grow text-black border-x-[#f3f4fa] border-x-2 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#03252b]">
                         {activeButton !== "Friends" ? (
                             <Channel
                                 selectedChannel={selectedChannel}
@@ -141,7 +148,8 @@ const ChatRooms = () => {
                         )}
                     </div>
 
-                    <div className="w-3/5 h-full px-2 text-black dark:text-[#09ebe3] dark:bg-[#05323a] bg-gray-200 flex flex-col justify-between">
+                    <div
+                        className="flex flex-col justify-between w-3/5 h-full px-2 text-black dark:text-[#09ebe3] dark:bg-[#05323a] bg-white">
                         <div className="flex justify-between items-center py-[0.85rem]">
                             <h1 className="text-3xl font-bold text-black dark:text-[#09ebe3]">
                                 {username}
@@ -164,12 +172,12 @@ const ChatRooms = () => {
                         />
 
                         <div className="w-full py-2">
-                            <Input selectedChannel={selectedChannel} />
+                            <Input selectedChannel={selectedChannel}/>
                         </div>
                     </div>
 
                     <div className="w-1/6 text-black dark:text-[#09ebe3] dark:bg-[#03252b] bg-white">
-                        <ActiveUser />
+                        <ActiveUser/>
                     </div>
                 </div>
             )}
