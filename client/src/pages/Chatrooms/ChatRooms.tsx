@@ -55,7 +55,8 @@ const ChatRooms = () => {
                     .then((res) => {
                         if ("username" in res.data && res.data.username === username) {
                             setConnected(true);
-                        } else {
+                        }
+                        else {
                             setConnected(false);
                             logOut();
                         }
@@ -65,7 +66,8 @@ const ChatRooms = () => {
                         setConnected(false);
                         logOut();
                     });
-            } else {
+            }
+            else {
                 setConnected(false);
                 logOut();
             }
@@ -90,13 +92,14 @@ const ChatRooms = () => {
         <div className="scrollbar-thin dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3] font-[sans-serif] h-screen flex flex-col">
             {connected && (
                 <div className="flex h-full">
-                    <SideBar className="flex flex-col justify-between items-center py-4 px-2 h-screen bg-white dark:bg-[#36404a]">
+                    <SideBar
+                        className="flex flex-col justify-between items-center z-10 py-4 px-2 h-screen bg-white dark:bg-[#36404a]">
                         <div className="w-8"><img className="h-auto w-auto" src={'/assets/logo_.png'} alt="logo"/></div>
                         <div className="grid grid-cols-1 gap-y-1">
                             <SideButton
                                 text="Friends"
-                                icon={<FriendIcon className="h-auto w-6" color={activeButton === "Friends" ? "#5e5dc3" : "#929cb8"} />}
-                                isActive={activeButton === "Friends"}
+                                icon={<FriendIcon className="h-auto w-6"
+                                                  color={activeButton === "Friends" ? "#5e5dc3" : "#929cb8"}/>}
                                 onClick={() => handleButtonClick("Friends")}
                             />
 
@@ -104,7 +107,6 @@ const ChatRooms = () => {
                                 text="Rooms"
                                 icon={<ChatIcon className="h-auto w-6"
                                                 color={activeButton === "Rooms" ? "#5e5dc3" : "#929cb8"}/>}
-                                isActive={activeButton === "Rooms"}
                                 onClick={() => handleButtonClick("Rooms")}
                             />
 
@@ -112,7 +114,6 @@ const ChatRooms = () => {
                                 text="Group Chats"
                                 icon={<GroupChatIcon className="h-auto w-6"
                                                      color={activeButton === "Group Chats" ? "#5e5dc3" : "#929cb8"}/>}
-                                isActive={activeButton === "Group Chats"}
                                 onClick={() => handleButtonClick("Group Chats")}
                             />
 
@@ -120,14 +121,8 @@ const ChatRooms = () => {
                                 text="Settings"
                                 icon={<SettingsIcon className="h-auto w-6"
                                                     color={activeButton === "Settings" ? "#5e5dc3" : "#929cb8"}/>}
-                                isActive={activeButton === "Settings"}
                                 onClick={() => handleButtonClick("Settings")}
                             >
-                                <div
-                                    className={`fixed z-10 h-screen top-0 left-0 w-screen bg-white transition-transform duration-300 ease-in-out ${
-                                        activeButton === "Settings" ? "translate-x-0 visible" : "-translate-x-full invisible"
-                                    }`} onClick={() => handleButtonClick("")}>sdf
-                                </div>
                             </SideButton>
                         </div>
 
@@ -137,7 +132,15 @@ const ChatRooms = () => {
                         </div>
                     </SideBar>
 
-                    <div className="flex-grow text-black border-x-[#f3f4fa] border-x-2 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#03252b]">
+                    <div
+                        className={`h-screen top-0 left-0 w-screen bg-white fixed ${
+                            activeButton === "Settings" ? "translate-x-0" : "-translate-x-full"
+                        } ease-in-out duration-500`}
+                        onClick={() => handleButtonClick("")}
+                    ></div>
+
+                    <div
+                        className="flex-grow text-black border-x-[#f3f4fa] border-x-2 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#03252b]">
                         {activeButton !== "Friends" ? (
                             <Channel
                                 selectedChannel={selectedChannel}
