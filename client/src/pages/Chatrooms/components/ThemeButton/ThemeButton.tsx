@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import darkImg from "./images/dark_mode.png";
-import lightImg from "./images/light_mode.png";
+import MoonIcon from "./icons/MoonIcon.tsx";
+import SunIcon from "./icons/SunIcon.tsx";
 
 const ThemeButton = () => {
     const [darkTheme, setDarkTheme] = useState(false);
@@ -30,15 +30,10 @@ const ThemeButton = () => {
 
     return (
         <button
-            className="p-2 rounded text-black bg-blue-500 hover:bg-blue-700 dark:bg-[#004449] dark:text-[#09ebe3] mr-2"
+            className="p-4 hover:bg-lightGray rounded-md group relative"
             onClick={changeTheme}
         >
-            <img
-                width={25}
-                height={25}
-                src={darkTheme ? darkImg : lightImg}
-                alt="dark/light mode"
-            />
+            {darkTheme ? <MoonIcon className="h-auto w-6" color="#929cb8"/> : <SunIcon className="h-auto w-6" color="#929cb8"/>}
         </button>
     );
 };

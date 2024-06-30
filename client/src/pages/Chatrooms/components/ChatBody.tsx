@@ -86,7 +86,7 @@ const ChatBody: React.FC<Props> = ({className, selectedChannel, setSelectedChann
     }
 
     return (
-        <div className={`${className} flex-grow overflow-y-auto scrollbar-thin bg-neutral-200 text-black dark:text-[#09ebe3] dark:bg-[#043a44] border border-black`}>
+        <div className={`${className} flex-grow overflow-y-auto scrollbar-thin bg-white text-black dark:text-[#09ebe3] dark:bg-[#043a44] border border-black`}>
             {!selectedChannel ? (
                 <div className="flex justify-center items-center h-full">
                     <h1 className="text-3xl mx-2 text-center font-bold text-black dark:text-[#09ebe3]">
