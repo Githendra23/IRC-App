@@ -35,14 +35,14 @@ const Input: React.FC<Props> = ({selectedChannel}) => {
                     <input
                         type="text"
                         onKeyDown={handleKeyPress}
-                        className="border border-black py-3 flex-grow rounded-md mr-2 pl-1 bg-neutral-300 text-black dark:text-[#09ebe3] dark:bg-[#004449]"
-                        placeholder="Type here"
+                        className="p-3 flex-grow rounded-md mr-2 focus:outline-none text-[#7a7f9a] transition-colors duration-100 dark:text-[#a6a7be] bg-[#e6ebf5] dark:bg-[#36404a]"
+                        placeholder="Enter Message..."
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                     />
 
                     <button
-                        className="px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg py-3"
+                        className="px-4 bg-[#7269ef] text-white rounded-lg py-3"
                         onClick={sendMessage}
                     >
                         <AirplaneIcon className="w-6 h-6"/>

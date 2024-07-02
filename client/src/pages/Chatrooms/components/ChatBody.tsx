@@ -86,10 +86,11 @@ const ChatBody: React.FC<Props> = ({className, selectedChannel, setSelectedChann
     }
 
     return (
-        <div className={`${className} flex-grow overflow-y-auto scrollbar-thin bg-white text-black dark:text-[#09ebe3] dark:bg-[#043a44] border border-black`}>
+        <div
+            className={`${className} flex-grow overflow-y-auto scrollbar-webkit dark:scrollbar-webkit-dark bg-white transition-all duration-100 dark:bg-[#262e35]`}>
             {!selectedChannel ? (
                 <div className="flex justify-center items-center h-full">
-                    <h1 className="text-3xl mx-2 text-center font-bold text-black dark:text-[#09ebe3]">
+                    <h1 className="text-3xl mx-2 text-center font-bold text-[#495057] dark:text-[#e1e9f1]">
                         Select a channel to start chatting
                     </h1>
                 </div>
@@ -99,15 +100,17 @@ const ChatBody: React.FC<Props> = ({className, selectedChannel, setSelectedChann
                         selectedChannel === data.channel && (
                             data.sender !== username ? (
                                 <div key={index} className="w-[70%] flex flex-col mt-4 mb-2">
-                                    <label className="ml-5 text-sm mb-[3px]">
+                                    <label className="ml-5 text-xs mb-[3px] dark:text-[#a6b0cf]">
                                         {data.sender}
                                     </label>
                                     <div className="flex flex-wrap">
-                                        <p className={`text-lg overflow-hidden break-words border my-1 ml-3 px-5 py-3 mt-[-2px] ${data.receiver ? "italic" : "not-italic"} border-[#0a2b03] rounded-[30px] bg-[#2f941a] text-white`}>
+                                        <p className={`overflow-hidden break-words my-1 ml-3 px-5 py-3 mt-[-2px]
+                                        ${data.receiver ? "italic" : "not-italic"}
+                                        rounded-b-xl rounded-r-xl bg-[#7269ef] text-md text-white`}>
                                             {data.message}
                                         </p>
                                     </div>
-                                    <label className="ml-5 mt[-2px] text-sm">
+                                    <label className="ml-5 mt[-2px] text-xs">
                                         {formatTime(data.createdAt)}
                                     </label>
                                 </div>
@@ -115,12 +118,12 @@ const ChatBody: React.FC<Props> = ({className, selectedChannel, setSelectedChann
                                 <div key={index} className="flex justify-end mt-4 mb-2">
                                     <div className="w-[70%] justify-end">
                                         <div className="flex flex-wrap justify-end">
-                                            <p className="text-lg overflow-hidden break-words border my-2 mr-3 px-5 py-3 border-[#03252b] rounded-[30px] bg-[#1356bb] text-white">
+                                            <p className="overflow-hidden break-words my-2 mr-3 px-5 py-3 rounded-t-xl rounded-l-xl bg-[#f5f7fb] dark:bg-[#36404a] text-black text-md dark:text-white">
                                                 {data.message}
                                             </p>
                                         </div>
                                         <div className="flex justify-end mr-5 mt[-2px] ml-6">
-                                            <label className="text-sm">
+                                            <label className="text-xs dark:text-[#a6b0cf]">
                                                 {formatTime(data.createdAt)}
                                             </label>
                                         </div>

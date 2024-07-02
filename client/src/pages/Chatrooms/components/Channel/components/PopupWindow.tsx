@@ -15,7 +15,7 @@ const PopupWindow = ({buttonText, children}: PopupWindowProps) => {
     return (
         <>
             <button
-                className="flex mt-1 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-3xl"
+                className="flex mt-1 bg-[#7269ef] text-white py-2 px-4 rounded-3xl"
                 onClick={togglePopup}
             >
                 {buttonText}

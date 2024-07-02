@@ -27,6 +27,7 @@ const ChatRooms = () => {
     const [connected, setConnected] = useState(isConnected());
     const username = localStorage.getItem("username");
     const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
+    const [channels, setChannels] = useState<string[]>([]);
     const [messages, setMessages] = useState<Data[]>([]);
     const navigate = useNavigate();
     const socket = getSocket();
@@ -89,15 +90,16 @@ const ChatRooms = () => {
     };
 
     return (
-        <div className="scrollbar-thin dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3] font-[sans-serif] h-screen flex flex-col">
+        <div className="scrollbar-thin transition-colors duration-100 dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3] font-inter h-screen flex flex-col">
             {connected && (
                 <div className="flex h-full">
                     <SideBar
-                        className="flex flex-col justify-between items-center z-10 py-4 px-2 h-screen bg-white dark:bg-[#36404a]">
+                        className="flex flex-col justify-between items-center z-10 py-4 px-2 h-screen bg-white transition-colors duration-100 dark:bg-[#36404a]">
                         <div className="w-8"><img className="h-auto w-auto" src={'/assets/logo_.png'} alt="logo"/></div>
                         <div className="grid grid-cols-1 gap-y-1">
                             <SideButton
                                 text="Friends"
+                                isActive={activeButton === "Friends"}
                                 icon={<FriendIcon className="h-auto w-6"
                                                   color={activeButton === "Friends" ? "#5e5dc3" : "#929cb8"}/>}
                                 onClick={() => handleButtonClick("Friends")}
@@ -105,6 +107,7 @@ const ChatRooms = () => {
 
                             <SideButton
                                 text="Rooms"
+                                isActive={activeButton === "Rooms"}
                                 icon={<ChatIcon className="h-auto w-6"
                                                 color={activeButton === "Rooms" ? "#5e5dc3" : "#929cb8"}/>}
                                 onClick={() => handleButtonClick("Rooms")}
@@ -112,6 +115,7 @@ const ChatRooms = () => {
 
                             <SideButton
                                 text="Group Chats"
+                                isActive={activeButton === "Group Chats"}
                                 icon={<GroupChatIcon className="h-auto w-6"
                                                      color={activeButton === "Group Chats" ? "#5e5dc3" : "#929cb8"}/>}
                                 onClick={() => handleButtonClick("Group Chats")}
@@ -119,6 +123,7 @@ const ChatRooms = () => {
 
                             <SideButton
                                 text="Settings"
+                                isActive={activeButton === "Settings"}
                                 icon={<SettingsIcon className="h-auto w-6"
                                                     color={activeButton === "Settings" ? "#5e5dc3" : "#929cb8"}/>}
                                 onClick={() => handleButtonClick("Settings")}
@@ -128,7 +133,7 @@ const ChatRooms = () => {
 
                         <div className="grid grid-cols-1 gap-y-4 justify-items-center items-center">
                             <ThemeButton/>
-                            <p className="flex items-center justify-center rounded-full h-8 w-8 bg-red-400">s</p>
+                            <p className="flex items-center justify-center rounded-full h-8 w-8 bg-red-400">{username !== null && username[0].toUpperCase()}</p>
                         </div>
                     </SideBar>
 
@@ -140,11 +145,13 @@ const ChatRooms = () => {
                     ></div>
 
                     <div
-                        className="flex-grow text-black border-x-[#f3f4fa] border-x-2 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#03252b]">
+                        className="flex-grow text-black border-x-[#f3f4fa] transition-colors duration-100 dark:border-x-[#323c46] border-x-2 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
                         {activeButton !== "Friends" ? (
                             <Channel
                                 selectedChannel={selectedChannel}
                                 setSelectedChannel={setSelectedChannel}
+                                channels={channels}
+                                setChannels={setChannels}
                             />
                         ) : (
                             <div>sdf</div>
@@ -152,9 +159,9 @@ const ChatRooms = () => {
                     </div>
 
                     <div
-                        className="flex flex-col justify-between w-3/5 h-full px-2 text-black dark:text-[#09ebe3] dark:bg-[#05323a] bg-white">
-                        <div className="flex justify-between items-center py-[0.85rem]">
-                            <h1 className="text-3xl font-bold text-black dark:text-[#09ebe3]">
+                        className="flex flex-col justify-between w-3/5 h-full text-black transition-colors duration-100 dark:bg-[#262e35] bg-white">
+                        <div className="flex justify-between items-center py-[0.85rem] border-b-2 border-b-[#fbfafc] dark:border-b-[#2b333b]">
+                            <h1 className="text-3xl font-bold text-[#495057] dark:text-[#e1e9f1]">
                                 {username}
                             </h1>
                             <div className="flex items-center">
@@ -174,12 +181,12 @@ const ChatRooms = () => {
                             setMessages={setMessages}
                         />
 
-                        <div className="w-full py-2">
+                        <div className="w-full transition-colors duration-100 py-5 pl-5 pr-2 border-t-2 border-t-[#f0effc] dark:border-t-[#2b333b]">
                             <Input selectedChannel={selectedChannel}/>
                         </div>
                     </div>
 
-                    <div className="w-1/6 text-black dark:text-[#09ebe3] dark:bg-[#03252b] bg-white">
+                    <div className="w-1/6 text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
                         <ActiveUser/>
                     </div>
                 </div>

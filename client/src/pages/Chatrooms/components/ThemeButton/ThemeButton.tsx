@@ -30,7 +30,7 @@ const ThemeButton = () => {
 
     return (
         <button
-            className="p-4 hover:bg-[#f7f7ff] hover:dark:bg-lightGray rounded-md group relative"
+            className="relative p-4 hover:bg-[#f7f7ff] hover:dark:bg-lightGray rounded-md group"
             onClick={changeTheme}
         >
             <div

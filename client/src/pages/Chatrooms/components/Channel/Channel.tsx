@@ -1,17 +1,23 @@
-import React, {useState, useEffect} from "react";
-import {toast} from "react-toastify";
-import {getSocket} from "../../../socket.ts";
-import PopupWindow from "../PopupWindow.tsx";
+import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { getSocket } from "../../../socket.ts";
+import PopupWindow from "./components/PopupWindow.tsx";
 import axios from "axios";
 import MessageIcon from "./icons/MessageIcon";
 
 interface Props {
     selectedChannel: string | null;
     setSelectedChannel: (channel: string | null) => void;
+    channels: string[];
+    setChannels: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
-    const [channels, setChannels] = useState<string[]>([]);
+const Channel: React.FC<Props> = ({
+                                      channels,
+                                      setChannels,
+                                      selectedChannel,
+                                      setSelectedChannel,
+                                  }) => {
     const [newChannel, setNewChannel] = useState("");
     const userId = localStorage.getItem("userId");
     const username = localStorage.getItem("username");
@@ -20,7 +26,7 @@ const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
     const handleJoinChannel = async () => {
         const channelName = newChannel.trim();
 
-        if (channelName.trim() === "") toast.error("Please enter a channel name");
+        if (channelName === "") toast.error("Please enter a channel name");
         else if (channels.includes(channelName))
             toast.error(`${channelName} already exists`);
         else {
@@ -33,11 +39,11 @@ const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
         }
     };
 
-    const handleChannelNameChange = (e: { target: { value: string } }) => {
+    const handleChannelNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewChannel(e.target.value);
     };
 
-    function selectChannel(channel: string) {
+    const selectChannel = (channel: string) => {
         setSelectedChannel(channel);
         console.log("Selected channel:", selectedChannel);
         const data = {
@@ -46,7 +52,7 @@ const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
         };
 
         socket.emit("message", data);
-    }
+    };
 
     const createChannel = async (channelName: string) => {
         if (!userId) {
@@ -54,18 +60,23 @@ const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
             return;
         }
 
-        axios.post("http://localhost:8080/api/channel", {
-            channelName: channelName,
-            userId: userId
-        }, {withCredentials: true})
-            .then(() => {
-                setChannels((prevchannels) => [...prevchannels, channelName]);
-                setNewChannel("");
-                toast.success(`Joined ${channelName}`);
-            })
-            .catch((err) => {
-                toast.error(err.response.data.message);
-            });
+        try {
+            await axios.post(
+                "http://localhost:8080/api/channel",
+                {
+                    channelName: channelName,
+                    userId: userId,
+                },
+                { withCredentials: true }
+            );
+
+            setChannels((prevChannels) => [...prevChannels, channelName]);
+            setNewChannel("");
+            toast.success(`Joined ${channelName}`);
+        }
+        catch (err: any) {
+            toast.error(err.response.data.message);
+        }
     };
 
     useEffect(() => {
@@ -74,7 +85,7 @@ const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
         };
 
         const leaveChannel = (channelName: string) => {
-            setChannels((prevChannels) =>
+            setChannels((prevChannels: string[]) =>
                 prevChannels.filter((channel) => channel !== channelName)
             );
         };
@@ -102,22 +113,22 @@ const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
     };
 
     return (
-        <div>
+        <div className="transition-colors duration-100 text-[#495057] dark:text-[#e1e9f1]">
             <div className="flex w-full gap-x-2 py-4 mb-2 items-center justify-center border-b border-gray-700">
-                <MessageIcon className="w-8 h-8 items-center"/>
+                <MessageIcon className="w-8 h-8 items-center" />
                 <h2 className="text-xl lg:text-3xl font-bold">Channels</h2>
             </div>
 
             {channels.length > 0 && (
-                <div className="">
+                <div>
                     {channels.map((channel, index) => (
-                        <div className="flex">
+                        <div key={index} className="flex">
                             <div
-                                key={index}
-                                className={`flex-1 mx-1 my-0.5 border-gray-100 p-3.5 dark:border-gray-600 cursor-pointer rounded-lg text-left text-lg
-                                ${selectedChannel === channel
-                                        ? "bg-blue-100 dark:bg-[#004449]"
-                                        : "hover:bg-blue-100 dark:hover:bg-[#004449] "
+                                className={`flex-1 mx-1 my-0.5 p-3.5 cursor-pointer rounded text-left text-md
+                                ${
+                                    selectedChannel === channel
+                                        ? "bg-[#e6ebf5] dark:bg-[#36404a]"
+                                        : "bg-[#f5f7fb] dark:bg-[#303841]"
                                 }`}
                                 onClick={() => selectChannel(channel)}
                             >
@@ -125,7 +136,7 @@ const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
                             </div>
                             <div className="flex justify-center items-center mr-1">
                                 <button
-                                    className="z-0 px-2 bg-red-500 hover:bg-red-700 text-white text-center rounded"
+                                    className="px-2 bg-red-500 hover:bg-red-700 text-white text-center rounded"
                                     onClick={() => removeChannel(channel)}
                                 >
                                     Quit
@@ -138,14 +149,14 @@ const Channel:React.FC<Props> = ({selectedChannel, setSelectedChannel}) => {
             <div className="flex flex-col items-center">
                 <PopupWindow buttonText="+">
                     <input
-                        className=" w-full mb-1 p-2 rounded bg-neutral-300 text-black dark:text-[#09ebe3] dark:bg-[#004449]"
+                        className="w-full mb-1 p-2 rounded focus:outline-none text-[#7a7f9a] transition-all duration-100 dark:text-[#a6a7be] bg-[#e6ebf5] dark:bg-[#36404a]"
                         placeholder="Enter Channel Name"
                         value={newChannel}
                         onChange={handleChannelNameChange}
                         onKeyDown={handleKeyPress}
                     />
                     <button
-                        className="flex mt-1 bg-blue-500 hover:bg-blue-700 text-white text-center py-2 px-4 rounded-lg"
+                        className="flex mt-1 bg-[#7269ef] text-white text-center py-2 px-4 rounded-lg"
                         onClick={handleJoinChannel}
                     >
                         Create/Join

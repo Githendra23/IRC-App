@@ -52,7 +52,7 @@ const ActiveUser = () => {
     }, [socket, setActiveUsers]);
 
     return (
-        <div className="text-center">
+        <div className="text-center text-[#495057] dark:text-[#e1e9f1]">
             <div className="p-4 border-b border-gray-700 mb-2">
                 <h2 className="text-xl lg:text-3xl font-bold">Active Users</h2>
             </div>
