@@ -35,7 +35,7 @@ const Input: React.FC<Props> = ({selectedChannel}) => {
                     <input
                         type="text"
                         onKeyDown={handleKeyPress}
-                        className="p-3 flex-grow rounded-md mr-2 focus:outline-none text-[#7a7f9a] transition-colors duration-100 dark:text-[#a6a7be] bg-[#e6ebf5] dark:bg-[#36404a]"
+                        className="p-3 flex-grow rounded-md mr-3 focus:outline-none text-[#7a7f9a] transition-colors duration-100 dark:text-[#a6a7be] bg-[#e6ebf5] dark:bg-[#36404a]"
                         placeholder="Enter Message..."
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}

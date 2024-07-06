@@ -14,6 +14,7 @@ import FriendIcon from "./icons/FriendIcon.tsx";
 import ChatIcon from "./icons/ChatIcon.tsx";
 import GroupChatIcon from "./icons/GroupChatIcon.tsx";
 import SettingsIcon from "./icons/SettingsIcon.tsx";
+import ProfileButton from "./components/ProfileButton/ProfileButton.tsx";
 
 interface Data {
     sender?: string;
@@ -133,7 +134,12 @@ const ChatRooms = () => {
 
                         <div className="grid grid-cols-1 gap-y-4 justify-items-center items-center">
                             <ThemeButton/>
-                            <p className="flex items-center justify-center rounded-full h-8 w-8 bg-red-400">{username !== null && username[0].toUpperCase()}</p>
+
+                            <ProfileButton>
+                                <div className="flex flex-col my-1.5 gap-y-2">
+                                    <button className="text-sm bg-red-600 p-2 rounded">LogOut</button>
+                                </div>
+                            </ProfileButton>
                         </div>
                     </SideBar>
 
@@ -145,7 +151,7 @@ const ChatRooms = () => {
                     ></div>
 
                     <div
-                        className="flex-grow text-black border-x-[#f3f4fa] transition-colors duration-100 dark:border-x-[#323c46] border-x-2 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
+                        className="w-96 text-black border-x-[#f3f4fa] transition-colors duration-100 dark:border-x-[#323c46] border-x-2 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
                         {activeButton !== "Friends" ? (
                             <Channel
                                 selectedChannel={selectedChannel}
@@ -159,7 +165,7 @@ const ChatRooms = () => {
                     </div>
 
                     <div
-                        className="flex flex-col justify-between w-3/5 h-full text-black transition-colors duration-100 dark:bg-[#262e35] bg-white">
+                        className="flex flex-grow flex-col justify-between w-3/5 h-full text-black transition-colors duration-100 dark:bg-[#262e35] bg-white">
                         <div className="flex justify-between items-center py-[0.85rem] border-b-2 border-b-[#fbfafc] dark:border-b-[#2b333b]">
                             <h1 className="text-3xl font-bold text-[#495057] dark:text-[#e1e9f1]">
                                 {username}
@@ -181,12 +187,12 @@ const ChatRooms = () => {
                             setMessages={setMessages}
                         />
 
-                        <div className="w-full transition-colors duration-100 py-5 pl-5 pr-2 border-t-2 border-t-[#f0effc] dark:border-t-[#2b333b]">
+                        <div className="w-full transition-colors duration-100 p-5 border-t-2 border-t-[#f0effc] dark:border-t-[#2b333b]">
                             <Input selectedChannel={selectedChannel}/>
                         </div>
                     </div>
 
-                    <div className="w-1/6 text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
+                    <div className={`w-1/6 text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]  ${selectedChannel ? "block" : "hidden"}`}>
                         <ActiveUser/>
                     </div>
                 </div>
