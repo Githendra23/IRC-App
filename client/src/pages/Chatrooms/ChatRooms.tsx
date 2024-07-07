@@ -15,6 +15,7 @@ import ChatIcon from "./icons/ChatIcon.tsx";
 import GroupChatIcon from "./icons/GroupChatIcon.tsx";
 import SettingsIcon from "./icons/SettingsIcon.tsx";
 import ProfileButton from "./components/ProfileButton/ProfileButton.tsx";
+import MessageIcon from "./components/Channel/icons/MessageIcon";
 
 interface Data {
     sender?: string;
@@ -91,12 +92,13 @@ const ChatRooms = () => {
     };
 
     return (
-        <div className="scrollbar-thin transition-colors duration-100 dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3] font-inter h-screen flex flex-col">
+        <div className="transition-colors duration-100 dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3] font-inter h-screen flex flex-col">
             {connected && (
                 <div className="flex h-full">
                     <SideBar
-                        className="flex flex-col justify-between items-center z-10 py-4 px-2 h-screen bg-white transition-colors duration-100 dark:bg-[#36404a]">
+                        className="flex flex-col shadow justify-between items-center z-10 py-4 px-2 h-screen bg-white transition-colors duration-100 dark:bg-[#36404a]">
                         <div className="w-8"><img className="h-auto w-auto" src={'/assets/logo_.png'} alt="logo"/></div>
+
                         <div className="grid grid-cols-1 gap-y-1">
                             <SideButton
                                 text="Friends"
@@ -137,47 +139,42 @@ const ChatRooms = () => {
 
                             <ProfileButton>
                                 <div className="flex flex-col my-1.5 gap-y-2">
-                                    <button className="text-sm bg-red-600 p-2 rounded">LogOut</button>
+                                    <button className="text-sm bg-red-600 p-2 rounded" onClick={logOut}>LogOut</button>
                                 </div>
                             </ProfileButton>
                         </div>
                     </SideBar>
 
                     <div
-                        className={`h-screen top-0 left-0 w-screen bg-white fixed ${
-                            activeButton === "Settings" ? "translate-x-0" : "-translate-x-full"
-                        } ease-in-out duration-500`}
-                        onClick={() => handleButtonClick("")}
-                    ></div>
+                        className={`h-screen top-0 left-0 w-screen bg-white fixed
+                        ${activeButton === "Settings" ? "translate-x-0" : "-translate-x-full"} ease-in-out duration-500`}
+                        onClick={() => handleButtonClick("")}>
+                    </div>
 
                     <div
-                        className="w-96 text-black border-x-[#f3f4fa] transition-colors duration-100 dark:border-x-[#323c46] border-x-2 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
+                        className="flex flex-grow flex-col w-1/6 text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
                         {activeButton !== "Friends" ? (
-                            <Channel
-                                selectedChannel={selectedChannel}
-                                setSelectedChannel={setSelectedChannel}
-                                channels={channels}
-                                setChannels={setChannels}
-                            />
+                            <>
+                                <div className="flex w-full gap-x-2 py-4 items-center justify-center border-b border-gray-700 transition-colors duration-100 text-[#495057] dark:text-[#e1e9f1]">
+                                    <MessageIcon className="w-8 h-8 items-center"/>
+                                    <h2 className="text-xl lg:text-3xl font-bold">Channels</h2>
+                                </div>
+                                <Channel
+                                    selectedChannel={selectedChannel}
+                                    setSelectedChannel={setSelectedChannel}
+                                    channels={channels}
+                                    setChannels={setChannels}/></>
                         ) : (
                             <div>sdf</div>
                         )}
                     </div>
 
                     <div
-                        className="flex flex-grow flex-col justify-between w-3/5 h-full text-black transition-colors duration-100 dark:bg-[#262e35] bg-white">
+                        className="flex flex-grow flex-col shadow justify-between w-3/5 h-screen text-black transition-colors duration-100 dark:bg-[#262e35] bg-white">
                         <div className="flex justify-between items-center py-[0.85rem] border-b-2 border-b-[#fbfafc] dark:border-b-[#2b333b]">
                             <h1 className="text-3xl font-bold text-[#495057] dark:text-[#e1e9f1]">
                                 {username}
                             </h1>
-                            <div className="flex items-center">
-                                <button
-                                    className="p-2 bg-red-500 hover:bg-red-700 text-white rounded"
-                                    onClick={logOut}
-                                >
-                                    Logout
-                                </button>
-                            </div>
                         </div>
 
                         <ChatBody
@@ -192,7 +189,7 @@ const ChatRooms = () => {
                         </div>
                     </div>
 
-                    <div className={`w-1/6 text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]  ${selectedChannel ? "block" : "hidden"}`}>
+                    <div className={`w-1/6 h-screen text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]  ${selectedChannel ? "block" : "hidden"}`}>
                         <ActiveUser/>
                     </div>
                 </div>

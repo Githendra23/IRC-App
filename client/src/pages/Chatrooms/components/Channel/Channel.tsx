@@ -3,21 +3,16 @@ import { toast } from "react-toastify";
 import { getSocket } from "../../../socket.ts";
 import PopupWindow from "./components/PopupWindow.tsx";
 import axios from "axios";
-import MessageIcon from "./icons/MessageIcon";
 
 interface Props {
     selectedChannel: string | null;
     setSelectedChannel: (channel: string | null) => void;
     channels: string[];
     setChannels: React.Dispatch<React.SetStateAction<string[]>>;
+    className?: string;
 }
 
-const Channel: React.FC<Props> = ({
-                                      channels,
-                                      setChannels,
-                                      selectedChannel,
-                                      setSelectedChannel,
-                                  }) => {
+const Channel: React.FC<Props> = ({className, channels, setChannels, selectedChannel, setSelectedChannel}) => {
     const [newChannel, setNewChannel] = useState("");
     const userId = localStorage.getItem("userId");
     const username = localStorage.getItem("username");
@@ -37,10 +32,6 @@ const Channel: React.FC<Props> = ({
 
             socket.emit("message", data);
         }
-    };
-
-    const handleChannelNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setNewChannel(e.target.value);
     };
 
     const selectChannel = (channel: string) => {
@@ -107,25 +98,14 @@ const Channel: React.FC<Props> = ({
         });
     };
 
-    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key !== "Enter") return;
-        handleJoinChannel();
-    };
-
     return (
-        <div className="transition-colors duration-100 text-[#495057] dark:text-[#e1e9f1]">
-            <div className="flex w-full gap-x-2 py-4 mb-2 items-center justify-center border-b border-gray-700">
-                <MessageIcon className="w-8 h-8 items-center" />
-                <h2 className="text-xl lg:text-3xl font-bold">Channels</h2>
-            </div>
-
+        <div className={`${className} overflow-y-auto scrollbar-webkit dark:scrollbar-webkit-dark transition-colors duration-100 text-[#495057] dark:text-[#e1e9f1]`}>
             {channels.length > 0 && (
-                <div>
+                <div className="m-3 justify-between items-center space-y-1">
                     {channels.map((channel, index) => (
-                        <div key={index} className="flex">
+                        <div key={index} className="flex gap-x-3">
                             <div
-                                className={`flex-1 mx-1 my-0.5 p-3.5 cursor-pointer rounded text-left text-md
-                                ${
+                                className={`flex-grow p-3.5 cursor-pointer rounded text-left text-md hover:bg-[#e6ebf5] duration-300 dark:hover:bg-[#36404a] ${
                                     selectedChannel === channel
                                         ? "bg-[#e6ebf5] dark:bg-[#36404a]"
                                         : "bg-[#f5f7fb] dark:bg-[#303841]"
@@ -134,7 +114,7 @@ const Channel: React.FC<Props> = ({
                             >
                                 {channel}
                             </div>
-                            <div className="flex justify-center items-center mr-1">
+                            <div className="flex items-center">
                                 <button
                                     className="px-2 bg-red-500 hover:bg-red-700 text-white text-center rounded"
                                     onClick={() => removeChannel(channel)}
@@ -146,14 +126,15 @@ const Channel: React.FC<Props> = ({
                     ))}
                 </div>
             )}
-            <div className="flex flex-col items-center">
+
+            <div className="flex flex-col items-center mb-2">
                 <PopupWindow buttonText="+">
                     <input
                         className="w-full mb-1 p-2 rounded focus:outline-none text-[#7a7f9a] transition-all duration-100 dark:text-[#a6a7be] bg-[#e6ebf5] dark:bg-[#36404a]"
                         placeholder="Enter Channel Name"
                         value={newChannel}
-                        onChange={handleChannelNameChange}
-                        onKeyDown={handleKeyPress}
+                        onChange={(e) => setNewChannel(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && handleJoinChannel()}
                     />
                     <button
                         className="flex mt-1 bg-[#7269ef] text-white text-center py-2 px-4 rounded-lg"
