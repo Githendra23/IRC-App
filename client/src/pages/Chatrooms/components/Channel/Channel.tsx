@@ -45,7 +45,7 @@ const Channel: React.FC<Props> = ({className, channels, setChannels, selectedCha
         socket.emit("message", data);
     };
 
-    const createChannel = async (channelName: string) => {
+    const createJoinChannel = async (channelName: string) => {
         if (!userId) {
             console.error("userId is null");
             return;
@@ -71,21 +71,17 @@ const Channel: React.FC<Props> = ({className, channels, setChannels, selectedCha
     };
 
     useEffect(() => {
-        const joinChannel = (channelName: string) => {
-            createChannel(channelName);
-        };
-
         const leaveChannel = (channelName: string) => {
             setChannels((prevChannels: string[]) =>
                 prevChannels.filter((channel) => channel !== channelName)
             );
         };
 
-        socket.on("joinChannel", joinChannel);
+        socket.on("joinChannel", createJoinChannel);
         socket.on("leaveChannel", leaveChannel);
 
         return () => {
-            socket.off("joinChannel", joinChannel);
+            socket.off("joinChannel", createJoinChannel);
             socket.off("leaveChannel", leaveChannel);
         };
     }, []);
@@ -105,7 +101,7 @@ const Channel: React.FC<Props> = ({className, channels, setChannels, selectedCha
                     {channels.map((channel, index) => (
                         <div key={index} className="flex gap-x-3">
                             <div
-                                className={`flex-grow p-3.5 cursor-pointer rounded text-left text-md hover:bg-[#e6ebf5] duration-100 dark:hover:bg-[#36404a] ${
+                                className={`relative flex-grow p-3.5 cursor-pointer rounded text-left text-md hover:bg-[#e6ebf5] duration-100 dark:hover:bg-[#36404a] ${
                                     selectedChannel === channel
                                         ? "bg-[#e6ebf5] dark:bg-[#36404a]"
                                         : "bg-[#f5f7fb] dark:bg-[#303841]"
@@ -113,14 +109,18 @@ const Channel: React.FC<Props> = ({className, channels, setChannels, selectedCha
                                 onClick={() => selectChannel(channel)}
                             >
                                 {channel}
-                            </div>
-                            <div className="flex items-center">
-                                <button
-                                    className="px-2 bg-red-500 hover:bg-red-700 text-white text-center rounded"
-                                    onClick={() => removeChannel(channel)}
-                                >
-                                    Quit
-                                </button>
+
+                                <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
+                                    <button
+                                        className="px-2 bg-red-500 hover:bg-red-700 text-white text-center rounded"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            removeChannel(channel);
+                                        }}
+                                    >
+                                        Quit
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     ))}

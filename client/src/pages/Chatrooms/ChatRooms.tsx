@@ -96,7 +96,7 @@ const ChatRooms = () => {
             {connected && (
                 <div className="flex h-full">
                     <SideBar
-                        className="flex flex-col shadow justify-between items-center z-10 py-4 px-2 h-screen bg-white transition-colors duration-100 dark:bg-[#36404a]">
+                        className="flex flex-col z-20 shadow justify-between items-center z-10 py-4 px-2 h-screen bg-white transition-colors duration-100 dark:bg-[#36404a]">
                         <div className="w-8"><img className="h-auto w-auto" src={'/assets/logo_.png'} alt="logo"/></div>
 
                         <div className="grid grid-cols-1 gap-y-1">
@@ -146,7 +146,7 @@ const ChatRooms = () => {
                     </SideBar>
 
                     <div
-                        className={`h-screen top-0 left-0 w-screen bg-white fixed
+                        className={`h-screen top-0 left-0 w-screen bg-white fixed z-10
                         ${activeButton === "Settings" ? "translate-x-0" : "-translate-x-full"} ease-in-out duration-500`}
                         onClick={() => handleButtonClick("")}>
                     </div>
