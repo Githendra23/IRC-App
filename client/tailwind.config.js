@@ -28,7 +28,7 @@ export default {
                         transition: "100ms",
                     },
                     "&::-webkit-scrollbar-track": {
-                        backgroundColor: "#262e35",
+                        borderRadius: "50px",
                         transition: "100ms",
                     }
                 },
@@ -43,7 +43,7 @@ export default {
                         transition: "100ms",
                     },
                     "&::-webkit-scrollbar-track": {
-                        backgroundColor: "#ffffff",
+                        borderRadius: "50px",
                         transition: "100ms",
                     }
                 },

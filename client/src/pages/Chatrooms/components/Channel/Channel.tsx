@@ -105,7 +105,7 @@ const Channel: React.FC<Props> = ({className, channels, setChannels, selectedCha
                     {channels.map((channel, index) => (
                         <div key={index} className="flex gap-x-3">
                             <div
-                                className={`flex-grow p-3.5 cursor-pointer rounded text-left text-md hover:bg-[#e6ebf5] duration-300 dark:hover:bg-[#36404a] ${
+                                className={`flex-grow p-3.5 cursor-pointer rounded text-left text-md hover:bg-[#e6ebf5] duration-100 dark:hover:bg-[#36404a] ${
                                     selectedChannel === channel
                                         ? "bg-[#e6ebf5] dark:bg-[#36404a]"
                                         : "bg-[#f5f7fb] dark:bg-[#303841]"

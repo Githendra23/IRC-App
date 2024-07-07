@@ -152,7 +152,7 @@ const ChatRooms = () => {
                     </div>
 
                     <div
-                        className="flex flex-grow flex-col w-1/6 text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
+                        className="flex flex-col w-1/6 text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
                         {activeButton !== "Friends" ? (
                             <>
                                 <div className="flex w-full gap-x-2 py-4 items-center justify-center border-b border-gray-700 transition-colors duration-100 text-[#495057] dark:text-[#e1e9f1]">
@@ -189,7 +189,12 @@ const ChatRooms = () => {
                         </div>
                     </div>
 
-                    <div className={`w-1/6 h-screen text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]  ${selectedChannel ? "block" : "hidden"}`}>
+                    <div
+                        className={`flex flex-col w-1/6 h-screen text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]  ${selectedChannel ? "block" : "hidden"}`}>
+                        <div className="p-4 border-b border-gray-700">
+                            <h2 className="text-xl lg:text-3xl font-bold text-center text-[#495057] dark:text-[#e1e9f1]">Active Now</h2>
+                        </div>
+
                         <ActiveUser/>
                     </div>
                 </div>

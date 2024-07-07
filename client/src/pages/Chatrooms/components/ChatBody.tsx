@@ -110,7 +110,7 @@ const ChatBody: React.FC<Props> = ({className, selectedChannel, setSelectedChann
                                             {data.message}
                                         </p>
                                     </div>
-                                    <label className="ml-5 mt[-2px] text-xs">
+                                    <label className="ml-5 mt[-2px] text-xs dark:text-[#a6b0cf]">
                                         {formatTime(data.createdAt)}
                                     </label>
                                 </div>
