@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {PencilIcon} from "./icons";
 
 const Settings = () => {
     const [isActive, setIsActive] = useState<boolean>(false);
@@ -41,36 +42,31 @@ const Settings = () => {
                             <p className="text-md">{username}</p>
 
                             <button className="absolute w-auto flex right-0 top-0 p-2 text-sm dark:bg-[#36404a] rounded">
-                                <svg className="fill-[#495057] h-5 dark:fill-[#e1e9f1] mr-1" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier"><title>Edit</title>
-                                        <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                                            <g id="Edit">
-                                                <rect id="Rectangle" fillRule="nonzero" x="0" y="0" width="24"
-                                                      height="24"></rect>
-                                                <line className="stroke-[#495057] dark:stroke-[#e1e9f1]" x1="20" y1="20" x2="4" y2="20" id="Path"
-                                                      strokeWidth="2" strokeLinecap="round"></line>
-                                                <path className="stroke-[#495057] dark:stroke-[#e1e9f1]"
-                                                    d="M14.5858,4.41421 C15.3668,3.63316 16.6332,3.63316 17.4142,4.41421 L17.4142,4.41421 C18.1953,5.19526 18.1953,6.46159 17.4142,7.24264 L9.13096,15.5259 L6.10051,15.7279 L6.30254,12.6975 L14.5858,4.41421 Z"
-                                                    id="Path" strokeWidth="2"
-                                                    strokeLinecap="round"></path>
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
+                                <PencilIcon className="h-5 mr-1"/>
                                 Edit
                             </button>
                         </div>
 
-                        <div>
+                        <div className="relative">
                             <h4 className="dark:text-[#9aa1b9]">Email</h4>
                             <p className="text-m">{email}</p>
+
+                            <button
+                                className="absolute w-auto flex right-0 top-0 p-2 text-sm dark:bg-[#36404a] rounded">
+                                <PencilIcon className="h-5 mr-1"/>
+                                Edit
+                            </button>
                         </div>
 
-                        <div>
+                        <div className="relative">
                             <h4 className="dark:text-[#9aa1b9]">Password</h4>
                             <p className="text-md">Change Password</p>
+
+                            <button
+                                className="absolute w-auto flex right-0 top-0 p-2 text-sm dark:bg-[#36404a] rounded">
+                                <PencilIcon className="h-5 mr-1"/>
+                                Edit
+                            </button>
                         </div>
                     </div>
                 </div>
