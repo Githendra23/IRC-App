@@ -8,6 +8,7 @@ export default {
         extend: {
             fontFamily: {
                 inter: ['Inter', 'sans-serif'],
+                'public-sans': ['Public Sans', 'sans-serif'],
             },
             colors: {
                 lightGray: '#3e4a56',

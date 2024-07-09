@@ -16,6 +16,7 @@ import GroupChatIcon from "./icons/GroupChatIcon.tsx";
 import SettingsIcon from "./icons/SettingsIcon.tsx";
 import ProfileButton from "./components/ProfileButton/ProfileButton.tsx";
 import MessageIcon from "./components/Channel/icons/MessageIcon";
+import Settings from "./components/Settings";
 
 interface Data {
     sender?: string;
@@ -33,7 +34,7 @@ const ChatRooms = () => {
     const [messages, setMessages] = useState<Data[]>([]);
     const navigate = useNavigate();
     const socket = getSocket();
-    const [activeButton, setActiveButton] = useState<string | null>(null);
+    const [activeButton, setActiveButton] = useState<string | null>("Friends");
 
     const handleButtonClick = (buttonText: string) => {
         if (activeButton !== buttonText) {
@@ -146,14 +147,8 @@ const ChatRooms = () => {
                     </SideBar>
 
                     <div
-                        className={`h-screen top-0 left-0 w-screen bg-white fixed z-10
-                        ${activeButton === "Settings" ? "translate-x-0" : "-translate-x-full"} ease-in-out duration-500`}
-                        onClick={() => handleButtonClick("")}>
-                    </div>
-
-                    <div
                         className="flex flex-col w-1/6 text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
-                        {activeButton !== "Friends" ? (
+                        {activeButton === "Rooms" && (
                             <>
                                 <div className="flex w-full gap-x-2 py-4 items-center justify-center border-b border-gray-700 transition-colors duration-100 text-[#495057] dark:text-[#e1e9f1]">
                                     <MessageIcon className="w-8 h-8 items-center"/>
@@ -163,15 +158,30 @@ const ChatRooms = () => {
                                     selectedChannel={selectedChannel}
                                     setSelectedChannel={setSelectedChannel}
                                     channels={channels}
-                                    setChannels={setChannels}/></>
-                        ) : (
-                            <div>sdf</div>
+                                    setChannels={setChannels}/>
+                            </>
+                        )}
+
+                        {activeButton === "Settings" && (
+                            <Settings/>
+                        )}
+
+                        {activeButton === "Group Chats" && (
+                            <>
+                                <div></div>
+                            </>
+                        )}
+
+                        {activeButton === "Friends" && (
+                            <>
+                                <div></div>
+                            </>
                         )}
                     </div>
 
                     <div
                         className="flex flex-grow flex-col shadow justify-between w-3/5 h-screen text-black transition-colors duration-100 dark:bg-[#262e35] bg-white">
-                        <div className="flex justify-between items-center py-[0.85rem] border-b-2 border-b-[#fbfafc] dark:border-b-[#2b333b]">
+                        <div className="flex justify-between duration-100 items-center py-[0.85rem] border-b-2 border-b-[#f0effc] dark:border-b-[#2b333b]">
                             <h1 className="text-3xl font-bold text-[#495057] dark:text-[#e1e9f1]">
                                 {username}
                             </h1>
@@ -190,7 +200,7 @@ const ChatRooms = () => {
                     </div>
 
                     <div
-                        className={`flex flex-col w-1/6 h-screen text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]  ${selectedChannel ? "block" : "hidden"}`}>
+                        className={`flex flex-col w-1/6 h-screen text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841] ${activeButton !== "Friends" && activeButton !== "Settings" ? "block" : "hidden"}`}>
                         <div className="p-4 border-b border-gray-700">
                             <h2 className="text-xl lg:text-3xl font-bold text-center text-[#495057] dark:text-[#e1e9f1]">Active Now</h2>
                         </div>
