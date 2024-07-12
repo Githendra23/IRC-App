@@ -1,5 +1,5 @@
 import {useState} from "react";
-import EditButton from "./components/EditButton";
+import EditOption from "./components/EditOption";
 
 const Settings = () => {
     const [isActive, setIsActive] = useState<boolean>(false);
@@ -30,7 +30,6 @@ const Settings = () => {
                         </g>
                     </g>
                 </svg>
-
             </div>
 
 
@@ -38,38 +37,12 @@ const Settings = () => {
                 className={`overflow-hidden transition-all duration-300 ${isActive ? "visible h-full" : "invisible h-0"}`}>
                 <div className="border-b border-x duration-100 dark:border-x-[#36404a] bg-white dark:bg-[#303841] h-full dark:border-b-[#36404a] rounded-b-md">
                     <div className="flex flex-col justify-between h-full px-3 py-4">
-                        <div className="relative">
-                            <h4 className="dark:text-[#9aa1b9] text-sm">Name</h4>
-                            <p className="text-sm font-semibold text-[#495057] dark:text-[#e1e9f1]">{username}</p>
-
-                            <EditButton>
-                                <div className="">
-                                    test
-                                </div>
-                            </EditButton>
-                        </div>
-
-                        <div className="relative">
-                            <h4 className="dark:text-[#9aa1b9] text-sm">Email</h4>
-                            <p className="text-sm font-semibold text-[#495057] dark:text-[#e1e9f1]">{email}</p>
-
-                            <EditButton>
-
-                            </EditButton>
-                        </div>
-
-                        <div className="relative">
-                            <h4 className="dark:text-[#9aa1b9] text-sm">Password</h4>
-                            <p className="text-sm font-semibold text-[#495057] dark:text-[#e1e9f1]">************</p>
-
-                            <EditButton>
-
-                            </EditButton>
-                        </div>
+                        <EditOption className="relative" title="Name" content={username}/>
+                        <EditOption className="relative" title="Email" content={email}/>
+                        <EditOption className="relative" title="Password" content="************"/>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }
