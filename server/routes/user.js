@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/userModel');
 const userRoutes = express.Router();
+const cookieParser = require('cookie-parser');
 
 userRoutes.post('/register', async (req, res) => {
     try {
