@@ -147,7 +147,7 @@ const ChatRooms = () => {
                     </SideBar>
 
                     <div
-                        className="flex flex-col w-1/6 text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
+                        className="flex flex-col min-w-[20%] text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
                         {activeButton === "Rooms" && (
                             <>
                                 <div className="flex w-full gap-x-2 py-4 items-center justify-center border-b border-gray-700 transition-colors duration-100 text-[#495057] dark:text-[#e1e9f1]">

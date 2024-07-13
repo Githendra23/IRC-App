@@ -26,6 +26,7 @@ const Login = () => {
                     const socket = getSocket();
                     localStorage.setItem("username", username);
                     localStorage.setItem("userId", res.data.userId);
+                    localStorage.setItem("password", String(password.length));
 
                     socket.on("connect", () => {
                         socket.emit("newUser", username);

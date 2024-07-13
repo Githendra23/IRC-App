@@ -3,8 +3,12 @@ import EditOption from "./components/EditOption";
 
 const Settings = () => {
     const [isActive, setIsActive] = useState<boolean>(false);
-    const username = localStorage.getItem("username");
-    const email = localStorage.getItem("email");
+    const username = localStorage.getItem("username") || "";
+    const [newUsername, setNewUsername] = useState<string>(username);
+    const email = localStorage.getItem("email") || "";
+    const [newEmail, setNewEmail] = useState<string>(email);
+    const numCharPassword = parseInt(localStorage.getItem("password") || "0") || 0;
+    const [newPassword, setNewPassword] = useState<string>("");
 
     return (
         <div className="text-[#495057] dark:text-[#e1e9f1] duration-100 p-5">
@@ -37,9 +41,24 @@ const Settings = () => {
                 className={`overflow-hidden transition-all duration-300 ${isActive ? "visible h-full" : "invisible h-0"}`}>
                 <div className="border-b border-x duration-100 dark:border-x-[#36404a] bg-white dark:bg-[#303841] h-full dark:border-b-[#36404a] rounded-b-md">
                     <div className="flex flex-col justify-between h-full px-3 py-4">
-                        <EditOption className="relative" title="Name" content={username}/>
-                        <EditOption className="relative" title="Email" content={email}/>
-                        <EditOption className="relative" title="Password" content="************"/>
+                        <EditOption title="Username" content={username} value={newUsername}
+                                    onChange={(e) => setNewUsername(e.target.value)}
+                                    onSubmit={(e) => {
+                                    e.preventDefault();
+                                }
+                        }/>
+
+                        <EditOption title="Email" content={email} value={newEmail} onChange={(e) => setNewEmail(e.target.value)}
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
+                                    }
+                        }/>
+
+                        <EditOption title="Password" content={'*'.repeat(numCharPassword)} value={newPassword} onChange={(e) => setNewPassword(e.target.value)}
+                                    onSubmit={(e) => {
+                                        e.preventDefault();
+                                    }
+                        }/>
                     </div>
                 </div>
             </div>
