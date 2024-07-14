@@ -1,5 +1,6 @@
 import {useState} from "react";
 import EditOption from "./components/EditOption";
+import axios from "axios";
 
 const Settings = () => {
     const [isActive, setIsActive] = useState<boolean>(false);
@@ -44,19 +45,49 @@ const Settings = () => {
                         <EditOption title="Username" content={username} value={newUsername}
                                     onChange={(e) => setNewUsername(e.target.value)}
                                     onSubmit={(e) => {
-                                    e.preventDefault();
-                                }
+                                        e.preventDefault();
+
+                                        axios.patch('http://localhost:8080/api/user/', {
+                                            newUsername: newUsername,
+                                        })
+                                            .then(res => {
+                                                console.log(res);
+                                            })
+                                            .catch(err => {
+                                                console.log(err.response.data.message);
+                                            })
+                                    }
                         }/>
 
                         <EditOption title="Email" content={email} value={newEmail} onChange={(e) => setNewEmail(e.target.value)}
                                     onSubmit={(e) => {
                                         e.preventDefault();
+
+                                        axios.patch('http://localhost:8080/api/user/', {
+                                            newEmail: newEmail,
+                                        })
+                                            .then(res => {
+                                                console.log(res);
+                                            })
+                                            .catch(err => {
+                                                console.log(err.response.data.message);
+                                            })
                                     }
                         }/>
 
                         <EditOption title="Password" content={'*'.repeat(numCharPassword)} value={newPassword} onChange={(e) => setNewPassword(e.target.value)}
                                     onSubmit={(e) => {
                                         e.preventDefault();
+
+                                        axios.patch('http://localhost:8080/api/user/', {
+                                            newPassword: newPassword,
+                                        })
+                                            .then(res => {
+                                                console.log(res);
+                                            })
+                                            .catch(err => {
+                                                console.log(err.response.data.message);
+                                            })
                                     }
                         }/>
                     </div>
