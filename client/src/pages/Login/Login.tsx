@@ -1,15 +1,16 @@
-import React, {useState} from "react";
-import {getSocket, connect, isConnected} from "../socket.ts";
-import {toast} from "react-toastify";
-import {useNavigate} from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { getSocket, connect, isConnected } from "../socket.ts";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {AccountIcon, LockIcon} from "./icons";
+import { AccountIcon, LockIcon } from "./icons";
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [connected, setConnected] = useState(isConnected());
     const navigate = useNavigate();
+    const passwordInputRef = useRef<HTMLInputElement>(null);
 
     const handleConnect = async (event?: React.FormEvent<HTMLFormElement>) => {
         if (event) {
@@ -18,8 +19,8 @@ const Login = () => {
 
         if (!connected && username.trim() !== "" && password.trim() !== "") {
             axios.post("http://localhost:8080/api/user/login", {
-                username: username,
-                password: password
+                username,
+                password
             }, {withCredentials: true})
                 .then((res) => {
                     connect();
@@ -51,10 +52,11 @@ const Login = () => {
         setConnected(isConnected());
     };
 
-    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key !== "Enter") return;
-
-        handleConnect();
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            (passwordInputRef.current as HTMLInputElement).focus();
+        }
     };
 
     return (
@@ -95,8 +97,8 @@ const Login = () => {
                                         className="w-full py-3 px-5 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a]"
                                         type="password"
                                         placeholder="Enter Password"
+                                        ref={passwordInputRef}
                                         value={password}
-                                        onKeyDown={handleKeyPress}
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
                                     />
