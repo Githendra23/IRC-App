@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ChatRooms from "./pages/Chatrooms";
-import StarCanvas from "./components/Stars";
 
 function App() {
     return (
@@ -20,7 +19,6 @@ function App() {
                 <Route path="/" element={<Navigate to="/login"/>}/>
                 <Route path="/chatrooms" element={<ChatRooms/>}/>
             </Routes>
-            <StarCanvas/>
             <ToastContainer
                 position="top-center"
                 autoClose={2500}
