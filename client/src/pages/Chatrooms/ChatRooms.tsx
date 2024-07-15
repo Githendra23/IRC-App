@@ -10,12 +10,8 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import SideBar from "./components/SideBar";
 import SideButton from "./components/SideButton";
-import FriendIcon from "./icons/FriendIcon.tsx";
-import ChatIcon from "./icons/ChatIcon.tsx";
-import GroupChatIcon from "./icons/GroupChatIcon.tsx";
-import SettingsIcon from "./icons/SettingsIcon.tsx";
+import {ChatIcon, FriendIcon, GroupChatIcon, SettingsIcon, MessageIcon} from "./icons";
 import ProfileButton from "./components/ProfileButton/ProfileButton.tsx";
-import MessageIcon from "./components/Channel/icons/MessageIcon";
 import Settings from "./components/Settings";
 
 interface Data {
