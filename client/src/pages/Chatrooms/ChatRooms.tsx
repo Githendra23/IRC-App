@@ -31,10 +31,12 @@ const ChatRooms = () => {
     const navigate = useNavigate();
     const socket = getSocket();
     const [activeButton, setActiveButton] = useState<string | null>("Friends");
+    const [activeSettings, setActiveSettings] = useState<boolean>(false);
 
     const handleButtonClick = (buttonText: string) => {
         if (activeButton !== buttonText) {
             setActiveButton(buttonText);
+            setActiveSettings(false);
         }
     };
 
@@ -126,7 +128,7 @@ const ChatRooms = () => {
                                 isActive={activeButton === "Settings"}
                                 icon={<SettingsIcon className="h-auto w-6"
                                                     color={activeButton === "Settings" ? "#5e5dc3" : "#929cb8"}/>}
-                                onClick={() => handleButtonClick("Settings")}
+                                onClick={() => setActiveSettings(true)}
                             >
                             </SideButton>
                         </div>
@@ -144,9 +146,9 @@ const ChatRooms = () => {
 
                     <div
                         className="flex flex-col min-w-[20%] text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
-                        {activeButton === "Rooms" && (
+                        {!activeSettings && activeButton === "Rooms" && (
                             <>
-                                <div className="flex w-full gap-x-2 py-4 items-center justify-center border-b border-gray-700 transition-colors duration-100 text-[#495057] dark:text-[#e1e9f1]">
+                                <div className="flex w-full gap-x-2 py-4 items-center justify-center transition-colors duration-100 text-[#495057] dark:text-[#e1e9f1]">
                                     <MessageIcon className="w-8 h-8 items-center"/>
                                     <h2 className="text-xl lg:text-3xl font-bold">Channels</h2>
                                 </div>
@@ -158,17 +160,17 @@ const ChatRooms = () => {
                             </>
                         )}
 
-                        {activeButton === "Settings" && (
+                        {activeSettings && (
                             <Settings/>
                         )}
 
-                        {activeButton === "Group Chats" && (
+                        {!activeSettings && activeButton === "Group Chats" && (
                             <>
                                 <div></div>
                             </>
                         )}
 
-                        {activeButton === "Friends" && (
+                        {!activeSettings && activeButton === "Friends" && (
                             <>
                                 <div></div>
                             </>
@@ -196,8 +198,8 @@ const ChatRooms = () => {
                     </div>
 
                     <div
-                        className={`flex flex-col w-1/6 h-screen text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841] ${activeButton !== "Friends" && activeButton !== "Settings" ? "block" : "hidden"}`}>
-                        <div className="p-4 border-b border-gray-700">
+                        className={`flex flex-col w-1/6 h-screen text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841] ${activeButton !== "Friends" ? "block" : "hidden"}`}>
+                        <div className="p-4">
                             <h2 className="text-xl lg:text-3xl font-bold text-center text-[#495057] dark:text-[#e1e9f1]">Active Now</h2>
                         </div>
 

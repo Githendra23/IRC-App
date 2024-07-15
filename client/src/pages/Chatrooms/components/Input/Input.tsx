@@ -42,7 +42,7 @@ const Input: React.FC<Props> = ({selectedChannel}) => {
                     />
 
                     <button
-                        className="px-4 bg-[#7269ef] text-white rounded-lg py-3"
+                        className="px-4 bg-[#7269ef] hover:bg-[#6159cb] text-white rounded-md py-3"
                         onClick={sendMessage}
                     >
                         <AirplaneIcon className="w-6 h-6"/>

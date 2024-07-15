@@ -130,14 +130,14 @@ const Channel: React.FC<Props> = ({className, channels, setChannels, selectedCha
             <div className="flex flex-col items-center mb-2">
                 <PopupWindow buttonText="+">
                     <input
-                        className="w-full mb-1 p-2 rounded focus:outline-none text-[#7a7f9a] transition-all duration-100 dark:text-[#a6a7be] bg-[#e6ebf5] dark:bg-[#36404a]"
+                        className="w-full mb-3 p-2 rounded outline-none text-black text-sm transition-all duration-100 dark:text-[#a6a7be] bg-[#e6ebf5] dark:bg-[#36404a]"
                         placeholder="Enter Channel Name"
                         value={newChannel}
                         onChange={(e) => setNewChannel(e.target.value)}
                         onKeyDown={(e) => e.key === "Enter" && handleJoinChannel()}
                     />
                     <button
-                        className="flex mt-1 bg-[#7269ef] text-white text-center py-2 px-4 rounded-lg"
+                        className="flex mt-1 bg-[#7269ef] hover:bg-[#6159cb] text-white text-center py-2 px-4 rounded-md"
                         onClick={handleJoinChannel}
                     >
                         Create/Join
