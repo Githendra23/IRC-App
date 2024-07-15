@@ -3,6 +3,7 @@ import {getSocket, connect, isConnected} from "../socket.ts";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import LockIcon from "./icons/LockIcon.tsx";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -77,20 +78,27 @@ const Login = () => {
                                 required
                             />
 
-                            <label className="mb-1 text-[#495057]" htmlFor="password">Password</label>
-                            <input
-                                className="mb-8 py-3 px-5 border border-[#e6ebf5] rounded bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a]"
-                                type="password"
-                                placeholder="Enter Password"
-                                value={password}
-                                onKeyDown={handleKeyPress}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
 
-                            <button className="p-2 bg-[#7269ef] hover:bg-[#6159cb] text-white rounded">
-                                Sign In
-                            </button>
+                            <label className="mb-1 text-[#495057]" htmlFor="password">Password</label>
+
+                            <div className="flex mb-8">
+                                <div className="flex items-center px-2 border border-[#e6ebf5] rounded-l bg-[#f7f7ff]">
+                                    <LockIcon className="w-3.5 stroke-[#7a7f9a]"/>
+                                </div>
+                                <input
+                                    className="w-full py-3 px-5 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a]"
+                                    type="password"
+                                    placeholder="Enter Password"
+                                    value={password}
+                                    onKeyDown={handleKeyPress}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                                <button className="p-2 bg-[#7269ef] hover:bg-[#6159cb] text-white rounded">
+                                    Sign In
+                                </button>
                         </form>
                     </div>
 
