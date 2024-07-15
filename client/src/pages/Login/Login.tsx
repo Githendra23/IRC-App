@@ -45,7 +45,8 @@ const Login = () => {
                 .catch((err) => {
                     toast.error(err.response.data.message);
                 });
-        } else {
+        }
+        else {
             toast.error("Please enter a username");
         }
 
@@ -63,7 +64,7 @@ const Login = () => {
         <>
             {!connected && (
                 <div className="flex flex-col justify-center items-center h-screen bg-[#f7f7ff] font-inter">
-                    <h1 className="text-2xl text-center font-semibold mb-2 text-[#495057]">Sign in</h1>
+                    <h1 className="text-2xl text-center font-semibold mb-2 text-[#495057]">Sign In</h1>
                     <h2 className="text-sm mb-6 text-[#7f7f9a]">Sign in to continue.</h2>
 
                     <div className="flex flex-col bg-white rounded p-10">
@@ -115,7 +116,7 @@ const Login = () => {
                         Don't have an account?&nbsp;
                         <a className="hover:cursor-pointer hover:underline hover:underline-offset-2 text-center text-[#7269ef]"
                            onClick={() => navigate("/register")}>
-                            Sign up now
+                            Sign up
                         </a>
                     </p>
                 </div>
