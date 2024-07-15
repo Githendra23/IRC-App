@@ -56,56 +56,53 @@ const Login = () => {
         handleConnect();
     };
 
-    const navigateToRegister = () => {
-        navigate("/register");
-    };
-
     return (
         <>
             {!connected && (
-                <div className="flex flex-col justify-center items-center h-[100vh] ">
-                    <div className="flex flex-col bg-[#05323a] rounded-lg py-20 px-20 shadow-md">
-                        <h1 className="text-5xl font-bold text-white text-center mb-10">
-                            Login
-                        </h1>
+                <div className="flex flex-col justify-center items-center h-screen bg-[#f7f7ff] font-inter">
+                    <h1 className="text-2xl text-center font-semibold mb-2 text-[#495057]">Sign in</h1>
+                    <h2 className="text-sm mb-6 text-[#7f7f9a]">Sign in to continue.</h2>
 
-                        <form className="flex flex-col" onSubmit={handleConnect}>
-                                <input
-                                    className="mb-8 p-2 pr-10 border-b border-gray-300 rounded-t-none rounded-l-none rounded-r-none bg-[#05323a] bg-none outline-none text-white focus:ring-0 focus:border-b focus:border-[#09ebe3]"
-                                    type="text"
-                                    placeholder="Enter your username"
-                                    value={username}
-                                    onKeyDown={handleKeyPress}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    required
-                                />
+                    <div className="flex flex-col bg-white rounded p-10">
 
-                                <input
-                                    className="mb-8 p-2 border-b border-gray-300 rounded-t-none rounded-l-none rounded-r-none bg-[#05323a] bg-none outline-none text-white focus:ring-0 focus:border-b focus:border-[#09ebe3]"
-                                    type="password"
-                                    placeholder="Enter your password"
-                                    value={password}
-                                    onKeyDown={handleKeyPress}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    required
-                                />
+                        <form className="flex flex-col w-80" onSubmit={handleConnect}>
+                            <label className="mb-1 text-[#495057]" htmlFor="username">Username</label>
+                            <input
+                                className="mb-8 py-3 px-5 border border-[#e6ebf5] rounded bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a]"
+                                type="text"
+                                placeholder="Enter Username"
+                                value={username}
+                                onKeyDown={handleKeyPress}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
 
-                                <div className="flex justify-center">
-                                    <button className="p-2 px-12 bg-gray-300 hover:bg-gray-100 font-bold text-black rounded-full mb-12">
-                                        Log In
-                                    </button>
-                                </div>
+                            <label className="mb-1 text-[#495057]" htmlFor="password">Password</label>
+                            <input
+                                className="mb-8 py-3 px-5 border border-[#e6ebf5] rounded bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a]"
+                                type="password"
+                                placeholder="Enter Password"
+                                value={password}
+                                onKeyDown={handleKeyPress}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
 
-                                <p
-                                    className="hover:cursor-pointer hover:underline hover:underline-offset-2 text-center"
-                                    onClick={navigateToRegister}
-                                >
-                                    Don't have an account?
-                                </p>
+                            <button className="p-2 bg-[#7269ef] hover:bg-[#6159cb] text-white rounded">
+                                Sign In
+                            </button>
                         </form>
                     </div>
+
+                    <p className="mt-10 text-[#495057]">
+                        Don't have an account?&nbsp;
+                        <a className="hover:cursor-pointer hover:underline hover:underline-offset-2 text-center text-[#7269ef]"
+                           onClick={() => navigate("/register")}>
+                            Sign up now
+                        </a>
+                    </p>
                 </div>
-                )}
+            )}
         </>
     );
 };
