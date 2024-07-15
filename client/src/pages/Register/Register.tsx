@@ -54,7 +54,7 @@ const Register = () => {
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 type="text"
-                                placeholder="Username"
+                                placeholder="Enter Username"
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         e.preventDefault();
@@ -77,7 +77,7 @@ const Register = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 type="email"
-                                placeholder="Email"
+                                placeholder="Enter Email"
                                 ref={emailInputRef}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
@@ -102,7 +102,7 @@ const Register = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 type="password"
-                                placeholder="Create password"
+                                placeholder="Enter password"
                                 ref={passwordInputRef}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
