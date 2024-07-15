@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
@@ -9,6 +9,8 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
     const navigate = useNavigate();
+    const passwordInputRef = useRef<HTMLInputElement>(null);
+    const confirmPasswordInputRef = useRef<HTMLInputElement>(null);
 
     const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
         if (event) {
@@ -31,12 +33,6 @@ const Register = () => {
         }
     };
 
-    const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key !== "Enter") return;
-
-        handleSubmit();
-    };
-
     return (
         <div className="flex flex-col justify-center items-center h-screen bg-[#f7f7ff] font-inter">
             <h1 className="text-2xl text-center font-semibold mb-2 text-[#495057]">Sign up</h1>
@@ -55,7 +51,12 @@ const Register = () => {
                                 onChange={(e) => setUsername(e.target.value)}
                                 type="text"
                                 placeholder="Username"
-                                onKeyDown={handleEnterKey}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        e.preventDefault();
+                                        (passwordInputRef.current as HTMLInputElement).focus();
+                                    }
+                                }}
                                 className="w-full py-3 px-5 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a]"
                                 required
                             />
@@ -74,7 +75,13 @@ const Register = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 type="password"
                                 placeholder="Create password"
-                                onKeyDown={handleEnterKey}
+                                ref={passwordInputRef}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        e.preventDefault();
+                                        (confirmPasswordInputRef.current as HTMLInputElement).focus();
+                                    }
+                                }}
                                 className={`w-full py-3 px-5 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a] ${
                                     password !== repeatPassword ? "border-red-500" : ""
                                 }`}
@@ -95,7 +102,12 @@ const Register = () => {
                                 onChange={(e) => setRepeatPassword(e.target.value)}
                                 type="password"
                                 placeholder="Confirm password"
-                                onKeyDown={handleEnterKey}
+                                ref={confirmPasswordInputRef}
+                                onKeyDown={(e) => {
+                                    if (e.key !== "Enter") return;
+                                    e.preventDefault();
+                                    handleSubmit();
+                                }}
                                 className={`w-full py-3 px-5 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a] ${
                                     password !== repeatPassword ? "border-red-500" : ""
                                 }`}
