@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {AccountIcon, LockIcon} from "../icons";
 
 const Register = () => {
     const [username, setUsername] = useState("");
@@ -37,61 +38,85 @@ const Register = () => {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center h-[100vh]">
-            <div className="flex flex-col bg-[#05323a] rounded-lg py-20 px-20 shadow-md">
-                <h1 className="text-center text-5xl font-bold text-white mb-8">Register</h1>
+        <div className="flex flex-col justify-center items-center h-screen bg-[#f7f7ff] font-inter">
+            <h1 className="text-2xl text-center font-semibold mb-2 text-[#495057]">Sign up</h1>
+            <h2 className="text-sm mb-6 text-[#7f7f9a]">Get your account now.</h2>
 
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <input
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            type="text"
-                            placeholder="Username"
-                            onKeyDown={handleEnterKey}
-                            className="flex flex-col mb-6 p-2 pr-10 border-b border-gray-300 rounded-t-none rounded-l-none rounded-r-none bg-[#05323a] bg-none outline-none text-white focus:ring-0 focus:border-b focus:border-[#09ebe3]"
-                            required
-                        />
-
-                        <input
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            type="password"
-                            placeholder="Create password"
-                            onKeyDown={handleEnterKey}
-                            className={`flex flex-col mb-6 p-2 pr-10 border-b border-gray-300 rounded-t-none rounded-l-none rounded-r-none bg-[#05323a] bg-none outline-none text-white focus:ring-0 focus:border-b focus:border-[#09ebe3] ${
-                                password !== repeatPassword ? "border-red-500" : ""
-                            }`}
-                            required
-                        />
-
-                        <input
-                            value={repeatPassword}
-                            onChange={(e) => setRepeatPassword(e.target.value)}
-                            type="password"
-                            placeholder="Confirm password"
-                            onKeyDown={handleEnterKey}
-                            className={`flex flex-col mb-8 p-2 pr-10 border-b border-gray-300 rounded-t-none rounded-l-none rounded-r-none bg-[#05323a] bg-none outline-none text-white focus:ring-0 focus:border-b focus:border-[#09ebe3] ${
-                                password !== repeatPassword ? "border-red-500" : ""
-                            }`}
-                            required
-                        />
+            <div className="flex flex-col bg-white rounded p-10">
+                <form className="flex flex-col w-80 gap-8" onSubmit={handleSubmit}>
+                    <div className="flex flex-col">
+                        <label className="mb-1 text-[#495057]" htmlFor="username">Username</label>
+                        <div className="flex">
+                            <div className="flex items-center px-2 border border-[#e6ebf5] rounded-l bg-[#f7f7ff]">
+                                <AccountIcon className="w-3.5 stroke-[#7a7f9a]"/>
+                            </div>
+                            <input
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                type="text"
+                                placeholder="Username"
+                                onKeyDown={handleEnterKey}
+                                className="w-full py-3 px-5 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a]"
+                                required
+                            />
+                        </div>
                     </div>
 
-                    <div className="flex justify-center">
-                        <button
-                            className="p-2 px-12 bg-gray-300 hover:bg-gray-100 font-bold text-black rounded-full mb-12">
-                            Register
-                        </button>
+                    <div className="flex flex-col">
+                        <label className="mb-1 text-[#495057]" htmlFor="password">Password</label>
+                        <div className="flex">
+                            <div
+                                className="flex items-center px-2 border border-[#e6ebf5] rounded-l bg-[#f7f7ff]">
+                                <LockIcon className="w-3.5 stroke-[#7a7f9a]"/>
+                            </div>
+                            <input
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                type="password"
+                                placeholder="Create password"
+                                onKeyDown={handleEnterKey}
+                                className={`w-full py-3 px-5 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a] ${
+                                    password !== repeatPassword ? "border-red-500" : ""
+                                }`}
+                                required
+                            />
+                        </div>
                     </div>
 
-                    <p className="hover:cursor-pointer hover:underline hover:underline-offset-2 text-center"
-                       onClick={() => navigate('/login')}
-                    >
-                        Already have an account?
-                    </p>
+                    <div className="flex flex-col">
+                        <label className="mb-1 text-[#495057]" htmlFor="confirmPassword">Confirm Password</label>
+                        <div className="flex">
+                            <div
+                                className="flex items-center px-2 border border-[#e6ebf5] rounded-l bg-[#f7f7ff]">
+                                <LockIcon className="w-3.5 stroke-[#7a7f9a]"/>
+                            </div>
+                            <input
+                                value={repeatPassword}
+                                onChange={(e) => setRepeatPassword(e.target.value)}
+                                type="password"
+                                placeholder="Confirm password"
+                                onKeyDown={handleEnterKey}
+                                className={`w-full py-3 px-5 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a] ${
+                                    password !== repeatPassword ? "border-red-500" : ""
+                                }`}
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <button className="p-2 bg-[#7269ef] hover:bg-[#6159cb] text-white rounded">
+                        Sign Up
+                    </button>
                 </form>
             </div>
+
+            <p className="mt-10 text-sm text-[#495057]">
+                Already have an account?&nbsp;
+                <a className="hover:cursor-pointer hover:underline hover:underline-offset-2 text-center text-[#7269ef]"
+                   onClick={() => navigate("/login")}>
+                    Sign in
+                </a>
+            </p>
         </div>
     );
 };

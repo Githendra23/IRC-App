@@ -3,7 +3,7 @@ import { getSocket, connect, isConnected } from "../socket.ts";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { AccountIcon, LockIcon } from "./icons";
+import { AccountIcon, LockIcon } from "../icons";
 
 const Login = () => {
     const [username, setUsername] = useState("");
