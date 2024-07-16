@@ -36,7 +36,7 @@ const EditOption: React.FC<Props> = ({className, title, content, onSubmit, value
                             value={value}
                             onChange={onChange}
                         />
-                        <button onClick={() => setIsActive(false)} className="p-2 rounded text-white bg-[#7269ef]">
+                        <button onClick={() => setIsActive(false)} className="p-2 rounded text-white bg-[#7269ef] hover:bg-[#6159cb] duration-200">
                             Save
                         </button>
                     </div>

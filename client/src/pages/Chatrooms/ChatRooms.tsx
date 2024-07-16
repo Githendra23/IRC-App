@@ -31,12 +31,10 @@ const ChatRooms = () => {
     const navigate = useNavigate();
     const socket = getSocket();
     const [activeButton, setActiveButton] = useState<string | null>("Friends");
-    const [activeSettings, setActiveSettings] = useState<boolean>(false);
 
     const handleButtonClick = (buttonText: string) => {
         if (activeButton !== buttonText) {
             setActiveButton(buttonText);
-            setActiveSettings(false);
         }
     };
 
@@ -57,8 +55,7 @@ const ChatRooms = () => {
                     .then((res) => {
                         if ("username" in res.data && res.data.username === username) {
                             setConnected(true);
-                        }
-                        else {
+                        } else {
                             setConnected(false);
                             logOut();
                         }
@@ -68,8 +65,7 @@ const ChatRooms = () => {
                         setConnected(false);
                         logOut();
                     });
-            }
-            else {
+            } else {
                 setConnected(false);
                 logOut();
             }
@@ -91,11 +87,12 @@ const ChatRooms = () => {
     };
 
     return (
-        <div className="transition-colors duration-100 dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3] font-inter h-screen flex flex-col">
+        <div
+            className="transition-colors duration-200 dark:scrollbar-track-[#09ebe42a] dark:scrollbar-thumb-[#09ebe3] font-inter h-screen flex flex-col">
             {connected && (
                 <div className="flex h-full">
                     <SideBar
-                        className="flex flex-col z-20 shadow justify-between items-center z-10 py-4 px-2 h-screen bg-white transition-colors duration-100 dark:bg-[#36404a]">
+                        className="flex flex-col z-20 shadow justify-between items-center z-10 py-4 px-2 h-screen bg-white transition-colors duration-200 dark:bg-[#36404a]">
                         <div className="w-8"><img className="h-auto w-auto" src={'/assets/logo_.png'} alt="logo"/></div>
 
                         <div className="grid grid-cols-1 gap-y-1">
@@ -128,7 +125,7 @@ const ChatRooms = () => {
                                 isActive={activeButton === "Settings"}
                                 icon={<SettingsIcon className="h-auto w-6"
                                                     color={activeButton === "Settings" ? "#5e5dc3" : "#929cb8"}/>}
-                                onClick={() => setActiveSettings(true)}
+                                onClick={() => handleButtonClick("Settings")}
                             >
                             </SideButton>
                         </div>
@@ -145,10 +142,11 @@ const ChatRooms = () => {
                     </SideBar>
 
                     <div
-                        className="flex flex-col min-w-[20%] text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
-                        {!activeSettings && activeButton === "Rooms" && (
+                        className="flex flex-col min-w-[20%] text-black transition-colors duration-200 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
+                        {activeButton === "Rooms" && (
                             <>
-                                <div className="flex w-full gap-x-2 py-4 items-center justify-center transition-colors duration-100 text-[#495057] dark:text-[#e1e9f1]">
+                                <div
+                                    className="flex w-full gap-x-2 py-4 items-center justify-center transition-colors duration-200 text-[#495057] dark:text-[#e1e9f1]">
                                     <MessageIcon className="w-8 h-8 items-center"/>
                                     <h2 className="text-xl lg:text-3xl font-bold">Channels</h2>
                                 </div>
@@ -160,17 +158,17 @@ const ChatRooms = () => {
                             </>
                         )}
 
-                        {activeSettings && (
+                        {activeButton === "Settings" && (
                             <Settings/>
                         )}
 
-                        {!activeSettings && activeButton === "Group Chats" && (
+                        {activeButton === "Group Chats" && (
                             <>
                                 <div></div>
                             </>
                         )}
 
-                        {!activeSettings && activeButton === "Friends" && (
+                        {activeButton === "Friends" && (
                             <>
                                 <div></div>
                             </>
@@ -178,8 +176,9 @@ const ChatRooms = () => {
                     </div>
 
                     <div
-                        className="flex flex-grow flex-col shadow justify-between w-3/5 h-screen text-black transition-colors duration-100 dark:bg-[#262e35] bg-white">
-                        <div className="flex justify-between duration-100 items-center py-[0.85rem] border-b-2 border-b-[#f0effc] dark:border-b-[#2b333b]">
+                        className="flex flex-grow flex-col shadow justify-between w-3/5 h-screen text-black transition-colors duration-200 dark:bg-[#262e35] bg-white">
+                        <div
+                            className="flex justify-between duration-200 items-center py-[0.85rem] border-b border-b-[#f0effc] dark:border-b-[#2b333b]">
                             <h1 className="text-3xl font-bold text-[#495057] dark:text-[#e1e9f1]">
                                 {username}
                             </h1>
@@ -192,15 +191,17 @@ const ChatRooms = () => {
                             setMessages={setMessages}
                         />
 
-                        <div className="w-full transition-colors duration-100 p-5 border-t-2 border-t-[#f0effc] dark:border-t-[#2b333b]">
+                        <div
+                            className="w-full transition-colors duration-200 p-5 border-t-2 border-t-[#f0effc] dark:border-t-[#2b333b]">
                             <Input selectedChannel={selectedChannel}/>
                         </div>
                     </div>
 
                     <div
-                        className={`flex flex-col w-1/6 h-screen text-black transition-colors duration-100 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841] ${activeButton !== "Friends" ? "block" : "hidden"}`}>
+                        className={`flex flex-col w-1/6 h-screen text-black transition-colors duration-200 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841] ${activeButton !== "Friends" ? "block" : "hidden"}`}>
                         <div className="p-4">
-                            <h2 className="text-xl lg:text-3xl font-bold text-center text-[#495057] dark:text-[#e1e9f1]">Active Now</h2>
+                            <h2 className="text-xl lg:text-3xl font-bold text-center text-[#495057] dark:text-[#e1e9f1]">Active
+                                Now</h2>
                         </div>
 
                         <ActiveUser/>

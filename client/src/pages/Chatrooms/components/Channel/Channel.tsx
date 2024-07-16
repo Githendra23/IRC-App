@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import { getSocket } from "../../../socket.ts";
+import React, {useState, useEffect} from "react";
+import {toast} from "react-toastify";
+import {getSocket} from "../../../socket.ts";
 import PopupWindow from "./components/PopupWindow.tsx";
 import axios from "axios";
 
@@ -12,7 +12,13 @@ interface Props {
     className?: string;
 }
 
-const Channel: React.FC<Props> = ({className, channels, setChannels, selectedChannel, setSelectedChannel}) => {
+const Channel: React.FC<Props> = ({
+                                      className,
+                                      channels,
+                                      setChannels,
+                                      selectedChannel,
+                                      setSelectedChannel,
+                                  }) => {
     const [newChannel, setNewChannel] = useState("");
     const userId = localStorage.getItem("userId");
     const username = localStorage.getItem("username");
@@ -58,14 +64,13 @@ const Channel: React.FC<Props> = ({className, channels, setChannels, selectedCha
                     channelName: channelName,
                     userId: userId,
                 },
-                { withCredentials: true }
+                {withCredentials: true}
             );
 
             setChannels((prevChannels) => [...prevChannels, channelName]);
             setNewChannel("");
             toast.success(`Joined ${channelName}`);
-        }
-        catch (err: any) {
+        } catch (err: any) {
             toast.error(err.response.data.message);
         }
     };
@@ -95,13 +100,15 @@ const Channel: React.FC<Props> = ({className, channels, setChannels, selectedCha
     };
 
     return (
-        <div className={`${className} overflow-y-auto scrollbar-webkit dark:scrollbar-webkit-dark transition-colors duration-100 text-[#495057] dark:text-[#e1e9f1]`}>
+        <div
+            className={`${className} overflow-y-auto scrollbar-webkit dark:scrollbar-webkit-dark transition-colors duration-200 text-[#495057] dark:text-[#e1e9f1]`}
+        >
             {channels.length > 0 && (
                 <div className="m-3 justify-between items-center space-y-1">
                     {channels.map((channel, index) => (
                         <div key={index} className="flex gap-x-3">
                             <div
-                                className={`relative flex-grow p-3.5 cursor-pointer rounded text-left text-md hover:bg-[#e6ebf5] duration-100 dark:hover:bg-[#36404a] ${
+                                className={`relative flex-grow p-3.5 cursor-pointer rounded text-left text-md hover:bg-[#e6ebf5] duration-200 dark:hover:bg-[#36404a] ${
                                     selectedChannel === channel
                                         ? "bg-[#e6ebf5] dark:bg-[#36404a]"
                                         : "bg-[#f5f7fb] dark:bg-[#303841]"
@@ -131,7 +138,7 @@ const Channel: React.FC<Props> = ({className, channels, setChannels, selectedCha
                          onClickChannelButton={handleJoinChannel} textButton="Add Channel" buttonText="+">
                 <label className="mb-1 text-[#495057] text-sm" htmlFor="channel">Channel Name</label>
                 <input
-                    className="w-80 p-2 rounded outline-none text-[#7a7f9a] placeholder-[#7a7f9a] text-sm dark:text-[#a6a7be] bg-[#ffffff] border border-[#f0eff5] focus:border-[#b9b4f7] dark:bg-[#36404a]"
+                    className="w-80 py-2 px-4 rounded outline-none text-[#7a7f9a] placeholder-[#7a7f9a] dark:text-[#a6b0cf] text-sm bg-[#ffffff] border border-[#f0eff5] dark:border-[#36404a] focus:border-[#b9b4f7] dark:focus:border-[#3f4a56] dark:bg-[#2b3141] duration-300"
                     placeholder="Enter Channel Name"
                     value={newChannel}
                     onChange={(e) => setNewChannel(e.target.value)}

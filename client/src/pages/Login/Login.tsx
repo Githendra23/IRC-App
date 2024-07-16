@@ -106,7 +106,7 @@ const Login = () => {
                                 </div>
                             </div>
 
-                            <button className="py-2 px-4 bg-[#7269ef] hover:bg-[#6159cb] text-white text-sm rounded">
+                            <button className="py-2 px-4 bg-[#7269ef] hover:bg-[#6159cb] duration-200 text-white text-sm rounded">
                                 Sign In
                             </button>
                         </form>
@@ -114,7 +114,7 @@ const Login = () => {
 
                     <p className="mt-10 text-sm text-[#495057]">
                         Don't have an account?&nbsp;
-                        <a className="hover:cursor-pointer hover:underline hover:underline-offset-2 text-center text-[#7269ef]"
+                        <a className="hover:cursor-pointer hover:underline hover:underline-offset-2 text-center text-[#7269ef] hover:text-[#6159cb] duration-200"
                            onClick={() => navigate("/register")}>
                             Sign up
                         </a>

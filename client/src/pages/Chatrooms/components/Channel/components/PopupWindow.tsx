@@ -15,7 +15,7 @@ const PopupWindow: React.FC<PopupWindowProps> = ({className, title, textButton, 
     return (
         <div className={className}>
             <button
-                className="flex mt-1 bg-[#7269ef] hover:bg-[#6159cb] text-white py-2 px-4 rounded-3xl"
+                className="flex mt-1 bg-[#7269ef] hover:bg-[#6159cb] duration-200 text-white py-2 px-4 rounded-3xl"
                 onClick={() => setIsOpen(true)}
             >
                 {buttonText}
@@ -24,11 +24,11 @@ const PopupWindow: React.FC<PopupWindowProps> = ({className, title, textButton, 
             <div className={`${isOpen ? "opacity-100 visible" : "opacity-0 invisible"} duration-500 fixed flex items-center justify-center inset-0 z-20`}>
                 <div className={`fixed bg-black ${isOpen ? "opacity-50" : "opacity-0"} transition-opacity duration-300 inset-0 z-20`}/>
 
-                <div className={`bg-[#ffffff] ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-20"} transition-all duration-500 z-30 dark:bg-gray-800 rounded-md`}>
+                <div className={`bg-white ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-20"} transition-all duration-500 z-30 dark:bg-[#272c3b] rounded-md  border border-white dark:border-[#36404a]`}>
                     <div>
-                        <div className="flex justify-between items-center border-b rounded-t-md border-[#f0eff5] p-4">
-                            <h3 className="text-[#495057] font-semibold">{title}</h3>
-                            <svg className="fill-[#495057] hover:fill-black h-auto w-6 hover:cursor-pointer" onClick={() => setIsOpen(false)} viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div className="flex justify-between items-center border-b rounded-t-md border-[#f0eff5] dark:border-[#36404a] p-4">
+                            <h3 className="text-[#495057] dark:text-[#e1e9f1] font-semibold">{title}</h3>
+                            <svg className="fill-[#495057] hover:fill-black h-auto dark:fill-[#6b6e78] dark:hover:fill-[#e1e9f1] w-6 hover:cursor-pointer" onClick={() => setIsOpen(false)} viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                                 <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
                                 <g id="SVGRepo_iconCarrier">
@@ -41,15 +41,15 @@ const PopupWindow: React.FC<PopupWindowProps> = ({className, title, textButton, 
 
                         <div className="flex flex-col px-4 py-6">{children}</div>
 
-                        <div className="flex p-4 items-center justify-end gap-x-4 border-t border-[#f0eff5]">
+                        <div className="flex p-4 items-center justify-end gap-x-4 border-t border-[#f0eff5] dark:border-[#36404a]">
                             <p
-                                className="text-sm text-[#7269ef] hover:cursor-pointer hover:underline hover:underline-offset-2"
+                                className="text-sm text-[#7269ef] hover:text-[#6159cb] hover:cursor-pointer hover:underline hover:underline-offset-2 duration-200"
                                 onClick={() => setIsOpen(false)}
                             >
                                 Close
                             </p>
 
-                            <button onClick={onClickChannelButton} className="bg-[#7269ef] text-sm text-white py-2 px-4 rounded">
+                            <button onClick={onClickChannelButton} className="bg-[#7269ef] hover:bg-[#6159cb] text-sm text-white py-2 px-4 rounded duration-200">
                                 {textButton}
                             </button>
                         </div>
