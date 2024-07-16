@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {getSocket, disconnect, isConnected} from "../socket.ts";
 import Input from "./components/Input";
 import {toast} from "react-toastify";
-import ChatBody from "./components/ChatBody.tsx";
+import ChatBody from "./components/Chatbody/ChatBody.tsx";
 import ActiveUser from "./components/ActiveUser.tsx";
 import Channel from "./components/Channel";
 import ThemeButton from "./components/ThemeButton";

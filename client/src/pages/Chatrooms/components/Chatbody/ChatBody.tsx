@@ -1,7 +1,8 @@
 import React, {useEffect, useRef, Dispatch, SetStateAction} from "react";
 import {toast} from "react-toastify";
-import {getSocket} from "../../socket.ts";
+import {getSocket} from "../../../socket.ts";
 import axios from "axios";
+import {ChatIcon} from "./icons";
 
 interface Data {
     sender?: string;
@@ -102,9 +103,12 @@ const ChatBody: React.FC<Props> = ({
             className={`${className} flex-grow overflow-y-auto scrollbar-webkit dark:scrollbar-webkit-dark bg-white transition-all duration-200 dark:bg-[#262e35]`}
         >
             {!selectedChannel ? (
-                <div className="flex justify-center items-center h-full">
-                    <h1 className="text-3xl mx-2 text-center font-bold text-[#495057] dark:text-[#e1e9f1]">
-                        Select a channel to start chatting
+                <div className="flex flex-col justify-center gap-y-4 items-center h-full">
+                    <div className="flex items-center justify-center w-32 h-32 py-2 px-4 rounded-full bg-[#7a7f9a] dark:bg-[#7a7f9a] duration-200">
+                        <ChatIcon className="stroke-white w-20 h-auto"/>
+                    </div>
+                    <h1 className="text-2xl text-white text-center py-2 px-4 rounded-full bg-[#7a7f9a] dark:bg-[#7a7f9a] font-bold duration-200">
+                        Start conversation
                     </h1>
                 </div>
             ) : (
