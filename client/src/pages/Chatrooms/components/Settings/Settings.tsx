@@ -14,8 +14,8 @@ const Settings = () => {
 
     return (
         <div className="text-[#495057] dark:text-[#e1e9f1] duration-200 p-5">
-            <div className="duration-200 border-b-[1px] border-b-[#f0effc] dark:border-b-[#2b333b] pb-3 mb-3">
-                <h1 className="text-xl font-bold pb-5">Settings</h1>
+            <div className="duration-200 border-b-[1px] border-b-[#f0effc] dark:border-b-[#36404a] pb-4">
+                <h1 className="text-xl font-bold pb-4">Settings</h1>
 
                 <p className="text-center text-lg">{username}</p>
             </div>

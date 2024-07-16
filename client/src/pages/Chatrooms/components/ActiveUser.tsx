@@ -54,7 +54,7 @@ const ActiveUser = () => {
     return (
         <div className="overflow-y-auto scrollbar-webkit dark:scrollbar-webkit-dark text-center text-[#495057] dark:text-[#e1e9f1]">
             {activeUsers.map((user, index) => (
-                <div className="pl-4 flex items-center gap-3 my-2">
+                <div className="px-5 flex items-center gap-3 my-2">
                     <div className={"w-10 h-10 rounded-full flex items-center " + user.color}>
                         <div className="text-center w-full text-black uppercase text-lg">
                             {user.name[0]}

@@ -10,7 +10,7 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import SideBar from "./components/SideBar";
 import SideButton from "./components/SideButton";
-import {ChatIcon, FriendIcon, GroupChatIcon, SettingsIcon, MessageIcon} from "./icons";
+import {ChatIcon, FriendIcon, GroupChatIcon, SettingsIcon} from "./icons";
 import ProfileButton from "./components/ProfileButton/ProfileButton.tsx";
 import Settings from "./components/Settings";
 
@@ -146,11 +146,10 @@ const ChatRooms = () => {
                         {activeButton === "Rooms" && (
                             <>
                                 <div
-                                    className="flex w-full gap-x-2 p-4 items-center justify-center transition-colors duration-200 text-[#495057] dark:text-[#e1e9f1]">
-                                    <MessageIcon className="w-8 h-8 items-center"/>
-                                    <h2 className="text-xl lg:text-3xl font-bold">Channels</h2>
+                                    className="flex w-full gap-x-2 p-5 items-center transition-colors duration-200 text-[#495057] dark:text-[#e1e9f1] border-b-[1px] border-b-[#f0effc] dark:border-b-[#36404a] mb-6">
+                                    <h4 className="text-xl font-bold">Channels</h4>
                                 </div>
-                                <Channel className="p-6"
+                                <Channel className="px-6"
                                     selectedChannel={selectedChannel}
                                     setSelectedChannel={setSelectedChannel}
                                     channels={channels}
@@ -178,10 +177,10 @@ const ChatRooms = () => {
                     <div
                         className="flex flex-grow flex-col shadow justify-between w-3/5 h-screen text-black transition-colors duration-200 dark:bg-[#262e35] bg-white">
                         <div
-                            className="flex justify-between duration-200 items-center border-b border-b-[#f0effc] dark:border-b-[#2b333b]">
-                            <h1 className="text-3xl font-bold text-[#495057] dark:text-[#e1e9f1] p-4">
+                            className="flex justify-between duration-200 items-center border-b border-b-[#f0effc] dark:border-b-[#36404a]">
+                            <h4 className="text-xl font-bold text-[#495057] dark:text-[#e1e9f1] p-5">
                                 {selectedChannel}
-                            </h1>
+                            </h4>
                         </div>
 
                         <ChatBody
@@ -192,14 +191,16 @@ const ChatRooms = () => {
                         />
 
                         <div
-                            className="w-full transition-colors duration-200 p-5 border-t-2 border-t-[#f0effc] dark:border-t-[#2b333b]">
+                            className="w-full transition-colors duration-200 p-5 border-t border-t-[#f0effc] dark:border-t-[#36404a]">
                             <Input selectedChannel={selectedChannel}/>
                         </div>
                     </div>
 
                     <div
                         className={`flex flex-col w-1/6 h-screen text-black transition-colors duration-200 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841] ${activeButton !== "Friends" ? "block" : "hidden"}`}>
-                        <h2 className="text-xl lg:text-3xl font-bold text-center text-[#495057] dark:text-[#e1e9f1] p-4">Active Now</h2>
+                        <h4 className="text-xl font-bold text-[#495057] border-b-[1px] border-b-[#f0effc] dark:border-b-[#36404a] mb-6 dark:text-[#e1e9f1] p-5 duration-200">
+                            Active Now
+                        </h4>
 
                         <ActiveUser/>
                     </div>
