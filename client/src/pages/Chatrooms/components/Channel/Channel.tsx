@@ -131,7 +131,7 @@ const Channel: React.FC<Props> = ({className, channels, setChannels, selectedCha
                          onClickChannelButton={handleJoinChannel} textButton="Add Channel" buttonText="+">
                 <label className="mb-1 text-[#495057] text-sm" htmlFor="channel">Channel Name</label>
                 <input
-                    className="w-80 p-2 rounded outline-none text-black text-sm transition-all duration-100 dark:text-[#a6a7be] bg-[#e6ebf5] dark:bg-[#36404a]"
+                    className="w-80 p-2 rounded outline-none text-[#7a7f9a] placeholder-[#7a7f9a] text-sm dark:text-[#a6a7be] bg-[#ffffff] border border-[#f0eff5] focus:border-[#b9b4f7] dark:bg-[#36404a]"
                     placeholder="Enter Channel Name"
                     value={newChannel}
                     onChange={(e) => setNewChannel(e.target.value)}

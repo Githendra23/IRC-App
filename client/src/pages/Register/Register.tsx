@@ -45,9 +45,9 @@ const Register = () => {
             <div className="flex flex-col bg-white rounded p-10">
                 <form className="flex flex-col w-80 gap-8" onSubmit={handleSubmit}>
                     <div className="flex flex-col">
-                        <label className="mb-1 text-[#495057]" htmlFor="username">Username</label>
+                        <label className="mb-1 text-[#495057] text-sm" htmlFor="username">Username</label>
                         <div className="flex">
-                            <div className="flex items-center px-2 border border-[#e6ebf5] rounded-l bg-[#f7f7ff]">
+                            <div className="flex items-center py-2 px-4 border border-[#e6ebf5] rounded-l bg-[#f7f7ff]">
                                 <AccountIcon className="w-3.5 stroke-[#7a7f9a]"/>
                             </div>
                             <input
@@ -61,16 +61,16 @@ const Register = () => {
                                         (emailInputRef.current as HTMLInputElement).focus();
                                     }
                                 }}
-                                className="w-full py-3 px-5 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a]"
+                                className="w-full py-2 px-4 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] placeholder-[#7a7f9a] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a]"
                                 required
                             />
                         </div>
                     </div>
 
                     <div className="flex flex-col">
-                        <label className="mb-1 text-[#495057]" htmlFor="email">Email</label>
+                        <label className="mb-1 text-[#495057] text-sm" htmlFor="email">Email</label>
                         <div className="flex">
-                            <div className="flex items-center px-2 border border-[#e6ebf5] rounded-l bg-[#f7f7ff]">
+                            <div className="flex items-center py-2 px-4 border border-[#e6ebf5] rounded-l bg-[#f7f7ff]">
                                 <MailIcon className="w-3.5 stroke-[#7a7f9a]"/>
                             </div>
                             <input
@@ -85,17 +85,17 @@ const Register = () => {
                                         (passwordInputRef.current as HTMLInputElement).focus();
                                     }
                                 }}
-                                className="w-full py-3 px-5 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a]"
+                                className="w-full py-2 px-4 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] placeholder-[#7a7f9a] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a]"
                                 required
                             />
                         </div>
                     </div>
 
                     <div className="flex flex-col">
-                        <label className="mb-1 text-[#495057]" htmlFor="password">Password</label>
+                        <label className="mb-1 text-[#495057] text-sm" htmlFor="password">Password</label>
                         <div className="flex">
                             <div
-                                className="flex items-center px-2 border border-[#e6ebf5] rounded-l bg-[#f7f7ff]">
+                                className="flex items-center py-2 px-4 border border-[#e6ebf5] rounded-l bg-[#f7f7ff]">
                                 <LockIcon className="w-3.5 stroke-[#7a7f9a]"/>
                             </div>
                             <input
@@ -110,7 +110,7 @@ const Register = () => {
                                         (confirmPasswordInputRef.current as HTMLInputElement).focus();
                                     }
                                 }}
-                                className={`w-full py-3 px-5 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a] ${
+                                className={`w-full py-2 px-4 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] placeholder-[#7a7f9a] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a] ${
                                     password !== repeatPassword ? "border-red-500" : ""
                                 }`}
                                 required
@@ -119,10 +119,10 @@ const Register = () => {
                     </div>
 
                     <div className="flex flex-col">
-                        <label className="mb-1 text-[#495057]" htmlFor="confirmPassword">Confirm Password</label>
+                        <label className="mb-1 text-[#495057] text-sm" htmlFor="confirmPassword">Confirm Password</label>
                         <div className="flex">
                             <div
-                                className="flex items-center px-2 border border-[#e6ebf5] rounded-l bg-[#f7f7ff]">
+                                className="flex items-center py-2 px-4 border border-[#e6ebf5] rounded-l bg-[#f7f7ff]">
                                 <LockIcon className="w-3.5 stroke-[#7a7f9a]"/>
                             </div>
                             <input
@@ -136,7 +136,7 @@ const Register = () => {
                                     e.preventDefault();
                                     handleSubmit();
                                 }}
-                                className={`w-full py-3 px-5 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a] ${
+                                className={`w-full py-2 px-4 border-y border-r border-y-[#e6ebf5] border-r-[#e6ebf5] placeholder-[#7a7f9a] rounded-r bg-[#f7f7ff] bg-none outline-none text-sm text-[#7a7f9a] ${
                                     password !== repeatPassword ? "border-red-500" : ""
                                 }`}
                                 required
@@ -144,7 +144,7 @@ const Register = () => {
                         </div>
                     </div>
 
-                    <button className="p-2 bg-[#7269ef] hover:bg-[#6159cb] text-white rounded">
+                    <button className="py-2 px-4 bg-[#7269ef] hover:bg-[#6159cb] text-white text-sm rounded">
                         Sign Up
                     </button>
                 </form>
