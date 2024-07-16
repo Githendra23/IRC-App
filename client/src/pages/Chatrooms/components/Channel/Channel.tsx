@@ -127,23 +127,17 @@ const Channel: React.FC<Props> = ({className, channels, setChannels, selectedCha
                 </div>
             )}
 
-            <div className="flex flex-col items-center mb-2">
-                <PopupWindow buttonText="+">
-                    <input
-                        className="w-full mb-3 p-2 rounded outline-none text-black text-sm transition-all duration-100 dark:text-[#a6a7be] bg-[#e6ebf5] dark:bg-[#36404a]"
-                        placeholder="Enter Channel Name"
-                        value={newChannel}
-                        onChange={(e) => setNewChannel(e.target.value)}
-                        onKeyDown={(e) => e.key === "Enter" && handleJoinChannel()}
-                    />
-                    <button
-                        className="flex mt-1 bg-[#7269ef] hover:bg-[#6159cb] text-white text-center py-2 px-4 rounded-md"
-                        onClick={handleJoinChannel}
-                    >
-                        Create/Join
-                    </button>
-                </PopupWindow>
-            </div>
+            <PopupWindow className="flex flex-col items-center mb-2" title="Add Channel"
+                         onClickChannelButton={handleJoinChannel} textButton="Add Channel" buttonText="+">
+                <label className="mb-1 text-[#495057] text-sm" htmlFor="channel">Channel Name</label>
+                <input
+                    className="w-80 p-2 rounded outline-none text-black text-sm transition-all duration-100 dark:text-[#a6a7be] bg-[#e6ebf5] dark:bg-[#36404a]"
+                    placeholder="Enter Channel Name"
+                    value={newChannel}
+                    onChange={(e) => setNewChannel(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleJoinChannel()}
+                />
+            </PopupWindow>
         </div>
     );
 };
