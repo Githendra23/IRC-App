@@ -3,6 +3,7 @@ import {toast} from "react-toastify";
 import {getSocket} from "../../../socket.ts";
 import PopupWindow from "./components/PopupWindow.tsx";
 import axios from "axios";
+import LeaveIcon from "./icons/LeaveIcon.tsx";
 
 interface Props {
     selectedChannel: string | null;
@@ -104,37 +105,36 @@ const Channel: React.FC<Props> = ({
             className={`${className} overflow-y-auto scrollbar-webkit dark:scrollbar-webkit-dark transition-colors duration-200 text-[#495057] dark:text-[#e1e9f1]`}
         >
             {channels.length > 0 && (
-                <div className="m-3 justify-between items-center space-y-1">
+                <div className="justify-between items-center space-y-0.5">
                     {channels.map((channel, index) => (
-                        <div key={index} className="flex gap-x-3">
-                            <div
-                                className={`relative flex-grow p-3.5 cursor-pointer rounded text-left text-md hover:bg-[#e6ebf5] duration-200 dark:hover:bg-[#36404a] ${
-                                    selectedChannel === channel
-                                        ? "bg-[#e6ebf5] dark:bg-[#36404a]"
-                                        : "bg-[#f5f7fb] dark:bg-[#303841]"
-                                }`}
-                                onClick={() => selectChannel(channel)}
-                            >
-                                {channel}
+                        <div
+                            className={`relative flex-grow py-4 px-5 cursor-pointer rounded text-left text-md hover:bg-[#e6ebf5] duration-200 dark:hover:bg-[#36404a] ${
+                                selectedChannel === channel
+                                    ? "bg-[#e6ebf5] dark:bg-[#36404a]"
+                                    : "bg-[#f5f7fb] dark:bg-[#303841]"
+                            }`}
+                            key={index}
+                            onClick={() => selectChannel(channel)}
+                        >
+                            {channel}
 
-                                <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center">
-                                    <button
-                                        className="px-2 bg-red-500 hover:bg-red-700 text-white text-center rounded"
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            removeChannel(channel);
-                                        }}
-                                    >
-                                        Quit
-                                    </button>
-                                </div>
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center">
+                                <button
+                                    className="px-2 py-1 bg-white dark:bg-[#313a43] border border-[#f0eff5] shadow dark:shadow-none dark:border-[#36404a] text-white text-center rounded duration-200"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        removeChannel(channel);
+                                    }}
+                                >
+                                    <LeaveIcon className="fill-red-500 hover:fill-red-600 w-5 h-auto duration-200"/>
+                                </button>
                             </div>
                         </div>
                     ))}
                 </div>
             )}
 
-            <PopupWindow className="flex flex-col items-center mb-2" title="Add Channel"
+            <PopupWindow className="flex flex-col items-center mt-2" title="Add Channel"
                          onClickChannelButton={handleJoinChannel} textButton="Add Channel" buttonText="+">
                 <label className="mb-1 text-[#495057] text-sm" htmlFor="channel">Channel Name</label>
                 <input

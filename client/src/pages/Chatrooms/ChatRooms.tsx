@@ -92,7 +92,7 @@ const ChatRooms = () => {
             {connected && (
                 <div className="flex h-full">
                     <SideBar
-                        className="flex flex-col z-20 shadow justify-between items-center z-10 py-4 px-2 h-screen bg-white transition-colors duration-200 dark:bg-[#36404a]">
+                        className="flex flex-col shadow justify-between items-center py-4 px-2 h-screen bg-white transition-colors duration-200 dark:bg-[#36404a]">
                         <div className="w-8"><img className="h-auto w-auto" src={'/assets/logo_.png'} alt="logo"/></div>
 
                         <div className="grid grid-cols-1 gap-y-1">
@@ -146,11 +146,11 @@ const ChatRooms = () => {
                         {activeButton === "Rooms" && (
                             <>
                                 <div
-                                    className="flex w-full gap-x-2 py-4 items-center justify-center transition-colors duration-200 text-[#495057] dark:text-[#e1e9f1]">
+                                    className="flex w-full gap-x-2 p-4 items-center justify-center transition-colors duration-200 text-[#495057] dark:text-[#e1e9f1]">
                                     <MessageIcon className="w-8 h-8 items-center"/>
                                     <h2 className="text-xl lg:text-3xl font-bold">Channels</h2>
                                 </div>
-                                <Channel
+                                <Channel className="p-6"
                                     selectedChannel={selectedChannel}
                                     setSelectedChannel={setSelectedChannel}
                                     channels={channels}
@@ -178,9 +178,9 @@ const ChatRooms = () => {
                     <div
                         className="flex flex-grow flex-col shadow justify-between w-3/5 h-screen text-black transition-colors duration-200 dark:bg-[#262e35] bg-white">
                         <div
-                            className="flex justify-between duration-200 items-center py-[0.85rem] border-b border-b-[#f0effc] dark:border-b-[#2b333b]">
-                            <h1 className="text-3xl font-bold text-[#495057] dark:text-[#e1e9f1]">
-                                {username}
+                            className="flex justify-between duration-200 items-center border-b border-b-[#f0effc] dark:border-b-[#2b333b]">
+                            <h1 className="text-3xl font-bold text-[#495057] dark:text-[#e1e9f1] p-4">
+                                {selectedChannel}
                             </h1>
                         </div>
 
@@ -199,10 +199,7 @@ const ChatRooms = () => {
 
                     <div
                         className={`flex flex-col w-1/6 h-screen text-black transition-colors duration-200 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841] ${activeButton !== "Friends" ? "block" : "hidden"}`}>
-                        <div className="p-4">
-                            <h2 className="text-xl lg:text-3xl font-bold text-center text-[#495057] dark:text-[#e1e9f1]">Active
-                                Now</h2>
-                        </div>
+                        <h2 className="text-xl lg:text-3xl font-bold text-center text-[#495057] dark:text-[#e1e9f1] p-4">Active Now</h2>
 
                         <ActiveUser/>
                     </div>
