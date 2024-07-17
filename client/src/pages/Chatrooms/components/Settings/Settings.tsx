@@ -69,8 +69,8 @@ const Settings = () => {
                 }`}
             >
                 <div
-                    className="border-b border-x duration-200 dark:border-x-[#36404a] bg-white dark:bg-[#303841] h-full dark:border-b-[#36404a] rounded-b-md">
-                    <div className="flex flex-col justify-between h-full px-3 py-4">
+                    className="border-b border-x duration-200 dark:border-x-[#36404a] bg-white dark:bg-[#303841] dark:border-b-[#36404a] rounded-b-md">
+                    <div className="space-y-16 px-3 py-4">
                         <EditOption
                             title="Username"
                             content={username}
