@@ -107,8 +107,8 @@ const Channel: React.FC<Props> = ({
             {channels.length > 0 && (
                 <div className="justify-between items-center space-y-0.5">
                     {channels.map((channel, index) => (
-                        <div
-                            className={`relative flex-grow py-4 px-5 cursor-pointer rounded text-left text-md hover:bg-[#e6ebf5] duration-200 dark:hover:bg-[#36404a] ${
+                        <button
+                            className={`relative flex-grow py-4 w-full px-5 rounded text-left text-md hover:bg-[#e6ebf5] transition-colors duration-200 dark:hover:bg-[#36404a] ${
                                 selectedChannel === channel
                                     ? "bg-[#e6ebf5] dark:bg-[#36404a]"
                                     : "bg-[#f5f7fb] dark:bg-[#303841]"
@@ -118,27 +118,25 @@ const Channel: React.FC<Props> = ({
                         >
                             {channel}
 
-                            <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center">
-                                <button
-                                    className="px-2 py-1 bg-white dark:bg-[#313a43] border border-[#f0eff5] shadow dark:shadow-none dark:border-[#36404a] text-white text-center rounded duration-200"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        removeChannel(channel);
-                                    }}
-                                >
-                                    <LeaveIcon className="fill-red-500 hover:fill-red-600 w-5 h-auto duration-200"/>
-                                </button>
+                            <div
+                                className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center px-2 py-1 bg-white dark:bg-[#313a43] border border-[#f0eff5] shadow dark:shadow-none dark:border-[#36404a] text-white text-center rounded transition-colors duration-200"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    removeChannel(channel);
+                                }}
+                            >
+                                <LeaveIcon className="fill-red-500 hover:fill-red-600 w-5 h-auto duration-200"/>
                             </div>
-                        </div>
+                        </button>
                     ))}
                 </div>
             )}
 
             <PopupWindow className="flex flex-col items-center mt-2" title="Add Channel"
                          onClickChannelButton={handleJoinChannel} textButton="Add Channel" buttonText="+">
-                <label className="mb-1 text-[#495057] text-sm" htmlFor="channel">Channel Name</label>
+                <label className="mb-1 text-[#495057] dark:text-[#a6b0cf] text-sm" htmlFor="channel">Channel Name</label>
                 <input
-                    className="w-80 py-2 px-4 rounded outline-none text-[#7a7f9a] placeholder-[#7a7f9a] dark:text-[#a6b0cf] text-sm bg-[#ffffff] border border-[#f0eff5] dark:border-[#36404a] focus:border-[#b9b4f7] dark:focus:border-[#3f4a56] dark:bg-[#2b3141] duration-300"
+                    className="w-80 py-2 px-4 rounded outline-none text-[#7a7f9a] placeholder-[#7a7f9a] dark:placeholder-[#a6b0cf] dark:text-[#a6b0cf] text-sm bg-[#ffffff] border border-[#f0eff5] dark:border-[#36404a] focus:border-[#b9b4f7] dark:focus:border-[#3f4a56] dark:bg-[#2b3141] duration-300"
                     placeholder="Enter Channel Name"
                     value={newChannel}
                     onChange={(e) => setNewChannel(e.target.value)}

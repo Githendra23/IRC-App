@@ -12,7 +12,16 @@ export default {
             },
             colors: {
                 lightGray: '#3e4a56',
-            }
+            },
+            animation: {
+                'spin-slow': 'spin 1s ease-in-out',
+            },
+            keyframes: {
+                spin: {
+                    '0%': { transform: 'rotate(0deg)' },
+                    '100%': { transform: 'rotate(360deg)' },
+                },
+            },
         },
     },
     plugins: [

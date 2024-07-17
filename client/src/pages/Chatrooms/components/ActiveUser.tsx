@@ -52,7 +52,7 @@ const ActiveUser = () => {
     }, [socket, setActiveUsers]);
 
     return (
-        <div className="overflow-y-auto scrollbar-webkit dark:scrollbar-webkit-dark text-center text-[#495057] dark:text-[#e1e9f1]">
+        <div className="overflow-y-auto scrollbar-webkit dark:scrollbar-webkit-dark text-center text-[#495057] dark:text-[#e1e9f1] duration-200">
             {activeUsers.map((user, index) => (
                 <div className="px-5 flex items-center gap-3 my-2">
                     <div className={"w-10 h-10 rounded-full flex items-center " + user.color}>

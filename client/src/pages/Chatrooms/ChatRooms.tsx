@@ -123,7 +123,7 @@ const ChatRooms = () => {
                             <SideButton
                                 text="Settings"
                                 isActive={activeButton === "Settings"}
-                                icon={<SettingsIcon className="h-auto w-6"
+                                icon={<SettingsIcon className="h-auto w-6 hover:animate-spin-slow"
                                                     color={activeButton === "Settings" ? "#5e5dc3" : "#929cb8"}/>}
                                 onClick={() => handleButtonClick("Settings")}
                             >
@@ -178,7 +178,7 @@ const ChatRooms = () => {
                         className="flex flex-grow flex-col shadow justify-between w-3/5 h-screen text-black transition-colors duration-200 dark:bg-[#262e35] bg-white">
                         <div
                             className="flex justify-between duration-200 items-center border-b border-b-[#f0effc] dark:border-b-[#36404a]">
-                            <h4 className="text-xl font-bold text-[#495057] dark:text-[#e1e9f1] p-5">
+                            <h4 className="text-xl font-bold text-[#495057] dark:text-[#e1e9f1] p-5 duration-200">
                                 {selectedChannel}
                             </h4>
                         </div>

@@ -12,7 +12,7 @@ const SideButton: React.FC<Props> = ({icon, text, isActive, onClick}) => {
         <button
             className={`${
                 isActive && "bg-[#f7f7ff] dark:bg-lightGray"
-            } p-4 rounded-md group relative`}
+            } p-4 rounded-md group relative duration-200`}
             onClick={onClick}
         >
             {icon}
