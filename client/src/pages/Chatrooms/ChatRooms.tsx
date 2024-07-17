@@ -120,9 +120,10 @@ const ChatRooms = () => {
                             />
 
                             <SideButton
+                                className="group"
                                 text="Settings"
                                 isActive={activeButton === "Settings"}
-                                icon={<SettingsIcon className="h-auto w-6 hover:animate-spin-slow"
+                                icon={<SettingsIcon className="h-auto w-6 group-hover:animate-spin-slow"
                                                     color={activeButton === "Settings" ? "#5e5dc3" : "#929cb8"}/>}
                                 onClick={() => handleButtonClick("Settings")}
                             >

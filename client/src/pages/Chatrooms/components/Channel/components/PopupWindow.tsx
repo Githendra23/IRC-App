@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 
 type PopupWindowProps = {
     className: string;
@@ -11,12 +11,32 @@ type PopupWindowProps = {
 };
 
 const PopupWindow: React.FC<PopupWindowProps> = ({isOpen, setIsOpen, className, title, textButton, children, onClickChannelButton}) => {
+    const wrapperRef = useRef(null);
+
+    useOutsideAlerter(wrapperRef);
+
+    function useOutsideAlerter(ref: React.RefObject<HTMLDivElement>) {
+        useEffect(() => {
+            const handleClickOutside = (event: MouseEvent) => {
+                if (ref.current && !ref.current.contains(event.target as Node)) {
+                    setIsOpen(false);
+                }
+            };
+
+            document.addEventListener("mousedown", handleClickOutside);
+
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
     return (
         <div className={className}>
             <div className={`${isOpen ? "opacity-100 visible" : "opacity-0 invisible"} duration-500 fixed flex items-center justify-center inset-0 z-20`}>
                 <div className={`fixed bg-black ${isOpen ? "opacity-50" : "opacity-0"} transition-opacity duration-300 inset-0 z-20`}/>
 
-                <div className={`bg-white ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-20"} transition-all duration-500 z-30 dark:bg-[#272c3b] rounded-md  border border-white dark:border-[#36404a]`}>
+                <div ref={wrapperRef} className={`bg-white ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-20"} transition-all duration-500 z-30 dark:bg-[#272c3b] rounded-md  border border-white dark:border-[#36404a]`}>
                     <div>
                         <div className="flex justify-between items-center border-b rounded-t-md border-[#f0eff5] dark:border-[#36404a] p-4">
                             <h3 className="text-[#495057] dark:text-[#e1e9f1] font-semibold">{title}</h3>
