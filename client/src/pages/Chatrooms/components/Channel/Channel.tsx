@@ -113,7 +113,7 @@ const Channel: React.FC<Props> = ({
 
                     <div
                         className="absolute right-1/2 translate-x-1/2 top-8 bg-black py-2 px-3 rounded-md text-white
-                            scale-0 transition duration-200 group-hover:scale-100"
+                            scale-0 transition duration-200 group-hover:scale-100 pointer-events-none"
                     >
                         <p className="whitespace-nowrap text-sm">Create/Join Room</p>
 

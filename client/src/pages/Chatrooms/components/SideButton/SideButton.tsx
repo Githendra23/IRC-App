@@ -20,7 +20,7 @@ const SideButton: React.FC<Props> = ({className, icon, text, isActive, onClick})
 
             <div
                 className="absolute left-[4.5rem] top-1/2 -translate-y-1/2 bg-black py-2 px-3 rounded-md text-white
-                            scale-0 transition duration-200 group-hover:scale-100"
+                            scale-0 transition duration-200 group-hover:scale-100 pointer-events-none"
             >
                 <p className="whitespace-nowrap text-sm">{text}</p>
 
