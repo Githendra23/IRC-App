@@ -107,8 +107,7 @@ const ChatRooms = () => {
                             <SideButton
                                 text="Rooms"
                                 isActive={activeButton === "Rooms"}
-                                icon={<ChatIcon className="h-auto w-6"
-                                                color={activeButton === "Rooms" ? "#5e5dc3" : "#929cb8"}/>}
+                                icon={<ChatIcon className={`h-auto w-6 ${activeButton === "Rooms" ? "stroke-[#5e5dc3]" : "stroke-[#929cb8]"}`}/>}
                                 onClick={() => handleButtonClick("Rooms")}
                             />
 
@@ -145,11 +144,7 @@ const ChatRooms = () => {
                         className="flex flex-col min-w-[20%] text-black transition-colors duration-200 dark:text-[#09ebe3] bg-[#f5f7fb] dark:bg-[#303841]">
                         {activeButton === "Rooms" && (
                             <>
-                                <div
-                                    className="flex w-full gap-x-2 p-5 items-center transition-colors duration-200 text-[#495057] dark:text-[#e1e9f1] border-b-[1px] border-b-[#f0effc] dark:border-b-[#36404a] mb-6">
-                                    <h4 className="text-xl font-bold">Channels</h4>
-                                </div>
-                                <Channel className="px-6"
+                                <Channel
                                     selectedChannel={selectedChannel}
                                     setSelectedChannel={setSelectedChannel}
                                     channels={channels}
@@ -177,7 +172,7 @@ const ChatRooms = () => {
                     <div
                         className="flex flex-grow flex-col shadow justify-between w-3/5 h-screen text-black transition-colors duration-200 dark:bg-[#262e35] bg-white">
                         <div
-                            className="flex justify-between duration-200 items-center border-b border-b-[#f0effc] dark:border-b-[#36404a]">
+                            className={`${selectedChannel ? "block" : "hidden"} flex justify-between duration-200 items-center border-b border-b-[#f0effc] dark:border-b-[#36404a]`}>
                             <h4 className="text-xl font-bold text-[#495057] dark:text-[#e1e9f1] p-5 duration-200">
                                 {selectedChannel}
                             </h4>
@@ -191,7 +186,7 @@ const ChatRooms = () => {
                         />
 
                         <div
-                            className="w-full transition-colors duration-200 p-5 border-t border-t-[#f0effc] dark:border-t-[#36404a]">
+                            className={`${selectedChannel ? "block" : "hidden"} w-full transition-colors duration-200 p-5 border-t border-t-[#f0effc] dark:border-t-[#36404a]`}>
                             <Input selectedChannel={selectedChannel}/>
                         </div>
                     </div>

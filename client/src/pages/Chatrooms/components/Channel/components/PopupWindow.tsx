@@ -1,26 +1,18 @@
-import React, {useState} from "react";
+import React from "react";
 
 type PopupWindowProps = {
     className: string;
-    buttonText: string;
     onClickChannelButton: () => void;
     title: string;
     textButton: string;
     children: React.ReactNode;
+    isOpen: boolean;
+    setIsOpen: (isOpen: boolean) => void;
 };
 
-const PopupWindow: React.FC<PopupWindowProps> = ({className, title, textButton, buttonText, children, onClickChannelButton}) => {
-    const [isOpen, setIsOpen] = useState(false);
-
+const PopupWindow: React.FC<PopupWindowProps> = ({isOpen, setIsOpen, className, title, textButton, children, onClickChannelButton}) => {
     return (
         <div className={className}>
-            <button
-                className="flex mt-1 bg-[#7269ef] hover:bg-[#6159cb] duration-200 text-white py-2 px-4 rounded-3xl"
-                onClick={() => setIsOpen(true)}
-            >
-                {buttonText}
-            </button>
-
             <div className={`${isOpen ? "opacity-100 visible" : "opacity-0 invisible"} duration-500 fixed flex items-center justify-center inset-0 z-20`}>
                 <div className={`fixed bg-black ${isOpen ? "opacity-50" : "opacity-0"} transition-opacity duration-300 inset-0 z-20`}/>
 
