@@ -134,8 +134,8 @@ const ChatRooms = () => {
                             <ThemeButton/>
 
                             <ProfileButton>
-                                <div className="flex flex-col my-1.5 gap-y-2">
-                                    <button className="text-sm bg-red-600 p-2 rounded" onClick={logOut}>LogOut</button>
+                                <div>
+                                    <button className="text-sm text-red-500 hover:text-red-600 hover:bg-[#f8f9fa] dark:hover:bg-[#36404a] p-2" onClick={logOut}>LogOut</button>
                                 </div>
                             </ProfileButton>
                         </div>
