@@ -169,13 +169,13 @@ const Channel: React.FC<Props> = ({
             </PopupWindow>
 
             <div
-                className={`px-6 overflow-y-auto scrollbar-webkit dark:scrollbar-webkit-dark transition-colors duration-200 text-[#495057] dark:text-[#e1e9f1]`}
+                className={`px-6 overflow-y-auto scrollbar-webkit dark:scrollbar-webkit-dark transition-colors duration-200`}
             >
                 {channels.length > 0 && (
                     <div className="justify-between items-center space-y-0.5">
                         {channels.map((channel, index) => (
                             <button
-                                className={`relative flex-grow py-4 w-full px-5 rounded text-left text-md hover:bg-[#e6ebf5] transition-colors duration-200 dark:hover:bg-[#36404a] ${
+                                className={`relative flex-grow py-4 w-full px-5 rounded text-left text-md hover:bg-[#e6ebf5] duration-200 dark:hover:bg-[#36404a] ${
                                     selectedChannel === channel
                                         ? "bg-[#e6ebf5] dark:bg-[#36404a]"
                                         : "bg-[#f5f7fb] dark:bg-[#303841]"
@@ -183,10 +183,10 @@ const Channel: React.FC<Props> = ({
                                 key={index}
                                 onClick={() => selectChannel(channel)}
                             >
-                                {channel}
+                                <p className="text-[#495057] dark:text-[#e1e9f1] duration-200">{channel}</p>
 
                                 <div
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center px-2 py-1 bg-white dark:bg-[#313a43] border border-[#f0eff5] shadow dark:shadow-none dark:border-[#36404a] text-white text-center rounded transition-colors duration-200"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center px-2 py-1 bg-white dark:bg-[#313a43] border border-[#f0eff5] shadow dark:shadow-none dark:border-[#36404a] text-white text-center rounded duration-200"
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         removeChannel(channel);
