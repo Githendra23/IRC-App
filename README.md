@@ -22,6 +22,7 @@ A seamless real-time communication chat app enabling users to create an account,
 **Frontend:**
 
 <a href="https://legacy.reactjs.org/docs/getting-started.html"><img width="auto" height="48" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" alt="react"/></a>
+<a href="https://tailwindcss.com/docs/installation" target="_blank"><img src="https://img.icons8.com/fluency/48/tailwind_css.png" alt="tailwind_css"/></a>
 <a href="https://www.typescriptlang.org/docs/"><img width="48" height="48" src="https://img.icons8.com/fluency/48/typescript--v1.png" alt="typescript"/></a>
 <a href="https://socket.io/docs/v4/" target="_blank"><img width="48" height="48" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Socket-io.svg/1024px-Socket-io.svg.png"/></a>
 
@@ -31,37 +32,32 @@ A seamless real-time communication chat app enabling users to create an account,
 
 To make the application work, you need to install:
 
-<a href="https://nodejs.org/en/download" target="_blank"><img src="https://img.icons8.com/fluency/48/node-js.png"/></a>
+<a href="docs.docker.com" target="_blank"><img src="https://img.icons8.com/fluency/48/docker.png"/></a>
 
 Download the project:
 ```cmd
 git clone https://github.com/Githendra23/IRC-App.git
 ```
 
-### Launching the API and the website
+### Run the Project
 
-To launch the web application, you must first start the API, and then the site.
+To run the project, you must build the docker containers and run them.
 
-First, install Express.js for the API to work:
+First, navigate to the directory where the *docker-compose.yml* file is located:
 ```cmd
-npm i express
+cd <route of the repository>
 ```
 
-To launch the API, open the terminal, then navigate to the folder "**backend**" with the command *cd*.
+To build the containers, execute this command:
 ```cmd
-cd <path inside the folder "backend">
+docker-compose build
 ```
 
-Then, execute:
+Then, run the containers:
 ```cmd
-node app.js
-```
-
-In another terminal, navigate to the folder "**frontend**" and execute:
-```cmd
-npm run dev
+docker-compose up
 ```
 
 Click or copy-paste the provided link into your browser to access the website.
 
-:fireworks: **You have successfully configured and installed the project in your environment** :tada:
+⚠️ **Do not open and use the link with the same ports in multiple tabs.** ⚠️
